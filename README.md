@@ -156,4 +156,4 @@ OpenMeeting is a fully open-source project, and we welcome contributions. Inform
 
 ## License
 
-Licensed under the [Apache License, Version 2.0](/LICENSE)
+Licensed under the [AGPL-3.0 license](/LICENSE)

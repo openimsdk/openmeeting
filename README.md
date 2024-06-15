@@ -44,7 +44,7 @@ Experience our meeting modules by trying out our sample apps.
 
 ### Requirements
 
-`Dart >= 2.19.2` and `Flutter = 3.19.0`
+`Dart >= 3.4.1` and `Flutter = 3.22.1`
 
 See the [example]() project. We use [Getx](https://github.com/jonataslaw/getx) in our project, It is an extra-light and powerful solution for Flutter. It combines high-performance state management, intelligent dependency injection, and route management quickly and practically.
 

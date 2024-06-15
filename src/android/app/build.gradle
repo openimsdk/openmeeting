@@ -1,0 +1,153 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+android {
+    compileSdkVersion 34
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "io.openim.flutter.b.meeting"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdkVersion 24
+        targetSdkVersion 28
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+
+        multiDexEnabled true
+
+        ndk {
+            abiFilters "arm64-v8a"//, "armeabi-v7a", "armeabi", "x86", "x86_64", "mips", "mips64"
+        }
+
+        lintOptions {
+            disable 'InvalidPackage'
+            disable "Instantiatable"
+            checkReleaseBuilds false
+            abortOnError false
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'openim'
+            keyPassword 'openim'
+            storeFile file('./openim')
+            storePassword 'openim'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+        profile {
+            signingConfig signingConfigs.release
+
+        }
+        release {
+//            minifyEnabled false
+//            useProguard false
+//            shrinkResources false
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "OpenMeeting_${versionName}(${versionCode})_${buildType.name}_${buildTime()}.apk"
+            }
+    }
+
+    packagingOptions {
+      // other options here
+
+      /* Fix for ffmpeg-kit-react-native START */
+        pickFirst 'lib/arm64-v8a/libgojni.so'
+        pickFirst 'lib/armeabi-v7a/libgojni.so'
+        pickFirst 'lib/x86/libgojni.so'
+        pickFirst 'lib/x86_64/libgojni.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libavcodec.so'
+        pickFirst 'lib/arm64-v8a/libavformat.so'
+        pickFirst 'lib/arm64-v8a/libavutil.so'
+        pickFirst 'lib/arm64-v8a/libswscale.so'
+        pickFirst 'lib/arm64-v8a/libavdevice.so'
+        pickFirst 'lib/arm64-v8a/libavfilter.so'
+        pickFirst 'lib/arm64-v8a/libffmpegkit.so'
+        pickFirst 'lib/arm64-v8a/libffmpegkit_abidetect.so'
+        pickFirst 'lib/arm64-v8a/libswresample.so'
+        pickFirst 'lib/arm64-v8a/libswscale.so'
+        pickFirst 'lib/x86/libavcodec.so'
+        pickFirst 'lib/x86/libavformat.so'
+        pickFirst 'lib/x86/libavutil.so'
+        pickFirst 'lib/x86/libswscale.so'
+        pickFirst 'lib/x86/libavdevice.so'
+        pickFirst 'lib/x86/libavfilter.so'
+        pickFirst 'lib/x86/libffmpegkit.so'
+        pickFirst 'lib/x86/libffmpegkit_abidetect.so'
+        pickFirst 'lib/x86/libswresample.so'
+        pickFirst 'lib/x86/libswscale.so'
+        pickFirst 'lib/x86_64/libavcodec.so'
+        pickFirst 'lib/x86_64/libavformat.so'
+        pickFirst 'lib/x86_64/libavutil.so'
+        pickFirst 'lib/x86_64/libswscale.so'
+        pickFirst 'lib/x86_64/libavdevice.so'
+        pickFirst 'lib/x86_64/libavfilter.so'
+        pickFirst 'lib/x86_64/libffmpegkit.so'
+        pickFirst 'lib/x86_64/libffmpegkit_abidetect.so'
+        pickFirst 'lib/x86_64/libswresample.so'
+        pickFirst 'lib/x86_64/libswscale.so'
+      /* Fix for ffmpeg-kit-react-native END */
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation 'com.android.support:multidex:1.0.3'
+}
+
+static def buildTime() {
+    return new Date().format("MMddHHmm", TimeZone.getTimeZone("GMT+08:00"))
+}

@@ -1,0 +1,21 @@
+flutter_launcher_icons:
+  image_path: "launcher_icon/app-icon.png"
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  web:
+    generate: true
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+
+
+#  flutter pub get
+#  flutter pub run flutter_launcher_icons:main -f <your config file name here>
+
+#  flutter pub get
+#  flutter pub run flutter_launcher_icons:main

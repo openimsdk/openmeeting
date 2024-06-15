@@ -115,41 +115,6 @@ flutter build ipa
 ```
 Now that you have an installable app, publish it to Google Play and App Store.
 
-
-## File Structure
-
-- [lib/openim_common](): Toolkit, including tools, materials, multi-language, etc.
-  
-- [lib/openim_meeting](): Meeting list, adding meetings and conference room scenes, etc.
-
-```
-├─ openim_meeting
-│  ├─ lib
-│  │  └─ src
-│  │     ├─ meeting_client.dart  // After creating/joining a meeting, you will go here to create a multimedia room.
-│  │     ├─ meeting_option.dart  // Enter some setting information for the meeting.
-│  │     ├─ pages
-│  │     │  ├─ book_meeting  // Book a meeting function.
-│  │     │  ├─ join_meeting  // Join meeting function.
-│  │     │  ├─ meeting  // Conference homepage
-│  │     │  ├─ meeting_detail  //  Meeting details
-│  │     │  └─ meeting_room  // Conference room, framed scene.
-│  │     └─ widgets
-│  │        ├─ appbar.dart  // The appBar on top of the conference room.
-│  │        ├─ button.dart  // Custom buttons, such as voice button, video button, screen sharing button, etc.
-│  │        ├─ controls.dart  // Wrap the appBar, the logical function of the button.
-│  │        ├─ meeting_close_sheet.dart  
-│  │        ├─ meeting_detail_sheet.dart  // Meeting details.
-│  │        ├─ meeting_members.dart  // List of members in the meeting.
-│  │        ├─ meeting_settings_sheet.dart  // Conference setting function scene.
-│  │        ├─ meeting_state.dart  // The base class of room.
-│  │        ├─ no_video.dart  // When there is no video stream, the content displayed on the item.
-│  │        ├─ overlay_widget.dart  // PopupMenuButton, etc.
-│  │        ├─ page_content.dart  // item
-│  │        ├─ participant.dart  // Build the attendee widget.
-│  │        ├─ participant_info.dart  // Construct situations such as microphones for attendees.
-│  │        └─ toolsbar.dart  // The toolbar at the bottom of the conference room.
-```
 ## Contributing
 
 OpenMeeting is a fully open-source project, and we welcome contributions. Information on how to get started can be found in [our contributor guide](/CONTRIBUTING.md).

@@ -154,13 +154,13 @@ class ToolsBarDesktop extends ToolsBar {
             color: color,
             textStyle: textStyle,
           ),
-          if (isHost)
-            ImageButton.settings(
-              onTap: onTapSettings,
-              expanded: false,
-              color: color,
-              textStyle: textStyle,
-            ),
+          // if (isHost)
+          //   ImageButton.settings(
+          //     onTap: onTapSettings,
+          //     expanded: false,
+          //     color: color,
+          //     textStyle: textStyle,
+          //   ),
           const Spacer(),
           Builder(builder: (context) {
             return CupertinoButton.filled(

@@ -9,7 +9,6 @@ import 'package:openmeeting/main.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../../../core/multi_window_manager.dart';
 import '../../../../data/models/define.dart';
-import '../../../../data/services/repository/repository.dart';
 import '../../../../widgets/meeting/desktop/participants_view.dart';
 import '../../../../widgets/meeting/participant_info.dart';
 import '../meeting_client.dart';

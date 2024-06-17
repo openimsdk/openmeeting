@@ -48,6 +48,10 @@ class MeetingClient {
   }
 
   void closeWindow({bool realClose = false}) async {
+    if (PlatformExt.isMobile) {
+      return;
+    }
+
     if (realClose) {
       await windowsManager.closeAllSubWindows();
     } else {
@@ -156,10 +160,12 @@ class MeetingClient {
       case OperationType.leave:
         await MeetingRepository().leaveMeeting(roomID!, loginUserID);
         close();
+        closeWindow();
         break;
       case OperationType.end:
         await MeetingRepository().endMeeting(roomID!, loginUserID);
         close();
+        closeWindow();
         break;
       case OperationType.setting:
         break;

@@ -8,24 +8,31 @@ import '../participant.dart';
 import '../participant_info.dart';
 
 class OxNLayoutView extends StatefulWidget {
-  const OxNLayoutView({super.key, required this.focusParticipantTrack, required this.participantTracks, this.options, this.onTap});
+  const OxNLayoutView({super.key, required this.focusParticipantTrack, required this.participantTracks, this.options, this.onTap, this.onDoubleTap});
 
   final ParticipantTrack? focusParticipantTrack;
   final List<ParticipantTrack> participantTracks;
   final MeetingOptions? options;
   final VoidCallback? onTap;
+  final ValueChanged<ParticipantTrack>? onDoubleTap;
 
   @override
   State<OxNLayoutView> createState() => _OxNLayoutViewState();
 }
 
 class _OxNLayoutViewState extends State<OxNLayoutView> {
-  ParticipantTrack? focusParticipantTrack;
+  ParticipantTrack? _focusParticipantTrack;
 
   @override
   void initState() {
     super.initState();
-    focusParticipantTrack = widget.participantTracks.firstWhereOrNull((element) => element.participant.hasVideo);
+    _focusParticipantTrack = widget.focusParticipantTrack;
+  }
+
+  @override
+  void didUpdateWidget(covariant OxNLayoutView oldWidget) {
+    _focusParticipantTrack = widget.focusParticipantTrack;
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -33,9 +40,9 @@ class _OxNLayoutViewState extends State<OxNLayoutView> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (focusParticipantTrack != null)
+        if (_focusParticipantTrack != null)
           Flexible(
-            child: _participantWidgetFor(focusParticipantTrack!),
+            child: _participantWidgetFor(_focusParticipantTrack!),
           ),
         const SizedBox(
           width: 8,
@@ -63,8 +70,9 @@ class _OxNLayoutViewState extends State<OxNLayoutView> {
         'muted:${track.videoTrack?.muted} '
         'muted:${track.screenShareTrack?.muted}');
     return GestureDetector(
-      onTap: () {
-        widget.onTap?.call();
+      onTap: widget.onTap,
+      onDoubleTap: () {
+        widget.onDoubleTap?.call(track);
       },
       child: ParticipantWidget.widgetFor(track,
           useScreenShareTrack: track.screenShareTrack != null && !track.screenShareTrack!.muted,

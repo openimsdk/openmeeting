@@ -8,11 +8,11 @@ class AppNavigator {
   AppNavigator._();
 
   static void startLogin() {
-    Get.offAllNamed(AppRoutes.login);
+    Get.offAndToNamed(AppRoutes.login);
   }
 
   static void startBackLogin() {
-    Get.until((route) => Get.currentRoute == AppRoutes.login);
+    Get.offAllNamed(AppRoutes.login);
   }
 
   static void startMain({bool isAutoLogin = false}) {

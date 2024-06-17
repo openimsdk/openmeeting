@@ -25,11 +25,8 @@ class MeetingDesktopRoom extends MeetingView {
 class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
   //
   List<ParticipantTrack> participantTracks = [];
-
   EventsListener<RoomEvent> get _listener => widget.listener;
-
   bool get fastConnection => widget.room.engine.fastConnectOptions != null;
-
   ScrollPhysics? scrollPhysics;
   final _pageController = PageController();
   int _pages = 0;
@@ -100,43 +97,40 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
   void _parseDataReceived(DataReceivedEvent event) {
     final jsonStr = utf8.decode(event.data);
     final map = jsonDecode(jsonStr);
-
+    final result = StreamOperateData()..mergeFromProto3Json(map);
     Logger.print('participant: ${event.participant?.identity} metadata: $map');
 
-    if (map['operation'] == null) return;
+    if (result.operation.isEmpty || result.operatorUserID == widget.room.localParticipant?.identity) {
+      return;
+    }
 
-    final operation = List<Map<String, dynamic>>.from(map['operation']);
-
-    final operateUser = operation.firstWhereOrNull((element) {
-      return element['userID'] == widget.room.localParticipant?.identity;
+    final operateUser = result.operation.firstWhereOrNull((element) {
+      return element.userID == widget.room.localParticipant?.identity;
     });
 
     if (operateUser == null) return;
 
-    final operationEntry = Map<String, dynamic>.from(operateUser['operation']);
-    final cameraOnEntry = operationEntry['cameraOnEntry'] as bool?;
-    final microphoneOnEntry = operationEntry['microphoneOnEntry'] as bool?;
+    final cameraOnEntry = operateUser.cameraOnEntry;
+    final microphoneOnEntry = operateUser.microphoneOnEntry;
 
-    if (cameraOnEntry != null) {
-      if (cameraOnEntry) {
-        MeetingAlertDialog.show(context, '', sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
-            forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
-          widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
-        });
-      } else {
+    if (cameraOnEntry) {
+      MeetingAlertDialog.show(context, '', sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
+          forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
         widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
-      }
+      });
+    } else {
+      widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
     }
-    if (microphoneOnEntry != null) {
-      if (microphoneOnEntry) {
-        MeetingAlertDialog.show(context, '', sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
-            forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
-          widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
-        });
-      } else {
+
+    if (microphoneOnEntry) {
+      MeetingAlertDialog.show(context, '', sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
+          forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
         widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
-      }
+      });
+    } else {
+      widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
     }
+
     Logger.print(jsonStr);
   }
 
@@ -223,16 +217,16 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
 
   ParticipantTrack? get _firstParticipantTrack {
     ParticipantTrack? track;
-    if (null != watchedUserID) {
+    if (watchedUserID != null) {
       track = participantTracks.firstWhere((e) => e.participant.identity == watchedUserID);
-    } else if (null != wasClickedUserID) {
+    } else if (wasClickedUserID != null) {
       track = participantTracks.firstWhere((e) => e.participant.identity == wasClickedUserID);
     } else if (focusParticipantTrack != null) {
       track = focusParticipantTrack;
     } else {
-      track = participantTracks.firstWhereOrNull((e) => e.screenShareTrack != null || e.videoTrack != null);
+      track = participantTracks.firstWhereOrNull((e) => e.participant.hasVideo);
     }
-    Logger.print('first watch track : ${track == null} '
+    Logger.print('first watch track: ${track?.participant.identity} '
         'videoTrack:${track?.videoTrack == null} '
         'screenShareTrack:${track?.screenShareTrack == null} '
         'muted:${track?.videoTrack?.muted} '
@@ -296,6 +290,11 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
             ? OxNLayoutView(
                 focusParticipantTrack: _firstParticipantTrack,
                 participantTracks: participantTracks,
+                onDoubleTap: (track) {
+                  setState(() {
+                    wasClickedUserID = track.participant.identity;
+                  });
+                },
               )
             : MxNLayoutView(
                 participantTracks: participantTracks,

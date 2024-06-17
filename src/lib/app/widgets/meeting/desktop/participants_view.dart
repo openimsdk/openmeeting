@@ -37,7 +37,7 @@ abstract class ParticipantsViewState<T extends ParticipantsView> extends State<T
   late MeetingInfoSetting? _meetingInfo;
 
   bool muteAll = false;
-  MeetingSetting get setting => _meetingInfo!.setting;
+  MeetingSetting? get setting => _meetingInfo?.setting;
   bool get isHost => _meetingInfo?.creatorUserID == widget.loginUserID;
 
   @override
@@ -417,22 +417,22 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
 
   void _meetingRoomSetting(BuildContext ctx) {
     MeetingPopMenu.showRoomSetting(ctx,
-        allowParticipantUnMute: setting.canParticipantsUnmuteMicrophone == true,
-        allowParticipantVideo: setting.canParticipantsEnableCamera == true,
-        onlyHostCanShareScreen: setting.canParticipantsShareScreen == false,
-        defaultMuted: setting.disableMicrophoneOnJoin == true, onOperation: (type, to) {
+        allowParticipantUnMute: setting?.canParticipantsUnmuteMicrophone == true,
+        allowParticipantVideo: setting?.canParticipantsEnableCamera == true,
+        onlyHostCanShareScreen: setting?.canParticipantsShareScreen == false,
+        defaultMuted: setting?.disableMicrophoneOnJoin == true, onOperation: (type, to) {
       switch (type) {
         case RoomSetting.allowParticipantUnMute:
-          setting.canParticipantsUnmuteMicrophone = to;
+          setting?.canParticipantsUnmuteMicrophone = to;
           break;
         case RoomSetting.allowParticipantVideo:
-          setting.canParticipantsEnableCamera = to;
+          setting?.canParticipantsEnableCamera = to;
           break;
         case RoomSetting.onlyHostCanShareScreen:
-          setting.canParticipantsShareScreen = to;
+          setting?.canParticipantsShareScreen = to;
           break;
         case RoomSetting.defaultMuted:
-          setting.disableMicrophoneOnJoin = to;
+          setting?.disableMicrophoneOnJoin = to;
           break;
       }
 

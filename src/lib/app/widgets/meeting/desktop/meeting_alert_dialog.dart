@@ -8,17 +8,16 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/widgets/meeting/overlay_widget.dart';
-import 'package:openmeeting/app/widgets/meeting/participant_info.dart';
 import 'package:sprintf/sprintf.dart';
 
 class MeetingAlertDialog {
   static void show(BuildContext context, String? title, String content,
       {bool forMobile = false, String? confirmText, VoidCallback? onConfirm, String? cancelText, VoidCallback? onCancel}) {
+    Logger.print('title:$title, content: $content');
+
     Widget buildContent(BuildContext ctx) {
-      Logger.print('title:$title, content: $content');
       return CustomDialog(
         leftText: cancelText,
         rightText: confirmText,

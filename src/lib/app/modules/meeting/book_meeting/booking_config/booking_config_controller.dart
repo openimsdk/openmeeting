@@ -87,8 +87,7 @@ class BookingConfigController extends GetxController {
         creatorUserID: userInfo.userId,
         creatorDefinedMeetingInfo: CreatorDefinedMeetingInfo(
             title: bookingConfig.value.name,
-            scheduledTime:
-                Int64(bookingConfig.value.beginTime.toString().length > 10 ? bookingConfig.value.beginTime ~/ 1000 : bookingConfig.value.beginTime),
+            scheduledTime: Int64(bookingConfig.value.beginTime),
             meetingDuration: Int64(bookingConfig.value.duration),
             password: bookingConfig.value.meetingPassword),
         setting:

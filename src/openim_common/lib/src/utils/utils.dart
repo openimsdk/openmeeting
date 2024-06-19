@@ -4,11 +4,6 @@ import 'dart:io';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:crypto/crypto.dart';
-import 'package:ffmpeg_kit_flutter_full_gpl/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_flutter_full_gpl/ffmpeg_kit_config.dart';
-import 'package:ffmpeg_kit_flutter_full_gpl/ffprobe_kit.dart';
-import 'package:ffmpeg_kit_flutter_full_gpl/return_code.dart';
-import 'package:ffmpeg_kit_flutter_full_gpl/session_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,69 +82,6 @@ class IMUtils {
   }
 
   static bool isMobile(String areaCode, String mobile) => (areaCode == '+86' || areaCode == '86') ? isChinaMobile(mobile) : true;
-
-  /// 获取视频缩略图
-  static Future<File> getVideoThumbnail(File file) async {
-    final path = file.path;
-    final names = path.substring(path.lastIndexOf("/") + 1).split('.');
-    final name = '${names.first}.png';
-    final directory = await createTempDir(dir: 'video');
-    final targetPath = '$directory/$name';
-
-    final String ffmpegCommand = '-i $path -ss 0 -vframes 1 -q:v 15 -y $targetPath';
-    final session = await FFmpegKit.execute(ffmpegCommand);
-
-    final state = FFmpegKitConfig.sessionStateToString(await session.getState());
-    final returnCode = await session.getReturnCode();
-
-    if (state == SessionState.failed || !ReturnCode.isSuccess(returnCode)) {}
-
-    session.cancel();
-
-    return File(targetPath);
-  }
-
-  ///  compress video
-  static Future<File?> compressVideoAndGetFile(File file) async {
-    final path = file.path;
-    final name = path.substring(path.lastIndexOf("/") + 1);
-    final directory = await createTempDir(dir: 'video');
-    final targetPath = '$directory/$name';
-
-    final output = await FFprobeKit.getMediaInformation(path);
-    final streams = output.getMediaInformation()?.getStreams();
-    final isH264 = streams?.any((element) => element.getCodec()?.contains('h264') == true) ?? false;
-    final size = output.getMediaInformation()?.getSize() ?? '0';
-    output.cancel();
-
-    if (File(targetPath).existsSync() && isH264) {
-      return File(targetPath);
-    }
-    // By default, everything below 1024M is uncompressed. If you want to compress it, you can change the value size.
-    if (int.parse(size) < 1024 * 1024 * 1024 && isH264) {
-      file.copySync(targetPath);
-
-      return File(targetPath);
-    }
-    // Compression is time consuming.
-    final String ffmpegCommand =
-        '-i $path -preset ultrafast -tune fastdecode -threads:v 16 -threads:a 1 -c:a copy -strict -2 -crf 20 -c:v libx264 -y '
-        '$targetPath';
-    final session = await FFmpegKit.execute(ffmpegCommand);
-
-    final state = FFmpegKitConfig.sessionStateToString(await session.getState());
-    final returnCode = await session.getReturnCode();
-
-    if (state == SessionState.failed || !ReturnCode.isSuccess(returnCode)) {
-      file.copySync(targetPath);
-
-      return File(targetPath);
-    }
-
-    session.cancel();
-
-    return File(targetPath);
-  }
 
   static Future<String> createTempFile({
     required String dir,

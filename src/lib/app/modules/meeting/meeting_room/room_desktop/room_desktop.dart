@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/meeting.pb.dart';
+import 'package:openmeeting/app/data/models/pb_extension.dart';
 import 'package:sprintf/sprintf.dart';
 import '../../../../data/models/define.dart';
 import '../../../../widgets/meeting/desktop/m_x_n_layout_view.dart';
@@ -137,7 +138,7 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
   void _parseRoomMetadata() {
     Logger.print('room parseRoomMetadata: ${widget.room.metadata}');
 
-    if (widget.room.metadata != null) {
+    if (widget.room.metadata?.isNotEmpty == true) {
       final json = jsonDecode(widget.room.metadata!);
       meetingInfo = MeetingInfoSetting()..mergeFromProto3Json(json['detail']);
       meetingInfoChangedSubject.add(meetingInfo!);
@@ -305,9 +306,10 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
 
   void _meetingClosed(RoomDisconnectedEvent event) {
     Logger.print('_meetingClosed: ${event.reason == DisconnectReason.disconnected}');
-    if (event.reason == DisconnectReason.reconnectAttemptsExceeded || event.reason == DisconnectReason.duplicateIdentity) {
+    if (event.reason != DisconnectReason.disconnected || meetingInfo?.creatorUserID == widget.room.localParticipant?.identity) {
       return;
     }
+
     MeetingAlertDialog.show(context, '', event.reason == DisconnectReason.disconnected ? StrRes.meetingIsOver : StrRes.meetingClosedHint,
         confirmText: event.reason == DisconnectReason.disconnected ? StrRes.iKnew : null, onConfirm: () {
       widget.onOperation?.call(context, OperationType.onlyClose);

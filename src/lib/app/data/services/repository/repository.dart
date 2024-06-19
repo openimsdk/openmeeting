@@ -41,7 +41,9 @@ class MeetingRepository implements IMeetingRepository {
       'creatorUserID': creatorUserID,
       'creatorDefinedMeetingInfo': {
         'title': creatorDefinedMeetingInfo.title,
-        'scheduledTime': creatorDefinedMeetingInfo.scheduledTime.toInt() ~/ 1000,
+        'scheduledTime': creatorDefinedMeetingInfo.scheduledTime.toString().length > 10
+            ? creatorDefinedMeetingInfo.scheduledTime.toInt() ~/ 1000
+            : creatorDefinedMeetingInfo.scheduledTime.toInt(),
         'meetingDuration': creatorDefinedMeetingInfo.meetingDuration.toInt(),
         'password': creatorDefinedMeetingInfo.password,
       },

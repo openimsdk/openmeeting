@@ -129,13 +129,11 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView> with Au
   @override
   void onWindowClose() {
     Logger.print('========[Room Connect] window close');
-    if (Platform.isMacOS) {
-      if (_room == null) {
-        Navigator.of(Get.context!).pop();
-        MeetingClient().closeWindow();
-      } else {
-        _showEndPopup(null, immediatelyClose: true);
-      }
+    if (_room == null) {
+      Navigator.of(Get.context!).pop();
+      MeetingClient().closeWindow();
+    } else {
+      _showEndPopup(null, immediatelyClose: true);
     }
   }
 
@@ -175,13 +173,8 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView> with Au
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: Column(
-        children: [
-          if (!Platform.isMacOS) _buildAppbar(context),
-          const Spacer(),
+      body: Center(child:
           _buildLoadingIndicator(),
-          const Spacer(),
-        ],
       ),
     );
   }

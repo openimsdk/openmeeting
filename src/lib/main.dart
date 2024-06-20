@@ -25,21 +25,13 @@ void main(List<String> args) => Config.init(() async {
         argument['windowId'] = kWindowId;
         int type = argument['type'] ?? -1;
         kWindowType = type.windowType;
-        if (!Platform.isMacOS) {
-          WindowController.fromWindowId(kWindowId!).showTitleBar(false);
-        }
-
+        
         WindowController.fromWindowId(kWindowId!).setPreventClose(true);
 
         runApp(MeetingSubWindow(args: argument));
 
-        if (useCompatibleUiMode) {
-          WindowController.fromWindowId(kWindowId!).showTitleBar(true);
-        }
-
         WindowController.fromWindowId(kWindowId!).setTitle('Open Meeting');
         WindowController.fromWindowId(kWindowId!).show();
-
         return;
       } else {
         await windowManager.ensureInitialized();

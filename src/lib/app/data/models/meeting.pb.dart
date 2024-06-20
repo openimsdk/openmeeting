@@ -34,19 +34,21 @@ class LiveKit extends $pb.GeneratedMessage {
   factory LiveKit.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory LiveKit.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LiveKit',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LiveKit', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..aOS(2, _omitFieldNames ? '' : 'url')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   LiveKit clone() => LiveKit()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   LiveKit copyWith(void Function(LiveKit) updates) => super.copyWith((message) => updates(message as LiveKit)) as LiveKit;
 
   $pb.BuilderInfo get info_ => _i;
@@ -62,10 +64,7 @@ class LiveKit extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get token => $_getSZ(0);
   @$pb.TagNumber(1)
-  set token($core.String v) {
-    $_setString(0, v);
-  }
-
+  set token($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasToken() => $_has(0);
   @$pb.TagNumber(1)
@@ -74,10 +73,7 @@ class LiveKit extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get url => $_getSZ(1);
   @$pb.TagNumber(2)
-  set url($core.String v) {
-    $_setString(1, v);
-  }
-
+  set url($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUrl() => $_has(1);
   @$pb.TagNumber(2)
@@ -112,29 +108,28 @@ class SystemGeneratedMeetingInfo extends $pb.GeneratedMessage {
     return $result;
   }
   SystemGeneratedMeetingInfo._() : super();
-  factory SystemGeneratedMeetingInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory SystemGeneratedMeetingInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory SystemGeneratedMeetingInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SystemGeneratedMeetingInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SystemGeneratedMeetingInfo',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SystemGeneratedMeetingInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creatorUserID', protoName: 'creatorUserID')
     ..aOS(2, _omitFieldNames ? '' : 'creatorNickname', protoName: 'creatorNickname')
     ..aOS(3, _omitFieldNames ? '' : 'status')
     ..aInt64(4, _omitFieldNames ? '' : 'startTime', protoName: 'startTime')
     ..aOS(5, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   SystemGeneratedMeetingInfo clone() => SystemGeneratedMeetingInfo()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  SystemGeneratedMeetingInfo copyWith(void Function(SystemGeneratedMeetingInfo) updates) =>
-      super.copyWith((message) => updates(message as SystemGeneratedMeetingInfo)) as SystemGeneratedMeetingInfo;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SystemGeneratedMeetingInfo copyWith(void Function(SystemGeneratedMeetingInfo) updates) => super.copyWith((message) => updates(message as SystemGeneratedMeetingInfo)) as SystemGeneratedMeetingInfo;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -149,10 +144,7 @@ class SystemGeneratedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get creatorUserID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set creatorUserID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set creatorUserID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasCreatorUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -161,10 +153,7 @@ class SystemGeneratedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get creatorNickname => $_getSZ(1);
   @$pb.TagNumber(2)
-  set creatorNickname($core.String v) {
-    $_setString(1, v);
-  }
-
+  set creatorNickname($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatorNickname() => $_has(1);
   @$pb.TagNumber(2)
@@ -173,10 +162,7 @@ class SystemGeneratedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get status => $_getSZ(2);
   @$pb.TagNumber(3)
-  set status($core.String v) {
-    $_setString(2, v);
-  }
-
+  set status($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasStatus() => $_has(2);
   @$pb.TagNumber(3)
@@ -185,10 +171,7 @@ class SystemGeneratedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $fixnum.Int64 get startTime => $_getI64(3);
   @$pb.TagNumber(4)
-  set startTime($fixnum.Int64 v) {
-    $_setInt64(3, v);
-  }
-
+  set startTime($fixnum.Int64 v) { $_setInt64(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasStartTime() => $_has(3);
   @$pb.TagNumber(4)
@@ -197,10 +180,7 @@ class SystemGeneratedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.String get meetingID => $_getSZ(4);
   @$pb.TagNumber(5)
-  set meetingID($core.String v) {
-    $_setString(4, v);
-  }
-
+  set meetingID($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasMeetingID() => $_has(4);
   @$pb.TagNumber(5)
@@ -243,13 +223,10 @@ class CreatorDefinedMeetingInfo extends $pb.GeneratedMessage {
     return $result;
   }
   CreatorDefinedMeetingInfo._() : super();
-  factory CreatorDefinedMeetingInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory CreatorDefinedMeetingInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory CreatorDefinedMeetingInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreatorDefinedMeetingInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatorDefinedMeetingInfo',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatorDefinedMeetingInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aInt64(2, _omitFieldNames ? '' : 'scheduledTime', protoName: 'scheduledTime')
     ..aInt64(3, _omitFieldNames ? '' : 'meetingDuration', protoName: 'meetingDuration')
@@ -257,17 +234,19 @@ class CreatorDefinedMeetingInfo extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'timeZone', protoName: 'timeZone')
     ..aOS(6, _omitFieldNames ? '' : 'hostUserID', protoName: 'hostUserID')
     ..pPS(7, _omitFieldNames ? '' : 'coHostUSerID', protoName: 'coHostUSerID')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   CreatorDefinedMeetingInfo clone() => CreatorDefinedMeetingInfo()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  CreatorDefinedMeetingInfo copyWith(void Function(CreatorDefinedMeetingInfo) updates) =>
-      super.copyWith((message) => updates(message as CreatorDefinedMeetingInfo)) as CreatorDefinedMeetingInfo;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreatorDefinedMeetingInfo copyWith(void Function(CreatorDefinedMeetingInfo) updates) => super.copyWith((message) => updates(message as CreatorDefinedMeetingInfo)) as CreatorDefinedMeetingInfo;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -282,10 +261,7 @@ class CreatorDefinedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get title => $_getSZ(0);
   @$pb.TagNumber(1)
-  set title($core.String v) {
-    $_setString(0, v);
-  }
-
+  set title($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasTitle() => $_has(0);
   @$pb.TagNumber(1)
@@ -294,10 +270,7 @@ class CreatorDefinedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $fixnum.Int64 get scheduledTime => $_getI64(1);
   @$pb.TagNumber(2)
-  set scheduledTime($fixnum.Int64 v) {
-    $_setInt64(1, v);
-  }
-
+  set scheduledTime($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasScheduledTime() => $_has(1);
   @$pb.TagNumber(2)
@@ -306,10 +279,7 @@ class CreatorDefinedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $fixnum.Int64 get meetingDuration => $_getI64(2);
   @$pb.TagNumber(3)
-  set meetingDuration($fixnum.Int64 v) {
-    $_setInt64(2, v);
-  }
-
+  set meetingDuration($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasMeetingDuration() => $_has(2);
   @$pb.TagNumber(3)
@@ -318,10 +288,7 @@ class CreatorDefinedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.String get password => $_getSZ(3);
   @$pb.TagNumber(4)
-  set password($core.String v) {
-    $_setString(3, v);
-  }
-
+  set password($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasPassword() => $_has(3);
   @$pb.TagNumber(4)
@@ -330,10 +297,7 @@ class CreatorDefinedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.String get timeZone => $_getSZ(4);
   @$pb.TagNumber(5)
-  set timeZone($core.String v) {
-    $_setString(4, v);
-  }
-
+  set timeZone($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasTimeZone() => $_has(4);
   @$pb.TagNumber(5)
@@ -342,10 +306,7 @@ class CreatorDefinedMeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.String get hostUserID => $_getSZ(5);
   @$pb.TagNumber(6)
-  set hostUserID($core.String v) {
-    $_setString(5, v);
-  }
-
+  set hostUserID($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasHostUserID() => $_has(5);
   @$pb.TagNumber(6)
@@ -374,21 +335,21 @@ class MeetingInfo extends $pb.GeneratedMessage {
   factory MeetingInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory MeetingInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingInfo',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
-    ..aOM<SystemGeneratedMeetingInfo>(1, _omitFieldNames ? '' : 'systemGenerated',
-        protoName: 'systemGenerated', subBuilder: SystemGeneratedMeetingInfo.create)
-    ..aOM<CreatorDefinedMeetingInfo>(2, _omitFieldNames ? '' : 'creatorDefinedMeeting',
-        protoName: 'creatorDefinedMeeting', subBuilder: CreatorDefinedMeetingInfo.create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+    ..aOM<SystemGeneratedMeetingInfo>(1, _omitFieldNames ? '' : 'systemGenerated', protoName: 'systemGenerated', subBuilder: SystemGeneratedMeetingInfo.create)
+    ..aOM<CreatorDefinedMeetingInfo>(2, _omitFieldNames ? '' : 'creatorDefinedMeeting', protoName: 'creatorDefinedMeeting', subBuilder: CreatorDefinedMeetingInfo.create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   MeetingInfo clone() => MeetingInfo()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   MeetingInfo copyWith(void Function(MeetingInfo) updates) => super.copyWith((message) => updates(message as MeetingInfo)) as MeetingInfo;
 
   $pb.BuilderInfo get info_ => _i;
@@ -404,10 +365,7 @@ class MeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   SystemGeneratedMeetingInfo get systemGenerated => $_getN(0);
   @$pb.TagNumber(1)
-  set systemGenerated(SystemGeneratedMeetingInfo v) {
-    setField(1, v);
-  }
-
+  set systemGenerated(SystemGeneratedMeetingInfo v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSystemGenerated() => $_has(0);
   @$pb.TagNumber(1)
@@ -418,10 +376,7 @@ class MeetingInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   CreatorDefinedMeetingInfo get creatorDefinedMeeting => $_getN(1);
   @$pb.TagNumber(2)
-  set creatorDefinedMeeting(CreatorDefinedMeetingInfo v) {
-    setField(2, v);
-  }
-
+  set creatorDefinedMeeting(CreatorDefinedMeetingInfo v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatorDefinedMeeting() => $_has(1);
   @$pb.TagNumber(2)
@@ -453,27 +408,27 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
     return $result;
   }
   MeetingRepeatInfo._() : super();
-  factory MeetingRepeatInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory MeetingRepeatInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory MeetingRepeatInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingRepeatInfo',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingRepeatInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'endDate', protoName: 'endDate')
     ..aOS(2, _omitFieldNames ? '' : 'repeatType', protoName: 'repeatType')
     ..aOS(3, _omitFieldNames ? '' : 'uintType', protoName: 'uintType')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'interval', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   MeetingRepeatInfo clone() => MeetingRepeatInfo()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  MeetingRepeatInfo copyWith(void Function(MeetingRepeatInfo) updates) =>
-      super.copyWith((message) => updates(message as MeetingRepeatInfo)) as MeetingRepeatInfo;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MeetingRepeatInfo copyWith(void Function(MeetingRepeatInfo) updates) => super.copyWith((message) => updates(message as MeetingRepeatInfo)) as MeetingRepeatInfo;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -488,10 +443,7 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get endDate => $_getSZ(0);
   @$pb.TagNumber(1)
-  set endDate($core.String v) {
-    $_setString(0, v);
-  }
-
+  set endDate($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasEndDate() => $_has(0);
   @$pb.TagNumber(1)
@@ -500,10 +452,7 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get repeatType => $_getSZ(1);
   @$pb.TagNumber(2)
-  set repeatType($core.String v) {
-    $_setString(1, v);
-  }
-
+  set repeatType($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasRepeatType() => $_has(1);
   @$pb.TagNumber(2)
@@ -512,10 +461,7 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get uintType => $_getSZ(2);
   @$pb.TagNumber(3)
-  set uintType($core.String v) {
-    $_setString(2, v);
-  }
-
+  set uintType($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasUintType() => $_has(2);
   @$pb.TagNumber(3)
@@ -524,10 +470,7 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.int get interval => $_getIZ(3);
   @$pb.TagNumber(4)
-  set interval($core.int v) {
-    $_setSignedInt32(3, v);
-  }
-
+  set interval($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasInterval() => $_has(3);
   @$pb.TagNumber(4)
@@ -578,12 +521,10 @@ class MeetingSetting extends $pb.GeneratedMessage {
     return $result;
   }
   MeetingSetting._() : super();
-  factory MeetingSetting.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory MeetingSetting.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory MeetingSetting.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingSetting',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingSetting', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'canParticipantsEnableCamera', protoName: 'canParticipantsEnableCamera')
     ..aOB(2, _omitFieldNames ? '' : 'canParticipantsUnmuteMicrophone', protoName: 'canParticipantsUnmuteMicrophone')
     ..aOB(3, _omitFieldNames ? '' : 'canParticipantsShareScreen', protoName: 'canParticipantsShareScreen')
@@ -593,15 +534,18 @@ class MeetingSetting extends $pb.GeneratedMessage {
     ..aOB(7, _omitFieldNames ? '' : 'lockMeeting', protoName: 'lockMeeting')
     ..aOB(8, _omitFieldNames ? '' : 'audioEncouragement', protoName: 'audioEncouragement')
     ..aOB(9, _omitFieldNames ? '' : 'videoMirroring', protoName: 'videoMirroring')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   MeetingSetting clone() => MeetingSetting()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   MeetingSetting copyWith(void Function(MeetingSetting) updates) => super.copyWith((message) => updates(message as MeetingSetting)) as MeetingSetting;
 
   $pb.BuilderInfo get info_ => _i;
@@ -617,10 +561,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool get canParticipantsEnableCamera => $_getBF(0);
   @$pb.TagNumber(1)
-  set canParticipantsEnableCamera($core.bool v) {
-    $_setBool(0, v);
-  }
-
+  set canParticipantsEnableCamera($core.bool v) { $_setBool(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasCanParticipantsEnableCamera() => $_has(0);
   @$pb.TagNumber(1)
@@ -629,10 +570,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.bool get canParticipantsUnmuteMicrophone => $_getBF(1);
   @$pb.TagNumber(2)
-  set canParticipantsUnmuteMicrophone($core.bool v) {
-    $_setBool(1, v);
-  }
-
+  set canParticipantsUnmuteMicrophone($core.bool v) { $_setBool(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasCanParticipantsUnmuteMicrophone() => $_has(1);
   @$pb.TagNumber(2)
@@ -641,10 +579,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.bool get canParticipantsShareScreen => $_getBF(2);
   @$pb.TagNumber(3)
-  set canParticipantsShareScreen($core.bool v) {
-    $_setBool(2, v);
-  }
-
+  set canParticipantsShareScreen($core.bool v) { $_setBool(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasCanParticipantsShareScreen() => $_has(2);
   @$pb.TagNumber(3)
@@ -653,10 +588,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.bool get disableCameraOnJoin => $_getBF(3);
   @$pb.TagNumber(4)
-  set disableCameraOnJoin($core.bool v) {
-    $_setBool(3, v);
-  }
-
+  set disableCameraOnJoin($core.bool v) { $_setBool(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasDisableCameraOnJoin() => $_has(3);
   @$pb.TagNumber(4)
@@ -665,10 +597,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.bool get disableMicrophoneOnJoin => $_getBF(4);
   @$pb.TagNumber(5)
-  set disableMicrophoneOnJoin($core.bool v) {
-    $_setBool(4, v);
-  }
-
+  set disableMicrophoneOnJoin($core.bool v) { $_setBool(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasDisableMicrophoneOnJoin() => $_has(4);
   @$pb.TagNumber(5)
@@ -677,10 +606,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.bool get canParticipantJoinMeetingEarly => $_getBF(5);
   @$pb.TagNumber(6)
-  set canParticipantJoinMeetingEarly($core.bool v) {
-    $_setBool(5, v);
-  }
-
+  set canParticipantJoinMeetingEarly($core.bool v) { $_setBool(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasCanParticipantJoinMeetingEarly() => $_has(5);
   @$pb.TagNumber(6)
@@ -689,10 +615,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.bool get lockMeeting => $_getBF(6);
   @$pb.TagNumber(7)
-  set lockMeeting($core.bool v) {
-    $_setBool(6, v);
-  }
-
+  set lockMeeting($core.bool v) { $_setBool(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasLockMeeting() => $_has(6);
   @$pb.TagNumber(7)
@@ -701,10 +624,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.bool get audioEncouragement => $_getBF(7);
   @$pb.TagNumber(8)
-  set audioEncouragement($core.bool v) {
-    $_setBool(7, v);
-  }
-
+  set audioEncouragement($core.bool v) { $_setBool(7, v); }
   @$pb.TagNumber(8)
   $core.bool hasAudioEncouragement() => $_has(7);
   @$pb.TagNumber(8)
@@ -713,10 +633,7 @@ class MeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $core.bool get videoMirroring => $_getBF(8);
   @$pb.TagNumber(9)
-  set videoMirroring($core.bool v) {
-    $_setBool(8, v);
-  }
-
+  set videoMirroring($core.bool v) { $_setBool(8, v); }
   @$pb.TagNumber(9)
   $core.bool hasVideoMirroring() => $_has(8);
   @$pb.TagNumber(9)
@@ -743,26 +660,26 @@ class MeetingInfoSetting extends $pb.GeneratedMessage {
     return $result;
   }
   MeetingInfoSetting._() : super();
-  factory MeetingInfoSetting.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory MeetingInfoSetting.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory MeetingInfoSetting.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingInfoSetting',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingInfoSetting', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOM<MeetingInfo>(1, _omitFieldNames ? '' : 'info', subBuilder: MeetingInfo.create)
     ..aOM<MeetingSetting>(2, _omitFieldNames ? '' : 'setting', subBuilder: MeetingSetting.create)
     ..aOM<MeetingRepeatInfo>(3, _omitFieldNames ? '' : 'repeatInfo', protoName: 'repeatInfo', subBuilder: MeetingRepeatInfo.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   MeetingInfoSetting clone() => MeetingInfoSetting()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  MeetingInfoSetting copyWith(void Function(MeetingInfoSetting) updates) =>
-      super.copyWith((message) => updates(message as MeetingInfoSetting)) as MeetingInfoSetting;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MeetingInfoSetting copyWith(void Function(MeetingInfoSetting) updates) => super.copyWith((message) => updates(message as MeetingInfoSetting)) as MeetingInfoSetting;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -777,10 +694,7 @@ class MeetingInfoSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   MeetingInfo get info => $_getN(0);
   @$pb.TagNumber(1)
-  set info(MeetingInfo v) {
-    setField(1, v);
-  }
-
+  set info(MeetingInfo v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasInfo() => $_has(0);
   @$pb.TagNumber(1)
@@ -791,10 +705,7 @@ class MeetingInfoSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   MeetingSetting get setting => $_getN(1);
   @$pb.TagNumber(2)
-  set setting(MeetingSetting v) {
-    setField(2, v);
-  }
-
+  set setting(MeetingSetting v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasSetting() => $_has(1);
   @$pb.TagNumber(2)
@@ -805,10 +716,7 @@ class MeetingInfoSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   MeetingRepeatInfo get repeatInfo => $_getN(2);
   @$pb.TagNumber(3)
-  set repeatInfo(MeetingRepeatInfo v) {
-    setField(3, v);
-  }
-
+  set repeatInfo(MeetingRepeatInfo v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRepeatInfo() => $_has(2);
   @$pb.TagNumber(3)
@@ -839,20 +747,22 @@ class UserInfo extends $pb.GeneratedMessage {
   factory UserInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory UserInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserInfo',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserInfo', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..aOS(2, _omitFieldNames ? '' : 'nickname')
     ..aOS(3, _omitFieldNames ? '' : 'account')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   UserInfo clone() => UserInfo()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   UserInfo copyWith(void Function(UserInfo) updates) => super.copyWith((message) => updates(message as UserInfo)) as UserInfo;
 
   $pb.BuilderInfo get info_ => _i;
@@ -868,10 +778,7 @@ class UserInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get userID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set userID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -880,10 +787,7 @@ class UserInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get nickname => $_getSZ(1);
   @$pb.TagNumber(2)
-  set nickname($core.String v) {
-    $_setString(1, v);
-  }
-
+  set nickname($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasNickname() => $_has(1);
   @$pb.TagNumber(2)
@@ -892,10 +796,7 @@ class UserInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get account => $_getSZ(2);
   @$pb.TagNumber(3)
-  set account($core.String v) {
-    $_setString(2, v);
-  }
-
+  set account($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasAccount() => $_has(2);
   @$pb.TagNumber(3)
@@ -914,24 +815,24 @@ class ParticipantMetaData extends $pb.GeneratedMessage {
     return $result;
   }
   ParticipantMetaData._() : super();
-  factory ParticipantMetaData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory ParticipantMetaData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ParticipantMetaData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ParticipantMetaData',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ParticipantMetaData', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOM<UserInfo>(1, _omitFieldNames ? '' : 'userInfo', protoName: 'userInfo', subBuilder: UserInfo.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ParticipantMetaData clone() => ParticipantMetaData()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ParticipantMetaData copyWith(void Function(ParticipantMetaData) updates) =>
-      super.copyWith((message) => updates(message as ParticipantMetaData)) as ParticipantMetaData;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ParticipantMetaData copyWith(void Function(ParticipantMetaData) updates) => super.copyWith((message) => updates(message as ParticipantMetaData)) as ParticipantMetaData;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -946,10 +847,7 @@ class ParticipantMetaData extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   UserInfo get userInfo => $_getN(0);
   @$pb.TagNumber(1)
-  set userInfo(UserInfo v) {
-    setField(1, v);
-  }
-
+  set userInfo(UserInfo v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasUserInfo() => $_has(0);
   @$pb.TagNumber(1)
@@ -973,25 +871,25 @@ class StreamOperateData extends $pb.GeneratedMessage {
     return $result;
   }
   StreamOperateData._() : super();
-  factory StreamOperateData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory StreamOperateData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory StreamOperateData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamOperateData',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamOperateData', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'operatorUserID', protoName: 'operatorUserID')
     ..pc<UserOperationData>(2, _omitFieldNames ? '' : 'operation', $pb.PbFieldType.PM, subBuilder: UserOperationData.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   StreamOperateData clone() => StreamOperateData()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  StreamOperateData copyWith(void Function(StreamOperateData) updates) =>
-      super.copyWith((message) => updates(message as StreamOperateData)) as StreamOperateData;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  StreamOperateData copyWith(void Function(StreamOperateData) updates) => super.copyWith((message) => updates(message as StreamOperateData)) as StreamOperateData;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1006,10 +904,7 @@ class StreamOperateData extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get operatorUserID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set operatorUserID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set operatorUserID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasOperatorUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1038,26 +933,26 @@ class UserOperationData extends $pb.GeneratedMessage {
     return $result;
   }
   UserOperationData._() : super();
-  factory UserOperationData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory UserOperationData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory UserOperationData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserOperationData',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserOperationData', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..aOB(2, _omitFieldNames ? '' : 'cameraOnEntry', protoName: 'cameraOnEntry')
     ..aOB(3, _omitFieldNames ? '' : 'microphoneOnEntry', protoName: 'microphoneOnEntry')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   UserOperationData clone() => UserOperationData()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  UserOperationData copyWith(void Function(UserOperationData) updates) =>
-      super.copyWith((message) => updates(message as UserOperationData)) as UserOperationData;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UserOperationData copyWith(void Function(UserOperationData) updates) => super.copyWith((message) => updates(message as UserOperationData)) as UserOperationData;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1072,10 +967,7 @@ class UserOperationData extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get userID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set userID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1084,10 +976,7 @@ class UserOperationData extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.bool get cameraOnEntry => $_getBF(1);
   @$pb.TagNumber(2)
-  set cameraOnEntry($core.bool v) {
-    $_setBool(1, v);
-  }
-
+  set cameraOnEntry($core.bool v) { $_setBool(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasCameraOnEntry() => $_has(1);
   @$pb.TagNumber(2)
@@ -1096,10 +985,7 @@ class UserOperationData extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.bool get microphoneOnEntry => $_getBF(2);
   @$pb.TagNumber(3)
-  set microphoneOnEntry($core.bool v) {
-    $_setBool(2, v);
-  }
-
+  set microphoneOnEntry($core.bool v) { $_setBool(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasMicrophoneOnEntry() => $_has(2);
   @$pb.TagNumber(3)
@@ -1130,26 +1016,26 @@ class BookMeetingReq extends $pb.GeneratedMessage {
     return $result;
   }
   BookMeetingReq._() : super();
-  factory BookMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory BookMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory BookMeetingReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BookMeetingReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BookMeetingReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creatorUserID', protoName: 'creatorUserID')
-    ..aOM<CreatorDefinedMeetingInfo>(2, _omitFieldNames ? '' : 'creatorDefinedMeetingInfo',
-        protoName: 'creatorDefinedMeetingInfo', subBuilder: CreatorDefinedMeetingInfo.create)
+    ..aOM<CreatorDefinedMeetingInfo>(2, _omitFieldNames ? '' : 'creatorDefinedMeetingInfo', protoName: 'creatorDefinedMeetingInfo', subBuilder: CreatorDefinedMeetingInfo.create)
     ..aOM<MeetingSetting>(3, _omitFieldNames ? '' : 'setting', subBuilder: MeetingSetting.create)
     ..aOM<MeetingRepeatInfo>(4, _omitFieldNames ? '' : 'repeatInfo', protoName: 'repeatInfo', subBuilder: MeetingRepeatInfo.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   BookMeetingReq clone() => BookMeetingReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   BookMeetingReq copyWith(void Function(BookMeetingReq) updates) => super.copyWith((message) => updates(message as BookMeetingReq)) as BookMeetingReq;
 
   $pb.BuilderInfo get info_ => _i;
@@ -1165,10 +1051,7 @@ class BookMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get creatorUserID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set creatorUserID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set creatorUserID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasCreatorUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1177,10 +1060,7 @@ class BookMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   CreatorDefinedMeetingInfo get creatorDefinedMeetingInfo => $_getN(1);
   @$pb.TagNumber(2)
-  set creatorDefinedMeetingInfo(CreatorDefinedMeetingInfo v) {
-    setField(2, v);
-  }
-
+  set creatorDefinedMeetingInfo(CreatorDefinedMeetingInfo v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatorDefinedMeetingInfo() => $_has(1);
   @$pb.TagNumber(2)
@@ -1191,10 +1071,7 @@ class BookMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   MeetingSetting get setting => $_getN(2);
   @$pb.TagNumber(3)
-  set setting(MeetingSetting v) {
-    setField(3, v);
-  }
-
+  set setting(MeetingSetting v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSetting() => $_has(2);
   @$pb.TagNumber(3)
@@ -1205,10 +1082,7 @@ class BookMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   MeetingRepeatInfo get repeatInfo => $_getN(3);
   @$pb.TagNumber(4)
-  set repeatInfo(MeetingRepeatInfo v) {
-    setField(4, v);
-  }
-
+  set repeatInfo(MeetingRepeatInfo v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasRepeatInfo() => $_has(3);
   @$pb.TagNumber(4)
@@ -1229,24 +1103,24 @@ class BookMeetingResp extends $pb.GeneratedMessage {
     return $result;
   }
   BookMeetingResp._() : super();
-  factory BookMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory BookMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory BookMeetingResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BookMeetingResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BookMeetingResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOM<MeetingInfoSetting>(1, _omitFieldNames ? '' : 'detail', subBuilder: MeetingInfoSetting.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   BookMeetingResp clone() => BookMeetingResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  BookMeetingResp copyWith(void Function(BookMeetingResp) updates) =>
-      super.copyWith((message) => updates(message as BookMeetingResp)) as BookMeetingResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BookMeetingResp copyWith(void Function(BookMeetingResp) updates) => super.copyWith((message) => updates(message as BookMeetingResp)) as BookMeetingResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1261,10 +1135,7 @@ class BookMeetingResp extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   MeetingInfoSetting get detail => $_getN(0);
   @$pb.TagNumber(1)
-  set detail(MeetingInfoSetting v) {
-    setField(1, v);
-  }
-
+  set detail(MeetingInfoSetting v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDetail() => $_has(0);
   @$pb.TagNumber(1)
@@ -1293,28 +1164,26 @@ class CreateImmediateMeetingReq extends $pb.GeneratedMessage {
     return $result;
   }
   CreateImmediateMeetingReq._() : super();
-  factory CreateImmediateMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory CreateImmediateMeetingReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory CreateImmediateMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateImmediateMeetingReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateImmediateMeetingReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateImmediateMeetingReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'creatorUserID', protoName: 'creatorUserID')
-    ..aOM<CreatorDefinedMeetingInfo>(2, _omitFieldNames ? '' : 'creatorDefinedMeetingInfo',
-        protoName: 'creatorDefinedMeetingInfo', subBuilder: CreatorDefinedMeetingInfo.create)
+    ..aOM<CreatorDefinedMeetingInfo>(2, _omitFieldNames ? '' : 'creatorDefinedMeetingInfo', protoName: 'creatorDefinedMeetingInfo', subBuilder: CreatorDefinedMeetingInfo.create)
     ..aOM<MeetingSetting>(3, _omitFieldNames ? '' : 'setting', subBuilder: MeetingSetting.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   CreateImmediateMeetingReq clone() => CreateImmediateMeetingReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  CreateImmediateMeetingReq copyWith(void Function(CreateImmediateMeetingReq) updates) =>
-      super.copyWith((message) => updates(message as CreateImmediateMeetingReq)) as CreateImmediateMeetingReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreateImmediateMeetingReq copyWith(void Function(CreateImmediateMeetingReq) updates) => super.copyWith((message) => updates(message as CreateImmediateMeetingReq)) as CreateImmediateMeetingReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1329,10 +1198,7 @@ class CreateImmediateMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get creatorUserID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set creatorUserID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set creatorUserID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasCreatorUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1341,10 +1207,7 @@ class CreateImmediateMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   CreatorDefinedMeetingInfo get creatorDefinedMeetingInfo => $_getN(1);
   @$pb.TagNumber(2)
-  set creatorDefinedMeetingInfo(CreatorDefinedMeetingInfo v) {
-    setField(2, v);
-  }
-
+  set creatorDefinedMeetingInfo(CreatorDefinedMeetingInfo v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatorDefinedMeetingInfo() => $_has(1);
   @$pb.TagNumber(2)
@@ -1355,10 +1218,7 @@ class CreateImmediateMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   MeetingSetting get setting => $_getN(2);
   @$pb.TagNumber(3)
-  set setting(MeetingSetting v) {
-    setField(3, v);
-  }
-
+  set setting(MeetingSetting v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSetting() => $_has(2);
   @$pb.TagNumber(3)
@@ -1383,26 +1243,25 @@ class CreateImmediateMeetingResp extends $pb.GeneratedMessage {
     return $result;
   }
   CreateImmediateMeetingResp._() : super();
-  factory CreateImmediateMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory CreateImmediateMeetingResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory CreateImmediateMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateImmediateMeetingResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateImmediateMeetingResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateImmediateMeetingResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOM<MeetingInfoSetting>(1, _omitFieldNames ? '' : 'detail', subBuilder: MeetingInfoSetting.create)
     ..aOM<LiveKit>(2, _omitFieldNames ? '' : 'liveKit', protoName: 'liveKit', subBuilder: LiveKit.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   CreateImmediateMeetingResp clone() => CreateImmediateMeetingResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  CreateImmediateMeetingResp copyWith(void Function(CreateImmediateMeetingResp) updates) =>
-      super.copyWith((message) => updates(message as CreateImmediateMeetingResp)) as CreateImmediateMeetingResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreateImmediateMeetingResp copyWith(void Function(CreateImmediateMeetingResp) updates) => super.copyWith((message) => updates(message as CreateImmediateMeetingResp)) as CreateImmediateMeetingResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1417,10 +1276,7 @@ class CreateImmediateMeetingResp extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   MeetingInfoSetting get detail => $_getN(0);
   @$pb.TagNumber(1)
-  set detail(MeetingInfoSetting v) {
-    setField(1, v);
-  }
-
+  set detail(MeetingInfoSetting v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDetail() => $_has(0);
   @$pb.TagNumber(1)
@@ -1431,10 +1287,7 @@ class CreateImmediateMeetingResp extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   LiveKit get liveKit => $_getN(1);
   @$pb.TagNumber(2)
-  set liveKit(LiveKit v) {
-    setField(2, v);
-  }
-
+  set liveKit(LiveKit v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasLiveKit() => $_has(1);
   @$pb.TagNumber(2)
@@ -1463,24 +1316,25 @@ class JoinMeetingReq extends $pb.GeneratedMessage {
     return $result;
   }
   JoinMeetingReq._() : super();
-  factory JoinMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory JoinMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory JoinMeetingReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'JoinMeetingReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'JoinMeetingReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..aOS(3, _omitFieldNames ? '' : 'password')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   JoinMeetingReq clone() => JoinMeetingReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   JoinMeetingReq copyWith(void Function(JoinMeetingReq) updates) => super.copyWith((message) => updates(message as JoinMeetingReq)) as JoinMeetingReq;
 
   $pb.BuilderInfo get info_ => _i;
@@ -1496,10 +1350,7 @@ class JoinMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1508,10 +1359,7 @@ class JoinMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -1520,10 +1368,7 @@ class JoinMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get password => $_getSZ(2);
   @$pb.TagNumber(3)
-  set password($core.String v) {
-    $_setString(2, v);
-  }
-
+  set password($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasPassword() => $_has(2);
   @$pb.TagNumber(3)
@@ -1542,24 +1387,24 @@ class JoinMeetingResp extends $pb.GeneratedMessage {
     return $result;
   }
   JoinMeetingResp._() : super();
-  factory JoinMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory JoinMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory JoinMeetingResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'JoinMeetingResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'JoinMeetingResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOM<LiveKit>(1, _omitFieldNames ? '' : 'liveKit', protoName: 'liveKit', subBuilder: LiveKit.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   JoinMeetingResp clone() => JoinMeetingResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  JoinMeetingResp copyWith(void Function(JoinMeetingResp) updates) =>
-      super.copyWith((message) => updates(message as JoinMeetingResp)) as JoinMeetingResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  JoinMeetingResp copyWith(void Function(JoinMeetingResp) updates) => super.copyWith((message) => updates(message as JoinMeetingResp)) as JoinMeetingResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1574,10 +1419,7 @@ class JoinMeetingResp extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   LiveKit get liveKit => $_getN(0);
   @$pb.TagNumber(1)
-  set liveKit(LiveKit v) {
-    setField(1, v);
-  }
-
+  set liveKit(LiveKit v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLiveKit() => $_has(0);
   @$pb.TagNumber(1)
@@ -1602,25 +1444,25 @@ class GetMeetingTokenReq extends $pb.GeneratedMessage {
     return $result;
   }
   GetMeetingTokenReq._() : super();
-  factory GetMeetingTokenReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory GetMeetingTokenReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetMeetingTokenReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingTokenReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingTokenReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetMeetingTokenReq clone() => GetMeetingTokenReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  GetMeetingTokenReq copyWith(void Function(GetMeetingTokenReq) updates) =>
-      super.copyWith((message) => updates(message as GetMeetingTokenReq)) as GetMeetingTokenReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetMeetingTokenReq copyWith(void Function(GetMeetingTokenReq) updates) => super.copyWith((message) => updates(message as GetMeetingTokenReq)) as GetMeetingTokenReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1635,10 +1477,7 @@ class GetMeetingTokenReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1647,10 +1486,7 @@ class GetMeetingTokenReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -1673,25 +1509,25 @@ class GetMeetingTokenResp extends $pb.GeneratedMessage {
     return $result;
   }
   GetMeetingTokenResp._() : super();
-  factory GetMeetingTokenResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory GetMeetingTokenResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetMeetingTokenResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingTokenResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingTokenResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOM<LiveKit>(2, _omitFieldNames ? '' : 'liveKit', protoName: 'liveKit', subBuilder: LiveKit.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetMeetingTokenResp clone() => GetMeetingTokenResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  GetMeetingTokenResp copyWith(void Function(GetMeetingTokenResp) updates) =>
-      super.copyWith((message) => updates(message as GetMeetingTokenResp)) as GetMeetingTokenResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetMeetingTokenResp copyWith(void Function(GetMeetingTokenResp) updates) => super.copyWith((message) => updates(message as GetMeetingTokenResp)) as GetMeetingTokenResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1706,10 +1542,7 @@ class GetMeetingTokenResp extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1718,10 +1551,7 @@ class GetMeetingTokenResp extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   LiveKit get liveKit => $_getN(1);
   @$pb.TagNumber(2)
-  set liveKit(LiveKit v) {
-    setField(2, v);
-  }
-
+  set liveKit(LiveKit v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasLiveKit() => $_has(1);
   @$pb.TagNumber(2)
@@ -1746,25 +1576,25 @@ class LeaveMeetingReq extends $pb.GeneratedMessage {
     return $result;
   }
   LeaveMeetingReq._() : super();
-  factory LeaveMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory LeaveMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory LeaveMeetingReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeaveMeetingReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeaveMeetingReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   LeaveMeetingReq clone() => LeaveMeetingReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  LeaveMeetingReq copyWith(void Function(LeaveMeetingReq) updates) =>
-      super.copyWith((message) => updates(message as LeaveMeetingReq)) as LeaveMeetingReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  LeaveMeetingReq copyWith(void Function(LeaveMeetingReq) updates) => super.copyWith((message) => updates(message as LeaveMeetingReq)) as LeaveMeetingReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1779,10 +1609,7 @@ class LeaveMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1791,10 +1618,7 @@ class LeaveMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -1805,23 +1629,23 @@ class LeaveMeetingReq extends $pb.GeneratedMessage {
 class LeaveMeetingResp extends $pb.GeneratedMessage {
   factory LeaveMeetingResp() => create();
   LeaveMeetingResp._() : super();
-  factory LeaveMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory LeaveMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory LeaveMeetingResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeaveMeetingResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LeaveMeetingResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   LeaveMeetingResp clone() => LeaveMeetingResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  LeaveMeetingResp copyWith(void Function(LeaveMeetingResp) updates) =>
-      super.copyWith((message) => updates(message as LeaveMeetingResp)) as LeaveMeetingResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  LeaveMeetingResp copyWith(void Function(LeaveMeetingResp) updates) => super.copyWith((message) => updates(message as LeaveMeetingResp)) as LeaveMeetingResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -1850,23 +1674,24 @@ class EndMeetingReq extends $pb.GeneratedMessage {
     return $result;
   }
   EndMeetingReq._() : super();
-  factory EndMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory EndMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory EndMeetingReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EndMeetingReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EndMeetingReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   EndMeetingReq clone() => EndMeetingReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   EndMeetingReq copyWith(void Function(EndMeetingReq) updates) => super.copyWith((message) => updates(message as EndMeetingReq)) as EndMeetingReq;
 
   $pb.BuilderInfo get info_ => _i;
@@ -1882,10 +1707,7 @@ class EndMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -1894,10 +1716,7 @@ class EndMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -1908,21 +1727,22 @@ class EndMeetingReq extends $pb.GeneratedMessage {
 class EndMeetingResp extends $pb.GeneratedMessage {
   factory EndMeetingResp() => create();
   EndMeetingResp._() : super();
-  factory EndMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory EndMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory EndMeetingResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EndMeetingResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EndMeetingResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   EndMeetingResp clone() => EndMeetingResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   EndMeetingResp copyWith(void Function(EndMeetingResp) updates) => super.copyWith((message) => updates(message as EndMeetingResp)) as EndMeetingResp;
 
   $pb.BuilderInfo get info_ => _i;
@@ -1952,23 +1772,24 @@ class GetMeetingsReq extends $pb.GeneratedMessage {
     return $result;
   }
   GetMeetingsReq._() : super();
-  factory GetMeetingsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory GetMeetingsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetMeetingsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingsReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..pPS(2, _omitFieldNames ? '' : 'status')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetMeetingsReq clone() => GetMeetingsReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   GetMeetingsReq copyWith(void Function(GetMeetingsReq) updates) => super.copyWith((message) => updates(message as GetMeetingsReq)) as GetMeetingsReq;
 
   $pb.BuilderInfo get info_ => _i;
@@ -1984,10 +1805,7 @@ class GetMeetingsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get userID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set userID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -2009,25 +1827,24 @@ class GetMeetingsResp extends $pb.GeneratedMessage {
     return $result;
   }
   GetMeetingsResp._() : super();
-  factory GetMeetingsResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory GetMeetingsResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetMeetingsResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingsResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
-    ..pc<MeetingInfoSetting>(1, _omitFieldNames ? '' : 'meetingDetails', $pb.PbFieldType.PM,
-        protoName: 'meetingDetails', subBuilder: MeetingInfoSetting.create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingsResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+    ..pc<MeetingInfoSetting>(1, _omitFieldNames ? '' : 'meetingDetails', $pb.PbFieldType.PM, protoName: 'meetingDetails', subBuilder: MeetingInfoSetting.create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetMeetingsResp clone() => GetMeetingsResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  GetMeetingsResp copyWith(void Function(GetMeetingsResp) updates) =>
-      super.copyWith((message) => updates(message as GetMeetingsResp)) as GetMeetingsResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetMeetingsResp copyWith(void Function(GetMeetingsResp) updates) => super.copyWith((message) => updates(message as GetMeetingsResp)) as GetMeetingsResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2059,23 +1876,24 @@ class GetMeetingReq extends $pb.GeneratedMessage {
     return $result;
   }
   GetMeetingReq._() : super();
-  factory GetMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory GetMeetingReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetMeetingReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..aOS(2, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetMeetingReq clone() => GetMeetingReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   GetMeetingReq copyWith(void Function(GetMeetingReq) updates) => super.copyWith((message) => updates(message as GetMeetingReq)) as GetMeetingReq;
 
   $pb.BuilderInfo get info_ => _i;
@@ -2091,10 +1909,7 @@ class GetMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get userID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set userID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -2103,10 +1918,7 @@ class GetMeetingReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get meetingID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set meetingID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set meetingID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasMeetingID() => $_has(1);
   @$pb.TagNumber(2)
@@ -2125,22 +1937,23 @@ class GetMeetingResp extends $pb.GeneratedMessage {
     return $result;
   }
   GetMeetingResp._() : super();
-  factory GetMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory GetMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetMeetingResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMeetingResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOM<MeetingInfoSetting>(1, _omitFieldNames ? '' : 'meetingDetail', protoName: 'meetingDetail', subBuilder: MeetingInfoSetting.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetMeetingResp clone() => GetMeetingResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   GetMeetingResp copyWith(void Function(GetMeetingResp) updates) => super.copyWith((message) => updates(message as GetMeetingResp)) as GetMeetingResp;
 
   $pb.BuilderInfo get info_ => _i;
@@ -2156,10 +1969,7 @@ class GetMeetingResp extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   MeetingInfoSetting get meetingDetail => $_getN(0);
   @$pb.TagNumber(1)
-  set meetingDetail(MeetingInfoSetting v) {
-    setField(1, v);
-  }
-
+  set meetingDetail(MeetingInfoSetting v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingDetail() => $_has(0);
   @$pb.TagNumber(1)
@@ -2191,28 +2001,27 @@ class ModifyMeetingParticipantNickNameReq extends $pb.GeneratedMessage {
     return $result;
   }
   ModifyMeetingParticipantNickNameReq._() : super();
-  factory ModifyMeetingParticipantNickNameReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ModifyMeetingParticipantNickNameReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ModifyMeetingParticipantNickNameReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ModifyMeetingParticipantNickNameReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ModifyMeetingParticipantNickNameReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ModifyMeetingParticipantNickNameReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..aOS(3, _omitFieldNames ? '' : 'participantUserID', protoName: 'participantUserID')
     ..aOS(4, _omitFieldNames ? '' : 'nickname')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ModifyMeetingParticipantNickNameReq clone() => ModifyMeetingParticipantNickNameReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ModifyMeetingParticipantNickNameReq copyWith(void Function(ModifyMeetingParticipantNickNameReq) updates) =>
-      super.copyWith((message) => updates(message as ModifyMeetingParticipantNickNameReq)) as ModifyMeetingParticipantNickNameReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ModifyMeetingParticipantNickNameReq copyWith(void Function(ModifyMeetingParticipantNickNameReq) updates) => super.copyWith((message) => updates(message as ModifyMeetingParticipantNickNameReq)) as ModifyMeetingParticipantNickNameReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2221,17 +2030,13 @@ class ModifyMeetingParticipantNickNameReq extends $pb.GeneratedMessage {
   ModifyMeetingParticipantNickNameReq createEmptyInstance() => create();
   static $pb.PbList<ModifyMeetingParticipantNickNameReq> createRepeated() => $pb.PbList<ModifyMeetingParticipantNickNameReq>();
   @$core.pragma('dart2js:noInline')
-  static ModifyMeetingParticipantNickNameReq getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ModifyMeetingParticipantNickNameReq>(create);
+  static ModifyMeetingParticipantNickNameReq getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ModifyMeetingParticipantNickNameReq>(create);
   static ModifyMeetingParticipantNickNameReq? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -2240,10 +2045,7 @@ class ModifyMeetingParticipantNickNameReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -2252,10 +2054,7 @@ class ModifyMeetingParticipantNickNameReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get participantUserID => $_getSZ(2);
   @$pb.TagNumber(3)
-  set participantUserID($core.String v) {
-    $_setString(2, v);
-  }
-
+  set participantUserID($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasParticipantUserID() => $_has(2);
   @$pb.TagNumber(3)
@@ -2264,10 +2063,7 @@ class ModifyMeetingParticipantNickNameReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.String get nickname => $_getSZ(3);
   @$pb.TagNumber(4)
-  set nickname($core.String v) {
-    $_setString(3, v);
-  }
-
+  set nickname($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasNickname() => $_has(3);
   @$pb.TagNumber(4)
@@ -2277,24 +2073,23 @@ class ModifyMeetingParticipantNickNameReq extends $pb.GeneratedMessage {
 class ModifyMeetingParticipantNickNameResp extends $pb.GeneratedMessage {
   factory ModifyMeetingParticipantNickNameResp() => create();
   ModifyMeetingParticipantNickNameResp._() : super();
-  factory ModifyMeetingParticipantNickNameResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory ModifyMeetingParticipantNickNameResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory ModifyMeetingParticipantNickNameResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ModifyMeetingParticipantNickNameResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ModifyMeetingParticipantNickNameResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ModifyMeetingParticipantNickNameResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ModifyMeetingParticipantNickNameResp clone() => ModifyMeetingParticipantNickNameResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ModifyMeetingParticipantNickNameResp copyWith(void Function(ModifyMeetingParticipantNickNameResp) updates) =>
-      super.copyWith((message) => updates(message as ModifyMeetingParticipantNickNameResp)) as ModifyMeetingParticipantNickNameResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ModifyMeetingParticipantNickNameResp copyWith(void Function(ModifyMeetingParticipantNickNameResp) updates) => super.copyWith((message) => updates(message as ModifyMeetingParticipantNickNameResp)) as ModifyMeetingParticipantNickNameResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2303,8 +2098,7 @@ class ModifyMeetingParticipantNickNameResp extends $pb.GeneratedMessage {
   ModifyMeetingParticipantNickNameResp createEmptyInstance() => create();
   static $pb.PbList<ModifyMeetingParticipantNickNameResp> createRepeated() => $pb.PbList<ModifyMeetingParticipantNickNameResp>();
   @$core.pragma('dart2js:noInline')
-  static ModifyMeetingParticipantNickNameResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ModifyMeetingParticipantNickNameResp>(create);
+  static ModifyMeetingParticipantNickNameResp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ModifyMeetingParticipantNickNameResp>(create);
   static ModifyMeetingParticipantNickNameResp? _defaultInstance;
 }
 
@@ -2384,12 +2178,10 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
     return $result;
   }
   UpdateMeetingRequest._() : super();
-  factory UpdateMeetingRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory UpdateMeetingRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory UpdateMeetingRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateMeetingRequest',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateMeetingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'updatingUserID', protoName: 'updatingUserID')
     ..aOS(3, _omitFieldNames ? '' : 'title')
@@ -2407,17 +2199,19 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
     ..aOB(15, _omitFieldNames ? '' : 'lockMeeting', protoName: 'lockMeeting')
     ..aOB(16, _omitFieldNames ? '' : 'audioEncouragement', protoName: 'audioEncouragement')
     ..aOB(17, _omitFieldNames ? '' : 'videoMirroring', protoName: 'videoMirroring')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   UpdateMeetingRequest clone() => UpdateMeetingRequest()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  UpdateMeetingRequest copyWith(void Function(UpdateMeetingRequest) updates) =>
-      super.copyWith((message) => updates(message as UpdateMeetingRequest)) as UpdateMeetingRequest;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateMeetingRequest copyWith(void Function(UpdateMeetingRequest) updates) => super.copyWith((message) => updates(message as UpdateMeetingRequest)) as UpdateMeetingRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2432,10 +2226,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -2444,10 +2235,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get updatingUserID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set updatingUserID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set updatingUserID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUpdatingUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -2456,10 +2244,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get title => $_getSZ(2);
   @$pb.TagNumber(3)
-  set title($core.String v) {
-    $_setString(2, v);
-  }
-
+  set title($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasTitle() => $_has(2);
   @$pb.TagNumber(3)
@@ -2468,10 +2253,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $fixnum.Int64 get scheduledTime => $_getI64(3);
   @$pb.TagNumber(4)
-  set scheduledTime($fixnum.Int64 v) {
-    $_setInt64(3, v);
-  }
-
+  set scheduledTime($fixnum.Int64 v) { $_setInt64(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasScheduledTime() => $_has(3);
   @$pb.TagNumber(4)
@@ -2480,10 +2262,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $fixnum.Int64 get meetingDuration => $_getI64(4);
   @$pb.TagNumber(5)
-  set meetingDuration($fixnum.Int64 v) {
-    $_setInt64(4, v);
-  }
-
+  set meetingDuration($fixnum.Int64 v) { $_setInt64(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasMeetingDuration() => $_has(4);
   @$pb.TagNumber(5)
@@ -2492,10 +2271,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.String get password => $_getSZ(5);
   @$pb.TagNumber(6)
-  set password($core.String v) {
-    $_setString(5, v);
-  }
-
+  set password($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasPassword() => $_has(5);
   @$pb.TagNumber(6)
@@ -2504,10 +2280,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.String get timeZone => $_getSZ(6);
   @$pb.TagNumber(7)
-  set timeZone($core.String v) {
-    $_setString(6, v);
-  }
-
+  set timeZone($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasTimeZone() => $_has(6);
   @$pb.TagNumber(7)
@@ -2516,10 +2289,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   MeetingRepeatInfo get repeatInfo => $_getN(7);
   @$pb.TagNumber(8)
-  set repeatInfo(MeetingRepeatInfo v) {
-    setField(8, v);
-  }
-
+  set repeatInfo(MeetingRepeatInfo v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasRepeatInfo() => $_has(7);
   @$pb.TagNumber(8)
@@ -2530,10 +2300,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $core.bool get canParticipantsEnableCamera => $_getBF(8);
   @$pb.TagNumber(9)
-  set canParticipantsEnableCamera($core.bool v) {
-    $_setBool(8, v);
-  }
-
+  set canParticipantsEnableCamera($core.bool v) { $_setBool(8, v); }
   @$pb.TagNumber(9)
   $core.bool hasCanParticipantsEnableCamera() => $_has(8);
   @$pb.TagNumber(9)
@@ -2542,10 +2309,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $core.bool get canParticipantsUnmuteMicrophone => $_getBF(9);
   @$pb.TagNumber(10)
-  set canParticipantsUnmuteMicrophone($core.bool v) {
-    $_setBool(9, v);
-  }
-
+  set canParticipantsUnmuteMicrophone($core.bool v) { $_setBool(9, v); }
   @$pb.TagNumber(10)
   $core.bool hasCanParticipantsUnmuteMicrophone() => $_has(9);
   @$pb.TagNumber(10)
@@ -2554,10 +2318,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   $core.bool get canParticipantsShareScreen => $_getBF(10);
   @$pb.TagNumber(11)
-  set canParticipantsShareScreen($core.bool v) {
-    $_setBool(10, v);
-  }
-
+  set canParticipantsShareScreen($core.bool v) { $_setBool(10, v); }
   @$pb.TagNumber(11)
   $core.bool hasCanParticipantsShareScreen() => $_has(10);
   @$pb.TagNumber(11)
@@ -2566,10 +2327,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   $core.bool get disableCameraOnJoin => $_getBF(11);
   @$pb.TagNumber(12)
-  set disableCameraOnJoin($core.bool v) {
-    $_setBool(11, v);
-  }
-
+  set disableCameraOnJoin($core.bool v) { $_setBool(11, v); }
   @$pb.TagNumber(12)
   $core.bool hasDisableCameraOnJoin() => $_has(11);
   @$pb.TagNumber(12)
@@ -2578,10 +2336,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   $core.bool get disableMicrophoneOnJoin => $_getBF(12);
   @$pb.TagNumber(13)
-  set disableMicrophoneOnJoin($core.bool v) {
-    $_setBool(12, v);
-  }
-
+  set disableMicrophoneOnJoin($core.bool v) { $_setBool(12, v); }
   @$pb.TagNumber(13)
   $core.bool hasDisableMicrophoneOnJoin() => $_has(12);
   @$pb.TagNumber(13)
@@ -2590,10 +2345,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(14)
   $core.bool get canParticipantJoinMeetingEarly => $_getBF(13);
   @$pb.TagNumber(14)
-  set canParticipantJoinMeetingEarly($core.bool v) {
-    $_setBool(13, v);
-  }
-
+  set canParticipantJoinMeetingEarly($core.bool v) { $_setBool(13, v); }
   @$pb.TagNumber(14)
   $core.bool hasCanParticipantJoinMeetingEarly() => $_has(13);
   @$pb.TagNumber(14)
@@ -2602,10 +2354,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(15)
   $core.bool get lockMeeting => $_getBF(14);
   @$pb.TagNumber(15)
-  set lockMeeting($core.bool v) {
-    $_setBool(14, v);
-  }
-
+  set lockMeeting($core.bool v) { $_setBool(14, v); }
   @$pb.TagNumber(15)
   $core.bool hasLockMeeting() => $_has(14);
   @$pb.TagNumber(15)
@@ -2614,10 +2363,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(16)
   $core.bool get audioEncouragement => $_getBF(15);
   @$pb.TagNumber(16)
-  set audioEncouragement($core.bool v) {
-    $_setBool(15, v);
-  }
-
+  set audioEncouragement($core.bool v) { $_setBool(15, v); }
   @$pb.TagNumber(16)
   $core.bool hasAudioEncouragement() => $_has(15);
   @$pb.TagNumber(16)
@@ -2626,10 +2372,7 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(17)
   $core.bool get videoMirroring => $_getBF(16);
   @$pb.TagNumber(17)
-  set videoMirroring($core.bool v) {
-    $_setBool(16, v);
-  }
-
+  set videoMirroring($core.bool v) { $_setBool(16, v); }
   @$pb.TagNumber(17)
   $core.bool hasVideoMirroring() => $_has(16);
   @$pb.TagNumber(17)
@@ -2640,23 +2383,23 @@ class UpdateMeetingRequest extends $pb.GeneratedMessage {
 class UpdateMeetingResp extends $pb.GeneratedMessage {
   factory UpdateMeetingResp() => create();
   UpdateMeetingResp._() : super();
-  factory UpdateMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory UpdateMeetingResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory UpdateMeetingResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateMeetingResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateMeetingResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   UpdateMeetingResp clone() => UpdateMeetingResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  UpdateMeetingResp copyWith(void Function(UpdateMeetingResp) updates) =>
-      super.copyWith((message) => updates(message as UpdateMeetingResp)) as UpdateMeetingResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateMeetingResp copyWith(void Function(UpdateMeetingResp) updates) => super.copyWith((message) => updates(message as UpdateMeetingResp)) as UpdateMeetingResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2685,25 +2428,25 @@ class PersonalMeetingSetting extends $pb.GeneratedMessage {
     return $result;
   }
   PersonalMeetingSetting._() : super();
-  factory PersonalMeetingSetting.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory PersonalMeetingSetting.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory PersonalMeetingSetting.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PersonalMeetingSetting',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PersonalMeetingSetting', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'cameraOnEntry', protoName: 'cameraOnEntry')
     ..aOB(2, _omitFieldNames ? '' : 'microphoneOnEntry', protoName: 'microphoneOnEntry')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   PersonalMeetingSetting clone() => PersonalMeetingSetting()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  PersonalMeetingSetting copyWith(void Function(PersonalMeetingSetting) updates) =>
-      super.copyWith((message) => updates(message as PersonalMeetingSetting)) as PersonalMeetingSetting;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PersonalMeetingSetting copyWith(void Function(PersonalMeetingSetting) updates) => super.copyWith((message) => updates(message as PersonalMeetingSetting)) as PersonalMeetingSetting;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2718,10 +2461,7 @@ class PersonalMeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool get cameraOnEntry => $_getBF(0);
   @$pb.TagNumber(1)
-  set cameraOnEntry($core.bool v) {
-    $_setBool(0, v);
-  }
-
+  set cameraOnEntry($core.bool v) { $_setBool(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasCameraOnEntry() => $_has(0);
   @$pb.TagNumber(1)
@@ -2730,10 +2470,7 @@ class PersonalMeetingSetting extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.bool get microphoneOnEntry => $_getBF(1);
   @$pb.TagNumber(2)
-  set microphoneOnEntry($core.bool v) {
-    $_setBool(1, v);
-  }
-
+  set microphoneOnEntry($core.bool v) { $_setBool(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasMicrophoneOnEntry() => $_has(1);
   @$pb.TagNumber(2)
@@ -2756,26 +2493,25 @@ class GetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
     return $result;
   }
   GetPersonalMeetingSettingsReq._() : super();
-  factory GetPersonalMeetingSettingsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory GetPersonalMeetingSettingsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory GetPersonalMeetingSettingsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetPersonalMeetingSettingsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPersonalMeetingSettingsReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPersonalMeetingSettingsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetPersonalMeetingSettingsReq clone() => GetPersonalMeetingSettingsReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  GetPersonalMeetingSettingsReq copyWith(void Function(GetPersonalMeetingSettingsReq) updates) =>
-      super.copyWith((message) => updates(message as GetPersonalMeetingSettingsReq)) as GetPersonalMeetingSettingsReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetPersonalMeetingSettingsReq copyWith(void Function(GetPersonalMeetingSettingsReq) updates) => super.copyWith((message) => updates(message as GetPersonalMeetingSettingsReq)) as GetPersonalMeetingSettingsReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2790,10 +2526,7 @@ class GetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -2802,10 +2535,7 @@ class GetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -2824,25 +2554,24 @@ class GetPersonalMeetingSettingsResp extends $pb.GeneratedMessage {
     return $result;
   }
   GetPersonalMeetingSettingsResp._() : super();
-  factory GetPersonalMeetingSettingsResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory GetPersonalMeetingSettingsResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory GetPersonalMeetingSettingsResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetPersonalMeetingSettingsResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPersonalMeetingSettingsResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPersonalMeetingSettingsResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOM<PersonalMeetingSetting>(1, _omitFieldNames ? '' : 'setting', subBuilder: PersonalMeetingSetting.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetPersonalMeetingSettingsResp clone() => GetPersonalMeetingSettingsResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  GetPersonalMeetingSettingsResp copyWith(void Function(GetPersonalMeetingSettingsResp) updates) =>
-      super.copyWith((message) => updates(message as GetPersonalMeetingSettingsResp)) as GetPersonalMeetingSettingsResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetPersonalMeetingSettingsResp copyWith(void Function(GetPersonalMeetingSettingsResp) updates) => super.copyWith((message) => updates(message as GetPersonalMeetingSettingsResp)) as GetPersonalMeetingSettingsResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2851,17 +2580,13 @@ class GetPersonalMeetingSettingsResp extends $pb.GeneratedMessage {
   GetPersonalMeetingSettingsResp createEmptyInstance() => create();
   static $pb.PbList<GetPersonalMeetingSettingsResp> createRepeated() => $pb.PbList<GetPersonalMeetingSettingsResp>();
   @$core.pragma('dart2js:noInline')
-  static GetPersonalMeetingSettingsResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPersonalMeetingSettingsResp>(create);
+  static GetPersonalMeetingSettingsResp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPersonalMeetingSettingsResp>(create);
   static GetPersonalMeetingSettingsResp? _defaultInstance;
 
   @$pb.TagNumber(1)
   PersonalMeetingSetting get setting => $_getN(0);
   @$pb.TagNumber(1)
-  set setting(PersonalMeetingSetting v) {
-    setField(1, v);
-  }
-
+  set setting(PersonalMeetingSetting v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSetting() => $_has(0);
   @$pb.TagNumber(1)
@@ -2894,28 +2619,27 @@ class SetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
     return $result;
   }
   SetPersonalMeetingSettingsReq._() : super();
-  factory SetPersonalMeetingSettingsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory SetPersonalMeetingSettingsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory SetPersonalMeetingSettingsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetPersonalMeetingSettingsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetPersonalMeetingSettingsReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetPersonalMeetingSettingsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..aOB(3, _omitFieldNames ? '' : 'cameraOnEntry', protoName: 'cameraOnEntry')
     ..aOB(4, _omitFieldNames ? '' : 'microphoneOnEntry', protoName: 'microphoneOnEntry')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   SetPersonalMeetingSettingsReq clone() => SetPersonalMeetingSettingsReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  SetPersonalMeetingSettingsReq copyWith(void Function(SetPersonalMeetingSettingsReq) updates) =>
-      super.copyWith((message) => updates(message as SetPersonalMeetingSettingsReq)) as SetPersonalMeetingSettingsReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetPersonalMeetingSettingsReq copyWith(void Function(SetPersonalMeetingSettingsReq) updates) => super.copyWith((message) => updates(message as SetPersonalMeetingSettingsReq)) as SetPersonalMeetingSettingsReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -2930,10 +2654,7 @@ class SetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -2942,10 +2663,7 @@ class SetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -2954,10 +2672,7 @@ class SetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.bool get cameraOnEntry => $_getBF(2);
   @$pb.TagNumber(3)
-  set cameraOnEntry($core.bool v) {
-    $_setBool(2, v);
-  }
-
+  set cameraOnEntry($core.bool v) { $_setBool(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasCameraOnEntry() => $_has(2);
   @$pb.TagNumber(3)
@@ -2966,10 +2681,7 @@ class SetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.bool get microphoneOnEntry => $_getBF(3);
   @$pb.TagNumber(4)
-  set microphoneOnEntry($core.bool v) {
-    $_setBool(3, v);
-  }
-
+  set microphoneOnEntry($core.bool v) { $_setBool(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasMicrophoneOnEntry() => $_has(3);
   @$pb.TagNumber(4)
@@ -2980,24 +2692,23 @@ class SetPersonalMeetingSettingsReq extends $pb.GeneratedMessage {
 class SetPersonalMeetingSettingsResp extends $pb.GeneratedMessage {
   factory SetPersonalMeetingSettingsResp() => create();
   SetPersonalMeetingSettingsResp._() : super();
-  factory SetPersonalMeetingSettingsResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory SetPersonalMeetingSettingsResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory SetPersonalMeetingSettingsResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetPersonalMeetingSettingsResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetPersonalMeetingSettingsResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetPersonalMeetingSettingsResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   SetPersonalMeetingSettingsResp clone() => SetPersonalMeetingSettingsResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  SetPersonalMeetingSettingsResp copyWith(void Function(SetPersonalMeetingSettingsResp) updates) =>
-      super.copyWith((message) => updates(message as SetPersonalMeetingSettingsResp)) as SetPersonalMeetingSettingsResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetPersonalMeetingSettingsResp copyWith(void Function(SetPersonalMeetingSettingsResp) updates) => super.copyWith((message) => updates(message as SetPersonalMeetingSettingsResp)) as SetPersonalMeetingSettingsResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -3006,8 +2717,7 @@ class SetPersonalMeetingSettingsResp extends $pb.GeneratedMessage {
   SetPersonalMeetingSettingsResp createEmptyInstance() => create();
   static $pb.PbList<SetPersonalMeetingSettingsResp> createRepeated() => $pb.PbList<SetPersonalMeetingSettingsResp>();
   @$core.pragma('dart2js:noInline')
-  static SetPersonalMeetingSettingsResp getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetPersonalMeetingSettingsResp>(create);
+  static SetPersonalMeetingSettingsResp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetPersonalMeetingSettingsResp>(create);
   static SetPersonalMeetingSettingsResp? _defaultInstance;
 }
 
@@ -3030,25 +2740,25 @@ class PersonalData extends $pb.GeneratedMessage {
     return $result;
   }
   PersonalData._() : super();
-  factory PersonalData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory PersonalData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory PersonalData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PersonalData',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PersonalData', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'userID', protoName: 'userID')
-    ..aOM<PersonalMeetingSetting>(2, _omitFieldNames ? '' : 'personalSetting',
-        protoName: 'personalSetting', subBuilder: PersonalMeetingSetting.create)
+    ..aOM<PersonalMeetingSetting>(2, _omitFieldNames ? '' : 'personalSetting', protoName: 'personalSetting', subBuilder: PersonalMeetingSetting.create)
     ..aOM<PersonalMeetingSetting>(3, _omitFieldNames ? '' : 'limitSetting', protoName: 'limitSetting', subBuilder: PersonalMeetingSetting.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   PersonalData clone() => PersonalData()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
   PersonalData copyWith(void Function(PersonalData) updates) => super.copyWith((message) => updates(message as PersonalData)) as PersonalData;
 
   $pb.BuilderInfo get info_ => _i;
@@ -3064,10 +2774,7 @@ class PersonalData extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get userID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set userID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasUserID() => $_has(0);
   @$pb.TagNumber(1)
@@ -3076,10 +2783,7 @@ class PersonalData extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   PersonalMeetingSetting get personalSetting => $_getN(1);
   @$pb.TagNumber(2)
-  set personalSetting(PersonalMeetingSetting v) {
-    setField(2, v);
-  }
-
+  set personalSetting(PersonalMeetingSetting v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPersonalSetting() => $_has(1);
   @$pb.TagNumber(2)
@@ -3091,10 +2795,7 @@ class PersonalData extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   PersonalMeetingSetting get limitSetting => $_getN(2);
   @$pb.TagNumber(3)
-  set limitSetting(PersonalMeetingSetting v) {
-    setField(3, v);
-  }
-
+  set limitSetting(PersonalMeetingSetting v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasLimitSetting() => $_has(2);
   @$pb.TagNumber(3)
@@ -3119,25 +2820,25 @@ class MeetingMetadata extends $pb.GeneratedMessage {
     return $result;
   }
   MeetingMetadata._() : super();
-  factory MeetingMetadata.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory MeetingMetadata.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory MeetingMetadata.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingMetadata',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MeetingMetadata', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOM<MeetingInfoSetting>(1, _omitFieldNames ? '' : 'detail', subBuilder: MeetingInfoSetting.create)
     ..pc<PersonalData>(2, _omitFieldNames ? '' : 'personalData', $pb.PbFieldType.PM, protoName: 'personalData', subBuilder: PersonalData.create)
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   MeetingMetadata clone() => MeetingMetadata()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  MeetingMetadata copyWith(void Function(MeetingMetadata) updates) =>
-      super.copyWith((message) => updates(message as MeetingMetadata)) as MeetingMetadata;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MeetingMetadata copyWith(void Function(MeetingMetadata) updates) => super.copyWith((message) => updates(message as MeetingMetadata)) as MeetingMetadata;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -3152,10 +2853,7 @@ class MeetingMetadata extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   MeetingInfoSetting get detail => $_getN(0);
   @$pb.TagNumber(1)
-  set detail(MeetingInfoSetting v) {
-    setField(1, v);
-  }
-
+  set detail(MeetingInfoSetting v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDetail() => $_has(0);
   @$pb.TagNumber(1)
@@ -3191,27 +2889,27 @@ class OperateRoomAllStreamReq extends $pb.GeneratedMessage {
     return $result;
   }
   OperateRoomAllStreamReq._() : super();
-  factory OperateRoomAllStreamReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory OperateRoomAllStreamReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory OperateRoomAllStreamReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OperateRoomAllStreamReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OperateRoomAllStreamReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'operatorUserID', protoName: 'operatorUserID')
     ..aOB(3, _omitFieldNames ? '' : 'cameraOnEntry', protoName: 'cameraOnEntry')
     ..aOB(4, _omitFieldNames ? '' : 'microphoneOnEntry', protoName: 'microphoneOnEntry')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   OperateRoomAllStreamReq clone() => OperateRoomAllStreamReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  OperateRoomAllStreamReq copyWith(void Function(OperateRoomAllStreamReq) updates) =>
-      super.copyWith((message) => updates(message as OperateRoomAllStreamReq)) as OperateRoomAllStreamReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  OperateRoomAllStreamReq copyWith(void Function(OperateRoomAllStreamReq) updates) => super.copyWith((message) => updates(message as OperateRoomAllStreamReq)) as OperateRoomAllStreamReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -3226,10 +2924,7 @@ class OperateRoomAllStreamReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -3238,10 +2933,7 @@ class OperateRoomAllStreamReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get operatorUserID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set operatorUserID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set operatorUserID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasOperatorUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -3250,10 +2942,7 @@ class OperateRoomAllStreamReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.bool get cameraOnEntry => $_getBF(2);
   @$pb.TagNumber(3)
-  set cameraOnEntry($core.bool v) {
-    $_setBool(2, v);
-  }
-
+  set cameraOnEntry($core.bool v) { $_setBool(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasCameraOnEntry() => $_has(2);
   @$pb.TagNumber(3)
@@ -3262,10 +2951,7 @@ class OperateRoomAllStreamReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.bool get microphoneOnEntry => $_getBF(3);
   @$pb.TagNumber(4)
-  set microphoneOnEntry($core.bool v) {
-    $_setBool(3, v);
-  }
-
+  set microphoneOnEntry($core.bool v) { $_setBool(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasMicrophoneOnEntry() => $_has(3);
   @$pb.TagNumber(4)
@@ -3288,25 +2974,25 @@ class OperateRoomAllStreamResp extends $pb.GeneratedMessage {
     return $result;
   }
   OperateRoomAllStreamResp._() : super();
-  factory OperateRoomAllStreamResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory OperateRoomAllStreamResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory OperateRoomAllStreamResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OperateRoomAllStreamResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OperateRoomAllStreamResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'streamNotExistUserIDList', protoName: 'streamNotExistUserIDList')
     ..pPS(2, _omitFieldNames ? '' : 'failedUserIDList', protoName: 'failedUserIDList')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   OperateRoomAllStreamResp clone() => OperateRoomAllStreamResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  OperateRoomAllStreamResp copyWith(void Function(OperateRoomAllStreamResp) updates) =>
-      super.copyWith((message) => updates(message as OperateRoomAllStreamResp)) as OperateRoomAllStreamResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  OperateRoomAllStreamResp copyWith(void Function(OperateRoomAllStreamResp) updates) => super.copyWith((message) => updates(message as OperateRoomAllStreamResp)) as OperateRoomAllStreamResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -3344,27 +3030,26 @@ class RemoveMeetingParticipantsReq extends $pb.GeneratedMessage {
     return $result;
   }
   RemoveMeetingParticipantsReq._() : super();
-  factory RemoveMeetingParticipantsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory RemoveMeetingParticipantsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory RemoveMeetingParticipantsReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RemoveMeetingParticipantsReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveMeetingParticipantsReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveMeetingParticipantsReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..pPS(3, _omitFieldNames ? '' : 'participantUserIDs', protoName: 'participantUserIDs')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   RemoveMeetingParticipantsReq clone() => RemoveMeetingParticipantsReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  RemoveMeetingParticipantsReq copyWith(void Function(RemoveMeetingParticipantsReq) updates) =>
-      super.copyWith((message) => updates(message as RemoveMeetingParticipantsReq)) as RemoveMeetingParticipantsReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RemoveMeetingParticipantsReq copyWith(void Function(RemoveMeetingParticipantsReq) updates) => super.copyWith((message) => updates(message as RemoveMeetingParticipantsReq)) as RemoveMeetingParticipantsReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -3379,10 +3064,7 @@ class RemoveMeetingParticipantsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -3391,10 +3073,7 @@ class RemoveMeetingParticipantsReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -3419,26 +3098,25 @@ class RemoveMeetingParticipantsResp extends $pb.GeneratedMessage {
     return $result;
   }
   RemoveMeetingParticipantsResp._() : super();
-  factory RemoveMeetingParticipantsResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-  factory RemoveMeetingParticipantsResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
+  factory RemoveMeetingParticipantsResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RemoveMeetingParticipantsResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveMeetingParticipantsResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RemoveMeetingParticipantsResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'successUserIDList', protoName: 'successUserIDList')
     ..pPS(2, _omitFieldNames ? '' : 'failedUserIDList', protoName: 'failedUserIDList')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   RemoveMeetingParticipantsResp clone() => RemoveMeetingParticipantsResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  RemoveMeetingParticipantsResp copyWith(void Function(RemoveMeetingParticipantsResp) updates) =>
-      super.copyWith((message) => updates(message as RemoveMeetingParticipantsResp)) as RemoveMeetingParticipantsResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RemoveMeetingParticipantsResp copyWith(void Function(RemoveMeetingParticipantsResp) updates) => super.copyWith((message) => updates(message as RemoveMeetingParticipantsResp)) as RemoveMeetingParticipantsResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -3480,27 +3158,27 @@ class SetMeetingHostInfoReq extends $pb.GeneratedMessage {
     return $result;
   }
   SetMeetingHostInfoReq._() : super();
-  factory SetMeetingHostInfoReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory SetMeetingHostInfoReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SetMeetingHostInfoReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetMeetingHostInfoReq',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetMeetingHostInfoReq', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'meetingID', protoName: 'meetingID')
     ..aOS(2, _omitFieldNames ? '' : 'userID', protoName: 'userID')
     ..aOS(3, _omitFieldNames ? '' : 'hostUserID', protoName: 'hostUserID')
     ..pPS(4, _omitFieldNames ? '' : 'coHostUserIDs', protoName: 'coHostUserIDs')
-    ..hasRequiredFields = false;
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   SetMeetingHostInfoReq clone() => SetMeetingHostInfoReq()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  SetMeetingHostInfoReq copyWith(void Function(SetMeetingHostInfoReq) updates) =>
-      super.copyWith((message) => updates(message as SetMeetingHostInfoReq)) as SetMeetingHostInfoReq;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetMeetingHostInfoReq copyWith(void Function(SetMeetingHostInfoReq) updates) => super.copyWith((message) => updates(message as SetMeetingHostInfoReq)) as SetMeetingHostInfoReq;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -3515,10 +3193,7 @@ class SetMeetingHostInfoReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get meetingID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set meetingID($core.String v) {
-    $_setString(0, v);
-  }
-
+  set meetingID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasMeetingID() => $_has(0);
   @$pb.TagNumber(1)
@@ -3527,10 +3202,7 @@ class SetMeetingHostInfoReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get userID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userID($core.String v) {
-    $_setString(1, v);
-  }
-
+  set userID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserID() => $_has(1);
   @$pb.TagNumber(2)
@@ -3539,10 +3211,7 @@ class SetMeetingHostInfoReq extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get hostUserID => $_getSZ(2);
   @$pb.TagNumber(3)
-  set hostUserID($core.String v) {
-    $_setString(2, v);
-  }
-
+  set hostUserID($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasHostUserID() => $_has(2);
   @$pb.TagNumber(3)
@@ -3555,23 +3224,23 @@ class SetMeetingHostInfoReq extends $pb.GeneratedMessage {
 class SetMeetingHostInfoResp extends $pb.GeneratedMessage {
   factory SetMeetingHostInfoResp() => create();
   SetMeetingHostInfoResp._() : super();
-  factory SetMeetingHostInfoResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
+  factory SetMeetingHostInfoResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory SetMeetingHostInfoResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetMeetingHostInfoResp',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
-    ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetMeetingHostInfoResp', package: const $pb.PackageName(_omitMessageNames ? '' : 'openmeeting.meeting'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   SetMeetingHostInfoResp clone() => SetMeetingHostInfoResp()..mergeFromMessage(this);
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  SetMeetingHostInfoResp copyWith(void Function(SetMeetingHostInfoResp) updates) =>
-      super.copyWith((message) => updates(message as SetMeetingHostInfoResp)) as SetMeetingHostInfoResp;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetMeetingHostInfoResp copyWith(void Function(SetMeetingHostInfoResp) updates) => super.copyWith((message) => updates(message as SetMeetingHostInfoResp)) as SetMeetingHostInfoResp;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -3589,38 +3258,52 @@ class MeetingServiceApi {
   MeetingServiceApi(this._client);
 
   $async.Future<BookMeetingResp> bookMeeting($pb.ClientContext? ctx, BookMeetingReq request) =>
-      _client.invoke<BookMeetingResp>(ctx, 'MeetingService', 'BookMeeting', request, BookMeetingResp());
+    _client.invoke<BookMeetingResp>(ctx, 'MeetingService', 'BookMeeting', request, BookMeetingResp())
+  ;
   $async.Future<CreateImmediateMeetingResp> createImmediateMeeting($pb.ClientContext? ctx, CreateImmediateMeetingReq request) =>
-      _client.invoke<CreateImmediateMeetingResp>(ctx, 'MeetingService', 'CreateImmediateMeeting', request, CreateImmediateMeetingResp());
+    _client.invoke<CreateImmediateMeetingResp>(ctx, 'MeetingService', 'CreateImmediateMeeting', request, CreateImmediateMeetingResp())
+  ;
   $async.Future<JoinMeetingResp> joinMeeting($pb.ClientContext? ctx, JoinMeetingReq request) =>
-      _client.invoke<JoinMeetingResp>(ctx, 'MeetingService', 'JoinMeeting', request, JoinMeetingResp());
+    _client.invoke<JoinMeetingResp>(ctx, 'MeetingService', 'JoinMeeting', request, JoinMeetingResp())
+  ;
   $async.Future<GetMeetingTokenResp> getMeetingToken($pb.ClientContext? ctx, GetMeetingTokenReq request) =>
-      _client.invoke<GetMeetingTokenResp>(ctx, 'MeetingService', 'GetMeetingToken', request, GetMeetingTokenResp());
+    _client.invoke<GetMeetingTokenResp>(ctx, 'MeetingService', 'GetMeetingToken', request, GetMeetingTokenResp())
+  ;
   $async.Future<LeaveMeetingResp> leaveMeeting($pb.ClientContext? ctx, LeaveMeetingReq request) =>
-      _client.invoke<LeaveMeetingResp>(ctx, 'MeetingService', 'LeaveMeeting', request, LeaveMeetingResp());
+    _client.invoke<LeaveMeetingResp>(ctx, 'MeetingService', 'LeaveMeeting', request, LeaveMeetingResp())
+  ;
   $async.Future<EndMeetingResp> endMeeting($pb.ClientContext? ctx, EndMeetingReq request) =>
-      _client.invoke<EndMeetingResp>(ctx, 'MeetingService', 'EndMeeting', request, EndMeetingResp());
+    _client.invoke<EndMeetingResp>(ctx, 'MeetingService', 'EndMeeting', request, EndMeetingResp())
+  ;
   $async.Future<GetMeetingsResp> getMeetings($pb.ClientContext? ctx, GetMeetingsReq request) =>
-      _client.invoke<GetMeetingsResp>(ctx, 'MeetingService', 'GetMeetings', request, GetMeetingsResp());
+    _client.invoke<GetMeetingsResp>(ctx, 'MeetingService', 'GetMeetings', request, GetMeetingsResp())
+  ;
   $async.Future<GetMeetingResp> getMeeting($pb.ClientContext? ctx, GetMeetingReq request) =>
-      _client.invoke<GetMeetingResp>(ctx, 'MeetingService', 'GetMeeting', request, GetMeetingResp());
+    _client.invoke<GetMeetingResp>(ctx, 'MeetingService', 'GetMeeting', request, GetMeetingResp())
+  ;
   $async.Future<UpdateMeetingResp> updateMeeting($pb.ClientContext? ctx, UpdateMeetingRequest request) =>
-      _client.invoke<UpdateMeetingResp>(ctx, 'MeetingService', 'UpdateMeeting', request, UpdateMeetingResp());
+    _client.invoke<UpdateMeetingResp>(ctx, 'MeetingService', 'UpdateMeeting', request, UpdateMeetingResp())
+  ;
   $async.Future<GetPersonalMeetingSettingsResp> getPersonalMeetingSettings($pb.ClientContext? ctx, GetPersonalMeetingSettingsReq request) =>
-      _client.invoke<GetPersonalMeetingSettingsResp>(ctx, 'MeetingService', 'GetPersonalMeetingSettings', request, GetPersonalMeetingSettingsResp());
+    _client.invoke<GetPersonalMeetingSettingsResp>(ctx, 'MeetingService', 'GetPersonalMeetingSettings', request, GetPersonalMeetingSettingsResp())
+  ;
   $async.Future<SetPersonalMeetingSettingsResp> setPersonalMeetingSettings($pb.ClientContext? ctx, SetPersonalMeetingSettingsReq request) =>
-      _client.invoke<SetPersonalMeetingSettingsResp>(ctx, 'MeetingService', 'SetPersonalMeetingSettings', request, SetPersonalMeetingSettingsResp());
+    _client.invoke<SetPersonalMeetingSettingsResp>(ctx, 'MeetingService', 'SetPersonalMeetingSettings', request, SetPersonalMeetingSettingsResp())
+  ;
   $async.Future<OperateRoomAllStreamResp> operateRoomAllStream($pb.ClientContext? ctx, OperateRoomAllStreamReq request) =>
-      _client.invoke<OperateRoomAllStreamResp>(ctx, 'MeetingService', 'OperateRoomAllStream', request, OperateRoomAllStreamResp());
-  $async.Future<ModifyMeetingParticipantNickNameResp> modifyMeetingParticipantNickName(
-          $pb.ClientContext? ctx, ModifyMeetingParticipantNickNameReq request) =>
-      _client.invoke<ModifyMeetingParticipantNickNameResp>(
-          ctx, 'MeetingService', 'ModifyMeetingParticipantNickName', request, ModifyMeetingParticipantNickNameResp());
+    _client.invoke<OperateRoomAllStreamResp>(ctx, 'MeetingService', 'OperateRoomAllStream', request, OperateRoomAllStreamResp())
+  ;
+  $async.Future<ModifyMeetingParticipantNickNameResp> modifyMeetingParticipantNickName($pb.ClientContext? ctx, ModifyMeetingParticipantNickNameReq request) =>
+    _client.invoke<ModifyMeetingParticipantNickNameResp>(ctx, 'MeetingService', 'ModifyMeetingParticipantNickName', request, ModifyMeetingParticipantNickNameResp())
+  ;
   $async.Future<RemoveMeetingParticipantsResp> removeParticipants($pb.ClientContext? ctx, RemoveMeetingParticipantsReq request) =>
-      _client.invoke<RemoveMeetingParticipantsResp>(ctx, 'MeetingService', 'RemoveParticipants', request, RemoveMeetingParticipantsResp());
+    _client.invoke<RemoveMeetingParticipantsResp>(ctx, 'MeetingService', 'RemoveParticipants', request, RemoveMeetingParticipantsResp())
+  ;
   $async.Future<SetMeetingHostInfoResp> setMeetingHostInfo($pb.ClientContext? ctx, SetMeetingHostInfoReq request) =>
-      _client.invoke<SetMeetingHostInfoResp>(ctx, 'MeetingService', 'SetMeetingHostInfo', request, SetMeetingHostInfoResp());
+    _client.invoke<SetMeetingHostInfoResp>(ctx, 'MeetingService', 'SetMeetingHostInfo', request, SetMeetingHostInfoResp())
+  ;
 }
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

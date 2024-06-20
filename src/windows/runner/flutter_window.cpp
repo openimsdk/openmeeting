@@ -4,6 +4,21 @@
 
 #include "flutter/generated_plugin_registrant.h"
 
+
+#include <connectivity_plus/connectivity_plus_windows_plugin.h>
+#include <desktop_multi_window/desktop_multi_window_plugin.h>
+#include <flutter_webrtc/flutter_web_r_t_c_plugin.h>
+#include <livekit_client/live_kit_plugin.h>
+#include <permission_handler_windows/permission_handler_windows_plugin.h>
+#include <screen_retriever/screen_retriever_plugin.h>
+#include <share_plus/share_plus_windows_plugin_c_api.h>
+#include <texture_rgba_renderer/texture_rgba_renderer_plugin_c_api.h>
+#include <url_launcher_windows/url_launcher_windows.h>
+#include <window_manager/window_manager_plugin.h>
+#include <window_size/window_size_plugin.h>
+
+#include <iostream>
+
 FlutterWindow::FlutterWindow(const flutter::DartProject& project)
     : project_(project) {}
 
@@ -29,12 +44,28 @@ bool FlutterWindow::OnCreate() {
         auto *flutter_view_controller =
                 reinterpret_cast<flutter::FlutterViewController *>(controller);
         auto *registry = flutter_view_controller->engine();
-        DesktopLifecyclePluginRegisterWithRegistrar(
-                registry->GetRegistrarForPlugin("DesktopLifecyclePlugin"));
-        WindowManagerPluginRegisterWithRegistrar(
-                registry->GetRegistrarForPlugin("WindowManagerPlugin"));
-        ScreenRetrieverPluginRegisterWithRegistrar(
-                registry->GetRegistrarForPlugin("ScreenRetrieverPlugin"));
+       std::cout << "DesktopMultiWindowSetWindowCreatedCallback register" << std::endl;
+
+       FlutterWebRTCPluginRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("FlutterWebRTCPlugin"));
+       ConnectivityPlusWindowsPluginRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("ConnectivityPlusWindowsPlugin"));
+         LiveKitPluginRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("LiveKitPlugin"));
+         PermissionHandlerWindowsPluginRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("PermissionHandlerWindowsPlugin"));
+         ScreenRetrieverPluginRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("ScreenRetrieverPlugin"));
+         SharePlusWindowsPluginCApiRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("SharePlusWindowsPluginCApi"));
+         TextureRgbaRendererPluginCApiRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("TextureRgbaRendererPluginCApi"));
+         UrlLauncherWindowsRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("UrlLauncherWindows"));
+         WindowManagerPluginRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("WindowManagerPlugin"));
+         WindowSizePluginRegisterWithRegistrar(
+             registry->GetRegistrarForPlugin("WindowSizePlugin"));
     });
   SetChildContent(flutter_controller_->view()->GetNativeWindow());
 
@@ -78,5 +109,5 @@ FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
       break;
   }
 
-  return Win32Window::MessageHandler(hwnd, message, wparam, lparam);
+return Win32Window::MessageHandler(hwnd, message, wparam, lparam);
 }

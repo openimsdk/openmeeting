@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:openim_common/openim_common.dart';
-import 'package:openmeeting/core/api_service.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'app.dart';

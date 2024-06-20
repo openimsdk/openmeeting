@@ -72,6 +72,8 @@ class FlutterWindow : public BaseFlutterWindow {
   void Destroy();
 
   void EmitEvent(const char* eventName);
+
+  void tryInvokeChannelOnDestroy();
 };
 
 #endif //DESKTOP_MULTI_WINDOW_WINDOWS_FLUTTER_WINDOW_H_

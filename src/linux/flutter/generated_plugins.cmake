@@ -6,8 +6,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   desktop_multi_window
   flutter_webrtc
   screen_retriever
+  texture_rgba_renderer
   url_launcher_linux
   window_manager
+  window_size
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

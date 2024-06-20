@@ -77,6 +77,7 @@ void RegisterWindowClass(WNDPROC wnd_proc) {
     window_class.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
     window_class.lpszMenuName = nullptr;
     window_class.lpfnWndProc = wnd_proc;
+    window_class.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
     RegisterClass(&window_class);
   }
   class_registered_++;
@@ -162,7 +163,6 @@ FlutterWindow::FlutterWindow(
 
   // hide the window when created.
   ShowWindow(window_handle, SW_HIDE);
-
 }
 
 // static
@@ -188,7 +188,6 @@ LRESULT CALLBACK FlutterWindow::WndProc(HWND window, UINT message, WPARAM wparam
 }
 
 LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) {
-
   // Give Flutter, including plugins, an opportunity to handle window messages.
   if (flutter_controller_) {
     std::optional<LRESULT> result = flutter_controller_->HandleTopLevelWindowProc(hwnd, message, wparam, lparam);
@@ -265,12 +264,7 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
       if (!destroyed_) {
         destroyed_ = true;
         // Give onDestroy callback to Flutter to close window gracefully
-        if (window_channel_) {
-            auto args = flutter::EncodableValue(flutter::EncodableMap());
-            window_channel_->InvokeMethod(0, "onDestroy", &args);
-            window_channel_->SetMethodCallHandler(nullptr);
-            window_channel_.reset();
-        }
+        tryInvokeChannelOnDestroy();
         if (auto callback = callback_.lock()) {
           callback->OnWindowDestroy(id_);
         }
@@ -335,8 +329,13 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
               last_state = STATE_NORMAL;
           }
       }
+      EmitEvent("resized");
       break;
     }
+
+    case WM_MOVE:
+      EmitEvent("moved");
+      break;
 
     case WM_ACTIVATE: {
       if (child_content_ != nullptr) {
@@ -371,6 +370,16 @@ LRESULT FlutterWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wparam, LP
   return DefWindowProc(window_handle_, message, wparam, lparam);
 }
 
+void FlutterWindow::tryInvokeChannelOnDestroy()
+{
+  if (window_channel_) {
+      auto args = flutter::EncodableValue(flutter::EncodableMap());
+      window_channel_->InvokeMethod(0, "onDestroy", &args);
+      window_channel_->SetMethodCallHandler(nullptr);
+      window_channel_.reset();
+  }
+}
+
 void FlutterWindow::EmitEvent(const char* eventName)
 {
     auto params = flutter::EncodableMap();
@@ -380,6 +389,7 @@ void FlutterWindow::EmitEvent(const char* eventName)
 }
 
 void FlutterWindow::Destroy() {
+  tryInvokeChannelOnDestroy();
   if (window_channel_) {
     window_channel_ = nullptr;
   }

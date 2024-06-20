@@ -82,18 +82,26 @@ class DesktopMultiWindow {
 
   /// Get all sub window id.
   static Future<List<int>> getAllSubWindowIds() async {
-    final result = await miltiWindowChannel
-        .invokeMethod<List<dynamic>>('getAllSubWindowIds');
-    final ids = result?.cast<int>() ?? const [];
-    assert(!ids.contains(0), 'ids must not contains main window id');
-    assert(ids.every((id) => id > 0), 'id must be greater than 0');
-    return ids;
+    try {
+      final result = await miltiWindowChannel
+          .invokeMethod<List<dynamic>>('getAllSubWindowIds');
+      final ids = result
+              ?.map<int>((id) => id.toInt())
+              .where((id) => id != 0)
+              ?.toList() ??
+          [];
+      assert(ids.every((id) => id > 0), 'id must be greater than 0');
+      return ids;
+    } catch (e) {
+      print('Unreachable, plugin exception, func getAllSubWindowIds(), $e');
+      return [];
+    }
   }
 
-  static final ObserverList<MultiWindowListener> _listeners = ObserverList<MultiWindowListener>();
+  static final ObserverList<MultiWindowListener> _listeners =
+      ObserverList<MultiWindowListener>();
 
   static Future<void> _windowMethodCallHandler(MethodCall call) async {
-
     for (final MultiWindowListener listener in listeners) {
       if (!_listeners.contains(listener)) {
         return;

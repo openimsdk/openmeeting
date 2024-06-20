@@ -197,7 +197,7 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView> with Au
                 height: kTabBarHeight - 1,
                 child: WindowActionPanel(
                   isMainWindow: false,
-                  onCloseWindow: (ctx) {
+                  onClose: (ctx) {
                     return _showEndPopup(ctx);
                   },
                 ),

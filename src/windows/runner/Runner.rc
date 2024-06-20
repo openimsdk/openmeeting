@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "io.openim.flutter.b" "\0"
-            VALUE "FileDescription", "open_meta_office_flutter" "\0"
+            VALUE "FileDescription", "src" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "open_meta_office_flutter" "\0"
+            VALUE "InternalName", "src" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 io.openim.flutter.b. All rights reserved." "\0"
-            VALUE "OriginalFilename", "open_meta_office_flutter.exe" "\0"
-            VALUE "ProductName", "open_meta_office_flutter" "\0"
+            VALUE "OriginalFilename", "src.exe" "\0"
+            VALUE "ProductName", "src" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

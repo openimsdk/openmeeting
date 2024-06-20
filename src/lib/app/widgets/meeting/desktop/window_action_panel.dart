@@ -30,8 +30,7 @@ class WindowActionPanel extends StatefulWidget {
   final bool showMaximize;
   final bool showClose;
   final Widget? tail;
-  final Future<bool> Function()? onClose;
-  final Future<bool> Function(BuildContext context)? onCloseWindow;
+  final Future<bool> Function(BuildContext? context)? onClose;
 
   const WindowActionPanel(
       {super.key,
@@ -41,8 +40,7 @@ class WindowActionPanel extends StatefulWidget {
       this.showMinimize = true,
       this.showMaximize = true,
       this.showClose = true,
-      this.onClose,
-      this.onCloseWindow});
+      this.onClose,});
 
   @override
   State<StatefulWidget> createState() {
@@ -54,7 +52,7 @@ class WindowActionPanelState extends State<WindowActionPanel> with MultiWindowLi
   final _saveFrameDebounce = Debouncer(delay: Duration(seconds: 1));
   Timer? _macOSCheckRestoreTimer;
   int _macOSCheckRestoreCounter = 0;
-
+  final globalKey = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -153,7 +151,7 @@ class WindowActionPanelState extends State<WindowActionPanel> with MultiWindowLi
   void onWindowClose() async {
     Logger.print('Window action panel: ==== onWindowClose');
 
-    final result = await widget.onCloseWindow?.call(context);
+    final result = await widget.onClose?.call(globalKey.currentContext);
     if (result == true) {
       _closeWindow();
     }
@@ -162,16 +160,6 @@ class WindowActionPanelState extends State<WindowActionPanel> with MultiWindowLi
   void _closeWindow() async {
     Future mainWindowClose() async => await windowManager.hide();
     Future notMainWindowClose(WindowController controller) async {
-      // if (widgets.tabController.length != 0) {
-      //   debugPrint("close not empty multiwindow from taskbar");
-      //   if (Platform.isWindows) {
-      //     await controller.show();
-      //     await controller.focus();
-      //     final res = await widgets.onClose?.call() ?? true;
-      //     if (!res) return;
-      //   }
-      //   widgets.tabController.clear();
-      // }
       await controller.hide();
       await windowsManager.call(WindowType.main, WindowEvent.hide.rawValue, {"id": kWindowId!});
     }
@@ -198,34 +186,27 @@ class WindowActionPanelState extends State<WindowActionPanel> with MultiWindowLi
       }
       // macOS specific workaround, the window is not hiding when in fullscreen.
       if (Platform.isMacOS && await windowManager.isFullScreen()) {
-        // stateGlobal.closeOnFullscreen ??= true;
         await windowManager.setFullScreen(false);
         await macOSWindowClose(
           () async => await windowManager.isFullScreen(),
           mainWindowClose,
         );
       } else {
-        // stateGlobal.closeOnFullscreen ??= false;
         await mainWindowClose();
       }
     } else {
       // it's safe to hide the subwindow
       final controller = WindowController.fromWindowId(kWindowId!);
       if (Platform.isMacOS) {
-        // onWindowClose() maybe called multiple times because of loopCloseWindow() in remote_tab_page.dart.
-        // use ??=  to make sure the value is set on first call.
-
-        if (await widget.onClose?.call() ?? true) {
+        final ctx = globalKey.currentContext;
+        if (await widget.onClose?.call(ctx) ?? true) {
           if (await controller.isFullScreen()) {
-            // stateGlobal.closeOnFullscreen ??= true;
             await controller.setFullscreen(false);
-            // stateGlobal.setFullscreen(false, procWnd: false);
             await macOSWindowClose(
               () async => await controller.isFullScreen(),
               () async => await notMainWindowClose(controller),
             );
           } else {
-            // stateGlobal.closeOnFullscreen ??= false;
             await notMainWindowClose(controller);
           }
         }
@@ -276,10 +257,11 @@ class WindowActionPanelState extends State<WindowActionPanel> with MultiWindowLi
               Offstage(
                   offstage: !widget.showClose || Platform.isMacOS,
                   child: ActionIcon(
+                    key: globalKey,
                     message: 'Close',
                     icon: IconFont.close,
                     onTap: () async {
-                      final res = await widget.onClose?.call() ?? true;
+                      final res = await widget.onClose?.call(globalKey.currentContext) ?? true;
                       if (res) {
                         // hide for all window
                         // note: the main window can be restored by tray icon
@@ -347,14 +329,13 @@ class ActionIcon extends StatefulWidget {
   final double boxSize;
 
   const ActionIcon(
-      {Key? key,
+      {super.key,
       this.message,
       required this.icon,
       this.onTap,
       this.isClose = false,
       this.iconSize = kActionIconSize,
-      this.boxSize = kTabBarHeight - 1})
-      : super(key: key);
+      this.boxSize = kTabBarHeight - 1});
 
   @override
   State<ActionIcon> createState() => _ActionIconState();

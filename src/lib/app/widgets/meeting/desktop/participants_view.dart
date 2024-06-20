@@ -300,7 +300,7 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
               ],
             ),
             const Spacer(),
-            // if (widget.loginUserID == _meetingInfo?.hostUserID) // only login user is host
+            if (isHost) // only login user is host
             Flexible(
               child: Wrap(
                 spacing: 8,
@@ -350,6 +350,7 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
                 ],
               ),
             ),
+            const SizedBox(width: 8),
           ],
         ),
         // if (isPined)

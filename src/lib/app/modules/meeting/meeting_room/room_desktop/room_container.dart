@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class _MeetingRoomContainerState extends State<MeetingRoomContainer> {
           ),
         if (showParticipants)
           Container(
-            constraints: BoxConstraints(maxWidth: 320),
+            constraints: BoxConstraints(maxWidth: Platform.isMacOS ? 320 : 350),
             child: ParticipantsDesktopView(
               participantsSubject: participantsSubject!,
               meetingInfoChangedSubject: meetingInfoChangedSubject!,

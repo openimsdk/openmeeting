@@ -9,202 +9,226 @@ import FlutterMacOS
 import Foundation
 
 class MultiWindowManager {
-    static let shared = MultiWindowManager()
-    
-    private var id: Int64 = 0
-    
-    private var windows: [Int64: BaseFlutterWindow] = [:]
-    
-    func create(arguments: String) -> Int64 {
-        id += 1
-        let windowId = id
-        
-        let window = FlutterWindow(id: windowId, arguments: arguments)
-        window.delegate = self
-        window.windowChannel.methodHandler = self.handleMethodCall
-        windows[windowId] = window
-        
-        for (_, wnd) in windows {
-            if wnd.isVisible {
-                wnd.hide()
-                wnd.show()
-            }
-        }
-        
-        return windowId
+  static let shared = MultiWindowManager()
+
+  private var id: Int64 = 0
+
+  private var windows: [Int64: BaseFlutterWindow] = [:]
+
+  func create(arguments: String) -> Int64 {
+    id += 1
+    let windowId = id
+
+    let window = FlutterWindow(id: windowId, arguments: arguments)
+    window.delegate = self
+    window.windowChannel.methodHandler = self.handleMethodCall
+    windows[windowId] = window
+    // https://github.com/flutter/flutter/issues/133533
+    // https://github.com/MixinNetwork/flutter-plugins/issues/289#issuecomment-1817665239
+    for (_, wnd) in windows {
+      if !wnd.isHidden() {
+        wnd.hide()
+        wnd.show()
+      }
     }
-    
-    func attachMainWindow(window: NSWindow, _ channel: WindowChannel) {
-        let mainWindow = BaseFlutterWindow(window: window, channel: channel)
-        mainWindow.windowChannel.methodHandler = self.handleMethodCall
-        windows[0] = mainWindow
+    return windowId
+  }
+
+  func attachMainWindow(window: NSWindow, _ channel: WindowChannel) {
+    let mainWindow = BaseFlutterWindow(window: window, channel: channel)
+    mainWindow.windowChannel.methodHandler = self.handleMethodCall
+    windows[0] = mainWindow
+  }
+
+  private func handleMethodCall(fromWindowId: Int64, targetWindowId: Int64, method: String, arguments: Any?, result: @escaping FlutterResult) {
+    guard let window = self.windows[targetWindowId] else {
+      result(FlutterError(code: "-1", message: "failed to find target window. \(targetWindowId)", details: nil))
+      return
     }
-    
-    private func handleMethodCall(fromWindowId: Int64, targetWindowId: Int64, method: String, arguments: Any?, result: @escaping FlutterResult) {
-        guard let window = self.windows[targetWindowId] else {
-            result(FlutterError(code: "-1", message: "failed to find target window. \(targetWindowId)", details: nil))
-            return
-        }
-        window.windowChannel.invokeMethod(fromWindowId: fromWindowId, method: method, arguments: arguments, result: result)
+    window.windowChannel.invokeMethod(fromWindowId: fromWindowId, method: method, arguments: arguments, result: result)
+  }
+
+  func show(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func show(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.show()
+    window.show()
+  }
+
+  func hide(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func hide(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.hide()
+    window.hide()
+  }
+
+  func isHidden(windowId: Int64) -> Bool {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return true
     }
-    
-    func close(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.close()
+    return window.isHidden()
+  }
+
+  func close(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func closeAll() {
-        windows.forEach { _, value in
-            value.close()
-        }
+    window.close()
+  }
+
+  func closeAll() {
+    windows.forEach { _, value in
+      value.close()
     }
-    
-    func center(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.center()
+  }
+
+  func center(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func focus(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.focus()
+    window.center()
+  }
+
+  func focus(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func minimize(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.minimize()
+    window.focus()
+  }
+
+  func minimize(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func showTitleBar(windowId: Int64, show: Bool) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.showTitleBar(show: show)
+    window.minimize()
+  }
+
+  func showTitleBar(windowId: Int64, show: Bool) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func maximize(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.maximize()
+    window.showTitleBar(show: show)
+  }
+
+  func maximize(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func isMaximized(windowId: Int64) -> Bool {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return false
-        }
-        return window.isMaximized()
+    window.maximize()
+  }
+
+  func isMaximized(windowId: Int64) -> Bool {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return false
     }
-    
-    func startDragging(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.startDragging()
+    return window.isMaximized()
+  }
+
+  func isMinimized(windowId: Int64) -> Bool {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return false
     }
-    
-    func startResizing(windowId: Int64, arguments: [String: Any?]) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.startResizing(arguments: arguments)
+    return window.isMinimized()
+  }
+
+  func startDragging(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func unmaximize(windowId: Int64) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.unmaximize()
+    window.startDragging()
+  }
+
+  func setMovable(windowId: Int64, isMovable: Bool) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
+    window.setMovable(isMovable: isMovable)
+  }
+
+  func startResizing(windowId: Int64, arguments: [String: Any?]) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
+    }
+    window.startResizing(arguments: arguments)
+  }
+
+  func unmaximize(windowId: Int64) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
+    }
+    window.unmaximize()
+  }
     
     func isFullScreen(windowId: Int64) -> Bool {
         guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return false
+          debugPrint("window \(windowId) not exists.")
+          return false
         }
         return window.isFullScreen()
     }
-    
-    func setFullscreen(windowId: Int64, fullscreen: Bool) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.setFullscreen(fullscreen: fullscreen)
+
+  func setFullscreen(windowId: Int64, fullscreen: Bool) {
+      guard let window = windows[windowId] else {
+        debugPrint("window \(windowId) not exists.")
+        return
+      }
+      window.setFullscreen(fullscreen: fullscreen)
+  }
+
+  func setFrame(windowId: Int64, frame: NSRect) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func setFrame(windowId: Int64, frame: NSRect) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.setFrame(frame: frame)
+    window.setFrame(frame: frame)
+  }
+
+  func getFrame(windowId: Int64) -> NSDictionary {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+        return [:];
     }
-    
-    func getFrame(windowId: Int64) -> NSDictionary {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return [:];
-        }
-        return window.getFrame()
+    return window.getFrame()
+  }
+
+  func setTitle(windowId: Int64, title: String) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func setTitle(windowId: Int64, title: String) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.setTitle(title: title)
+    window.setTitle(title: title)
+  }
+
+  func setFrameAutosaveName(windowId: Int64, name: String) {
+    guard let window = windows[windowId] else {
+      debugPrint("window \(windowId) not exists.")
+      return
     }
-    
-    func setFrameAutosaveName(windowId: Int64, name: String) {
-        guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
-            return
-        }
-        window.setFrameAutosaveName(name: name)
-    }
-    
-    func getAllSubWindowIds() -> [Int64] {
-        return windows.keys.filter { $0 != 0 }
-    }
+    window.setFrameAutosaveName(name: name)
+  }
+
+  func getAllSubWindowIds() -> [Int64] {
+    return windows.keys.filter { $0 != 0 }
+  }
     
     func isPreventClose(windowId: Int64) -> Bool {
         guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
+          debugPrint("window \(windowId) not exists.")
             return false
         }
         return window.isPreventClose()
@@ -212,7 +236,7 @@ class MultiWindowManager {
     
     func setPreventClose(windowId: Int64, setPreventClose: Bool) {
         guard let window = windows[windowId] else {
-            debugPrint("window \(windowId) not exists.")
+          debugPrint("window \(windowId) not exists.")
             return
         }
         return window.setPreventClose(setPreventClose: setPreventClose)
@@ -220,18 +244,18 @@ class MultiWindowManager {
 }
 
 protocol WindowManagerDelegate: AnyObject {
-    func onClose(windowId: Int64)
+  func onClose(windowId: Int64)
 }
 
 extension MultiWindowManager: WindowManagerDelegate {
-    func onClose(windowId: Int64) {
-        // notify flutter to close this window gracefully
-        guard let window = self.windows[windowId] else {
-            return
-        }
-        let args = NSDictionary()
-        debugPrint("invoke onDestroy \(windowId)")
-        window.windowChannel.invokeMethod(fromWindowId: 0, method: "onDestroy", arguments: args, result: nil)
-        windows.removeValue(forKey: windowId)
+  func onClose(windowId: Int64) {
+    // notify flutter to close this window gracefully
+    guard let window = self.windows[windowId] else {
+      return
     }
+    let args = NSDictionary()
+    debugPrint("invoke onDestroy \(windowId)")
+    window.windowChannel.invokeMethod(fromWindowId: 0, method: "onDestroy", arguments: args, result: nil)
+    windows.removeValue(forKey: windowId)
+  }
 }

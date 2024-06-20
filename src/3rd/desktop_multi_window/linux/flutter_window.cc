@@ -177,7 +177,6 @@ void _emitEvent(const char *event_name, FlutterWindow *self)
 gboolean onWindowClose(GtkWidget *widget, GdkEvent *, gpointer arg)
 {
   auto *self = static_cast<FlutterWindow *>(arg);
-  _emitEvent("close", self);
   // destory hook
   if (!self->isPreventClose)
   {
@@ -191,6 +190,10 @@ gboolean onWindowClose(GtkWidget *widget, GdkEvent *, gpointer arg)
       callback->OnWindowClose(self->id_);
       callback->OnWindowDestroy(self->id_);
     }
+  }
+  else
+  {
+    _emitEvent("close", self);
   }
   return self->isPreventClose;
 }
@@ -213,6 +216,7 @@ gboolean onWindowResize(GtkWidget *widget, gpointer data)
 {
   auto *self = static_cast<FlutterWindow *>(data);
   _emitEvent("resize", self);
+  _emitEvent("resized", self);
   return false;
 }
 
@@ -236,6 +240,7 @@ gboolean onWindowMove(GtkWidget *widget, GdkEvent *event, gpointer data)
 {
   auto *self = static_cast<FlutterWindow *>(data);
   _emitEvent("move", self);
+  _emitEvent("moved", self);
   return false;
 }
 

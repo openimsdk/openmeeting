@@ -152,7 +152,7 @@ class IMUtils {
     if (Platform.isAndroid) {
       try {
         externalStorageDirPath = (await getDownloadsDirectory())?.path;
-      } catch (err, st) {
+      } catch (err, _) {
         final directory = await getExternalStorageDirectory();
         externalStorageDirPath = directory?.path;
       }

@@ -1,4 +1,3 @@
-import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/user_info.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:uuid/uuid.dart';
@@ -8,8 +7,6 @@ import 'sp_util.dart';
 class DataSp {
   static const _loginCertificate = 'loginCertificate';
   static const _loginAccount = 'loginAccount';
-  static const _server = "server";
-  static const _ip = 'ip';
   static const _deviceID = 'deviceID';
   static const _ignoreUpdate = 'ignoreUpdate';
   static const _language = "language";

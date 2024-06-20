@@ -3,7 +3,6 @@ import FlutterMacOS
 
 import desktop_multi_window
 import device_info_plus
-import ffmpeg_kit_flutter_full_gpl
 import flutter_local_notifications
 import flutter_webrtc
 import livekit_client
@@ -30,7 +29,6 @@ class MainFlutterWindow: NSWindow {
             ConnectivityPlusPlugin.register(with: controller.registrar(forPlugin: "ConnectivityPlusPlugin"))
             FlutterMultiWindowPlugin.register(with: controller.registrar(forPlugin: "FlutterMultiWindowPlugin"))
             DeviceInfoPlusMacosPlugin.register(with: controller.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
-            FFmpegKitFlutterPlugin.register(with: controller.registrar(forPlugin: "FFmpegKitFlutterPlugin"))
             FlutterLocalNotificationsPlugin.register(with: controller.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
             FlutterWebRTCPlugin.register(with: controller.registrar(forPlugin: "FlutterWebRTCPlugin"))
             LiveKitPlugin.register(with: controller.registrar(forPlugin: "LiveKitPlugin"))

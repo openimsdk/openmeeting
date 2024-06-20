@@ -34,11 +34,9 @@ Experience our meeting modules by trying out our sample apps.
 
 | Platform | Link | Remark |
 |---------|---------|---------|
-| Android/iOS | <img src="https://www.openim.io/_next/image?url=https%3A%2F%2Fwww.pgyer.com%2Fapp%2Fqrcode%2FIM-FCER&w=256&q=75" width="140px" alt="Open Meeting Logo" /> | Scan to download app for both Android and iOS. Automatically identifies platform. |
-| Web | [Visit Now](https://www.openim.io/zh/commercial) | Supports both desktop and mobile browsers and automatically adjusts its layout accordingly. Same website as previous QR code. |
-| macOS | [Download Now](https://www.openim.io/zh/commercial) | The macOS version of our sample app.  |
-| Windows | [Download Now](https://www.openim.io/zh/commercial) | The Windows version of our sample app, which is a UWP (Universal Windows Platform) application. |
-| Linux | [Download Now](https://www.openim.io/zh/commercial) | The macOS version of our sample app. |
+| Android/iOS | <img src="https://www.pgyer.com/app/qrcode/OpenMeeting" width="140px" alt="Open Meeting Logo" /> | Scan to download app for both Android and iOS. Automatically identifies platform. |
+| macOS | Incoming | The macOS version of our sample app.  |
+| Windows | Incoming | The Windows version of our sample app, which is a UWP (Universal Windows Platform) application. |
 
 ## Getting Started
 
@@ -93,7 +91,7 @@ flutter pub run flutter_launcher_icons:main
 </application>
 ```
   
- ###### iOS
+ ###### iOS/MacOS
   
 ```xml
 // ios/Runner/Info.plist
@@ -104,14 +102,24 @@ flutter pub run flutter_launcher_icons:main
 </string> 
 ```
 
+###### Windows
+```
+// windows/CMakeLists.txt
+set(BINARY_NAME "your app name")
+
+```
+
 Step 3: Build binaries
 
 ```ruby
-// build android App
+// build Android App
 flutter build apk
 
 // build iOS App
 flutter build ipa
+
+// build MacOS App
+flutter build macos
 ```
 Now that you have an installable app, publish it to Google Play and App Store.
 

@@ -14,10 +14,13 @@ extension MeetingInfoSettingExt on MeetingInfoSetting {
   String? get password => info.creatorDefinedMeeting.password;
   bool get shouldCheckPassword => password?.isNotEmpty == true;
   MeetingStatus get status => MeetingStatusExt.fromString(info.systemGenerated.status);
+  String get hostUserID =>
+      info.creatorDefinedMeeting.hostUserID.isNotEmpty ? info.creatorDefinedMeeting.hostUserID : creatorUserID;
+  List<String> get coHostUSerID => info.creatorDefinedMeeting.coHostUSerID;
 }
 
 extension UserInfoExt on ui.UserInfo {
   UserInfo toPBUser() {
-    return UserInfo(userID: this.userId, nickname: this.nickname);
+    return UserInfo(userID: userId, nickname: nickname);
   }
 }

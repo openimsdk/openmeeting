@@ -23,7 +23,8 @@ abstract class IMeetingRepository {
       {required CreateMeetingType type,
       required String creatorUserID,
       required CreatorDefinedMeetingInfo creatorDefinedMeetingInfo,
-      required MeetingSetting setting}) {
+      required MeetingSetting setting,
+      MeetingRepeatInfo? repeatInfo}) {
     throw UnimplementedError();
   }
 
@@ -61,6 +62,27 @@ abstract class IMeetingRepository {
     bool? cameraOnEntry,
     bool? microphoneOnEntry,
   }) {
+    throw UnimplementedError();
+  }
+
+  Future<bool> modifyParticipantName(
+      {required String meetingID,
+      required String userID,
+      required String participantUserID,
+      required String nickname}) {
+    throw UnimplementedError();
+  }
+
+  Future<bool> kickParticipant(
+      {required String meetingID, required String userID, required List<String> participantUserIDs}) {
+    throw UnimplementedError();
+  }
+
+  Future<bool> setMeetingHost(
+      {required String meetingID,
+      required String userID,
+      required String hostUserID,
+      required List<String> coHostUserIDs}) {
     throw UnimplementedError();
   }
 }

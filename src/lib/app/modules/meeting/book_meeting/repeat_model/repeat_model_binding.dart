@@ -6,7 +6,7 @@ class RepeatModelBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<RepeatModelController>(
-      () => RepeatModelController(rawType: (Get.parameters['type'] != null) ? int.tryParse(Get.parameters['type']!) : null),
+      () => RepeatModelController(rawType: (Get.parameters['type'] != null) ? Get.parameters['type'] : null),
     );
   }
 }

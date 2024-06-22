@@ -1,4 +1,3 @@
-import 'meeting.pb.dart';
 
 class MeetingOptions {
   final bool enableMicrophone;

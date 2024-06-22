@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/pb_extension.dart';
+import 'package:openmeeting/app/widgets/meeting/desktop/meeting_alert_dialog.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -27,14 +28,15 @@ abstract class ParticipantsView extends StatefulWidget {
   final BehaviorSubject<MeetingInfoSetting> meetingInfoChangedSubject;
   final String loginUserID;
   final void Function<T>(BuildContext? context, OperationType type, {T? value})? onRoomOperation;
-  final Future<bool> Function<T>({OperationParticipantType type, String userID, T to})? onOperation; // {OptionType.invite, OptionType.participants>
+  final Future<bool> Function<T>({OperationParticipantType type, String userID, T to})?
+      onOperation; // {OptionType.invite, OptionType.participants>
 }
 
 abstract class ParticipantsViewState<T extends ParticipantsView> extends State<T> {
   late StreamSubscription _participantsSub;
   late StreamSubscription _meetingInfSub;
   List<ParticipantTrack> _participantTracks = [];
-  late MeetingInfoSetting? _meetingInfo;
+  MeetingInfoSetting? _meetingInfo;
 
   bool muteAll = false;
   MeetingSetting? get setting => _meetingInfo?.setting;
@@ -87,11 +89,16 @@ class ParticipantsDesktopView extends ParticipantsView {
 class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDesktopView> {
   List<ParticipantTrack> _searchResult = [];
   final TextEditingController _searchController = TextEditingController();
+  ValueNotifier<({bool cameraIsEnable, bool micIsEnable, String nickname, String userID})> valueNotifier =
+      ValueNotifier((cameraIsEnable: false, micIsEnable: false, nickname: '', userID: ''));
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
+      padding: EdgeInsets.only(
+        bottom: 16,
+      ),
       child: Column(
         children: [
           const SizedBox(height: 32),
@@ -103,17 +110,15 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
           Flexible(
             child: ListView.separated(
                 padding: EdgeInsets.all(16),
-                itemBuilder: (context, index) =>
-                    _searchController.text.isNotEmpty ? _buildItem(_searchResult[index]) : _buildItem(_participantTracks[index]),
+                itemBuilder: (context, index) => _searchController.text.isNotEmpty
+                    ? _buildItem(_searchResult[index])
+                    : _buildItem(_participantTracks[index]),
                 separatorBuilder: (context, index) => SizedBox(
                       height: 12.h,
                     ),
                 itemCount: _searchController.text.isNotEmpty ? _searchResult.length : _participantTracks.length),
           ),
           if (isHost) _buildBottomButtons(),
-          SizedBox(
-            height: 16,
-          )
         ],
       ),
     );
@@ -274,102 +279,60 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
     final isMicrophoneEnabled = track.participant.isMicrophoneEnabled();
     final isCameraEnabled = track.participant.isCameraEnabled();
 
-    return Stack(
+    return Row(
       children: [
-        Row(
+        AvatarView(
+          url: faceURL,
+          text: nickname,
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AvatarView(
-              url: faceURL,
-              text: nickname,
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                nickname.toText
-                  ..style = Styles.ts_0C1C33_17sp
-                  ..maxLines = 1
-                  ..overflow = TextOverflow.ellipsis,
-                if (widget.loginUserID == _meetingInfo?.creatorUserID)
-                  Text(
-                    '(${StrRes.meetingHost}, ${StrRes.me})',
-                    style: Styles.ts_8E9AB0_12sp,
-                  )
-              ],
-            ),
-            const Spacer(),
-            if (isHost) // only login user is host
-            Flexible(
-              child: Wrap(
-                spacing: 8,
-                children: [
-                  _buildButtonInItem(isMicrophoneEnabled ? ImageRes.meetingMicOnGray : ImageRes.meetingMicOffGray, () {
-                    _disableParticipantMicrophone(userID, !isMicrophoneEnabled);
-                  }),
-                  _buildButtonInItem(isCameraEnabled ? ImageRes.meetingCameraOnGray : ImageRes.meetingCameraOffGray, () {
-                    _disableParticipantCamera(userID, !isCameraEnabled);
-                  }),
-                  // Builder(
-                  //   builder: (ctx) => _buildButtonInItem(
-                  //     ImageRes.meetingMore,
-                  //     () {
-                  //       MeetingPopMenu.showSimpleWidget(
-                  //         ctx,
-                  //         ListView(
-                  //           shrinkWrap: true,
-                  //           padding: const EdgeInsets.all(8),
-                  //           children: [
-                  //             TextButton(
-                  //                 onPressed: () {
-                  //                   _pineParticipant(userID, isPined);
-                  //                 },
-                  //                 child: Text(
-                  //                   isPined ? StrRes.unpinThisMember : StrRes.pinThisMember,
-                  //                   style: Styles.ts_0C1C33_14sp,
-                  //                 )),
-                  //             const SizedBox(
-                  //               height: 6,
-                  //             ),
-                  //             TextButton(
-                  //               onPressed: () {
-                  //                 _allSeeHim(userID, focus);
-                  //               },
-                  //               child: Text(
-                  //                 focus ? StrRes.cancelAllSeeHim : StrRes.allSeeHim,
-                  //                 style: Styles.ts_0C1C33_14sp,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 8),
+            nickname.toText
+              ..style = Styles.ts_0C1C33_17sp
+              ..maxLines = 1
+              ..overflow = TextOverflow.ellipsis,
+            if (userID == _meetingInfo?.creatorUserID)
+              Text(
+                '(${StrRes.meetingHost}, ${StrRes.me})',
+                style: Styles.ts_8E9AB0_12sp,
+              )
           ],
         ),
-        // if (isPined)
-        //   Positioned(
-        //     top: 0,
-        //     right: 0,
-        //     child: ImageRes.meetingMembersPin.toImage
-        //       ..width = 10.w
-        //       ..height = 10.h,
-        //   ),
+        const Spacer(),
+        if (isHost) // only login user is host
+          Row(
+            children: [
+              _buildButtonInItem(isMicrophoneEnabled ? ImageRes.meetingMicOnGray : ImageRes.meetingMicOffGray, () {
+                _disableParticipantMicrophone(userID, !isMicrophoneEnabled);
+              }),
+              _buildButtonInItem(isCameraEnabled ? ImageRes.meetingCameraOnGray : ImageRes.meetingCameraOffGray, () {
+                _disableParticipantCamera(userID, !isCameraEnabled);
+              }),
+              Builder(
+                builder: (ctx) => _buildButtonInItem(
+                  ImageRes.meetingMore,
+                  () {
+                    _onTapMore(ctx, userID, nickname);
+                  },
+                ),
+              ),
+            ],
+          ),
+        const SizedBox(width: 8),
       ],
     );
   }
 
   Widget _buildButtonInItem(String image, VoidCallback onTap) {
-    return image.toImage
-      ..width = 24
-      ..height = 24
-      ..onTap = onTap;
+    return IconButton(
+        onPressed: onTap,
+        icon: image.toImage
+          ..width = 24
+          ..height = 24);
   }
 
 /*
@@ -441,5 +404,29 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
     }, onPop: () {
       widget.onRoomOperation?.call(context, OperationType.roomSettings, value: setting);
     });
+  }
+
+  void _onTapMore(BuildContext ctx, String userID, String nickname) {
+    final itemIsHost = userID == _meetingInfo?.creatorUserID;
+
+    MeetingAlertDialog.showMemberSetting(ctx, forMobile: false, valueNotifier: valueNotifier, onEnableCamera: () {
+      _disableParticipantCamera(userID, !valueNotifier.value.cameraIsEnable);
+    }, onEnableMic: () {
+      _disableParticipantMicrophone(userID, !valueNotifier.value.micIsEnable);
+    }, onChangeNickname: () {
+      MeetingAlertDialog.showInputText(context, title: StrRes.changeNickname, nickname: nickname, onConfirm: (value) {
+        widget.onOperation?.call(type: OperationParticipantType.nickname, userID: userID, to: value);
+      });
+    },
+        onSetHost: itemIsHost
+            ? null
+            : () {
+                widget.onOperation?.call(type: OperationParticipantType.setHost, userID: userID);
+              },
+        onKickoff: itemIsHost
+            ? null
+            : () {
+                widget.onOperation?.call(type: OperationParticipantType.kickoff, userID: userID);
+              });
   }
 }

@@ -26,7 +26,8 @@ enum _LoadingStatus {
 }
 
 class RoomConnectDesktopView extends StatefulWidget {
-  const RoomConnectDesktopView(this.windowId, this.userFullInfo, this.certificate, this.roomID, {super.key, this.options});
+  const RoomConnectDesktopView(this.windowId, this.userFullInfo, this.certificate, this.roomID,
+      {super.key, this.options});
 
   final UserInfo userFullInfo;
   final LiveKit certificate;
@@ -38,7 +39,8 @@ class RoomConnectDesktopView extends StatefulWidget {
   State<RoomConnectDesktopView> createState() => _RoomConnectDesktopViewState();
 }
 
-class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView> with AutomaticKeepAliveClientMixin, MultiWindowListener {
+class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
+    with AutomaticKeepAliveClientMixin, MultiWindowListener {
   final loading = _LoadingStatus.loading.obs;
   Room? _room;
   late String _roomID;
@@ -142,9 +144,9 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView> with Au
 
     final loginUserID = widget.userFullInfo.userID;
     final roomMetadata = (MeetingMetadata()..mergeFromProto3Json(jsonDecode(_room!.metadata!))).detail;
-    MeetingPopMenu.showMeetingWidget(ctx ?? context, contentDyOffset: ctx == null ? kTabBarHeight - MediaQuery.of(context).size.height : 0,
-        onTap2: () {
-      MeetingAlertDialog.show(context, StrRes.leaveMeetingConfirmHint, '', onConfirm: () {
+    MeetingPopMenu.showMeetingWidget(ctx ?? context,
+        contentDyOffset: ctx == null ? kTabBarHeight - MediaQuery.of(context).size.height : 0, onTap2: () {
+      MeetingAlertDialog.show(context, title: StrRes.leaveMeetingConfirmHint, '', onConfirm: () {
         if (immediatelyClose) {
           Navigator.of(Get.context!).pop();
           MeetingClient().closeWindow();
@@ -156,7 +158,7 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView> with Au
         onTap3: loginUserID != roomMetadata.creatorUserID
             ? null
             : () {
-                MeetingAlertDialog.show(context, StrRes.endMeetingConfirmHit, '', onConfirm: () {
+                MeetingAlertDialog.show(context, title: StrRes.endMeetingConfirmHit, '', onConfirm: () {
                   if (immediatelyClose) {
                     Navigator.of(Get.context!).pop();
                     MeetingClient().closeWindow(realClose: true);
@@ -173,8 +175,8 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView> with Au
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: Center(child:
-          _buildLoadingIndicator(),
+      body: Center(
+        child: _buildLoadingIndicator(),
       ),
     );
   }

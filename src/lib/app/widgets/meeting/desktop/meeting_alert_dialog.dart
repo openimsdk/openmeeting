@@ -1,20 +1,19 @@
-import 'dart:ui';
-
-import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/widgets/meeting/overlay_widget.dart';
+import 'package:popover/popover.dart';
 import 'package:sprintf/sprintf.dart';
 
 class MeetingAlertDialog {
-  static void show(BuildContext context, String? title, String content,
-      {bool forMobile = false, String? confirmText, VoidCallback? onConfirm, String? cancelText, VoidCallback? onCancel}) {
+  static void show(BuildContext context, String content,
+      {bool forMobile = false,
+      String? title, 
+      String? confirmText,
+      VoidCallback? onConfirm,
+      String? cancelText,
+      VoidCallback? onCancel}) {
     Logger.print('title:$title, content: $content');
 
     Widget buildContent(BuildContext ctx) {
@@ -49,7 +48,8 @@ class MeetingAlertDialog {
     }
   }
 
-  static void showEnterMeetingWithPasswordDialog(BuildContext context, String host, {ValueChanged<String>? onConfirm, VoidCallback? onCancel}) {
+  static void showEnterMeetingWithPasswordDialog(BuildContext context, String host,
+      {ValueChanged<String>? onConfirm, VoidCallback? onCancel}) {
     final hostController = TextEditingController(text: sprintf(StrRes.meetingHostIs, [host]));
     final passwordController = TextEditingController();
 
@@ -145,12 +145,13 @@ class MeetingAlertDialog {
 
   MeetingAlertDialog.showMemberSetting(
     BuildContext context, {
+    bool forMobile = true,
     required ValueNotifier<({bool cameraIsEnable, bool micIsEnable, String nickname, String userID})> valueNotifier,
     required VoidCallback onEnableCamera,
     required VoidCallback onEnableMic,
-    required VoidCallback onChangeNickname,
-    required VoidCallback onSetHost,
-    required VoidCallback onKickoff,
+    required VoidCallback? onChangeNickname,
+    required VoidCallback? onSetHost,
+    required VoidCallback? onKickoff,
   }) {
     Widget buildContent(BuildContext ctx) {
       Widget buildItem(Widget icon, String title, VoidCallback onTap, {bool showDivider = true}) {
@@ -171,8 +172,8 @@ class MeetingAlertDialog {
       }
 
       return Container(
-        width: 300.w,
-        padding: EdgeInsets.only(bottom: 8),
+        width: 300,
+        padding: const EdgeInsets.only(bottom: 8),
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
         child: ValueListenableBuilder(
@@ -193,22 +194,36 @@ class MeetingAlertDialog {
                       Text(valueNotifier.value.nickname, style: Styles.ts_0C1C33_17sp),
                       CloseButton(
                         onPressed: () {
-                          OverlayWidget().hideDialog();
+                          if (forMobile) {
+                            OverlayWidget().hideDialog();
+                          } else {
+                            Navigator.of(context).pop();
+                          }
                         },
                       ),
                     ],
                   ),
                 ),
                 buildItem(
-                    Icon(valueNotifier.value.cameraIsEnable ? Icons.video_camera_back_rounded : Icons.videocam_off_rounded, color: Styles.c_0089FF),
+                    Icon(
+                        valueNotifier.value.cameraIsEnable
+                            ? Icons.video_camera_back_rounded
+                            : Icons.videocam_off_rounded,
+                        color: Styles.c_8E9AB0),
                     valueNotifier.value.cameraIsEnable ? StrRes.meetingCloseVideo : StrRes.requestEnableVideo,
                     onEnableCamera),
-                buildItem(Icon(valueNotifier.value.micIsEnable ? Icons.mic : Icons.mic_off, color: Styles.c_0089FF),
-                    valueNotifier.value.micIsEnable ? StrRes.meetingMute : StrRes.requestEnableAudio, onEnableMic,
-                    showDivider: false),
-                // buildItem(Icon(Icons.edit_note_sharp, color: Styles.c_0089FF), StrRes.changeNickname, onChangeNickname),
-                // buildItem(Icon(Icons.person_add_alt_1_rounded, color: Styles.c_0089FF), StrRes.setHost, onSetHost),
-                // buildItem(Icon(Icons.person_remove_rounded, color: Colors.red), StrRes.kickoffFromMeeting, onKickoff, showDivider: false),
+                buildItem(Icon(valueNotifier.value.micIsEnable ? Icons.mic : Icons.mic_off, color: Styles.c_8E9AB0),
+                    valueNotifier.value.micIsEnable ? StrRes.meetingMute : StrRes.requestEnableAudio, onEnableMic),
+                if (onChangeNickname != null)
+                  buildItem(Icon(Icons.edit_note_sharp, color: Styles.c_8E9AB0), StrRes.changeNickname, () {
+                    OverlayWidget().hideDialog();
+                    onChangeNickname();
+                  }),
+                if (onSetHost != null)
+                  buildItem(Icon(Icons.person_add_alt_1_rounded, color: Styles.c_8E9AB0), StrRes.setHost, onSetHost),
+                if (onKickoff != null)
+                  buildItem(Icon(Icons.person_remove_rounded, color: Colors.red), StrRes.kickoffFromMeeting, onKickoff,
+                      showDivider: false),
               ],
             );
           },
@@ -216,6 +231,90 @@ class MeetingAlertDialog {
       );
     }
 
-    OverlayWidget().showDialog(context: context, child: buildContent(context));
+    if (forMobile) {
+      OverlayWidget().showDialog(context: context, child: buildContent(context));
+    } else {
+      showPopover(context: context, bodyBuilder: (_) => buildContent(context));
+    }
+  }
+
+  MeetingAlertDialog.showInputText(
+    BuildContext context, {
+    String? title,
+    required String nickname,
+    required ValueChanged<String> onConfirm,
+    bool forMobile = true,
+  }) {
+    final textController = TextEditingController(text: nickname);
+    final focusNode = FocusNode();
+
+    Future.delayed(const Duration(milliseconds: 300), () {
+      focusNode.requestFocus();
+    });
+    Widget buildContent(BuildContext ctx) {
+      return Dialog(
+        child: Container(
+          width: 300,
+          padding: const EdgeInsets.only(top: 16),
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (title != null) Text(title, style: Styles.ts_0C1C33_17sp),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: CupertinoTextField(
+                  controller: textController,
+                  focusNode: focusNode,
+                ),
+              ),
+              const Divider(
+                height: 1,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: CupertinoButton(
+                      padding: const EdgeInsets.symmetric(vertical: 0),
+                      child: Text(StrRes.cancel),
+                      onPressed: () {
+                        if (forMobile) {
+                          OverlayWidget().hideDialog();
+                        } else {
+                          Navigator.pop(context);
+                        }
+                      },
+                    ),
+                  ),
+                  Container(height: 50, width: 1, color: Colors.grey.shade400),
+                  Expanded(
+                    child: CupertinoButton(
+                      padding: const EdgeInsets.symmetric(vertical: 0),
+                      child: Text(StrRes.confirm),
+                      onPressed: () {
+                        if (forMobile) {
+                          OverlayWidget().hideDialog();
+                        } else {
+                          Navigator.of(context).pop();
+                        }
+                        onConfirm(textController.text.trim());
+                      },
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (forMobile) {
+      OverlayWidget().showDialog(context: context, child: buildContent(context));
+    } else {
+      showDialog(context: context, builder: (ctx) => buildContent(ctx));
+    }
   }
 }

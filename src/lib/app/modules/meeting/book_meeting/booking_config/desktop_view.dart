@@ -180,12 +180,12 @@ class _DesktopViewState extends State<DesktopView> {
               valueListenable: repeatModelsValueListenable,
               onChanged: _selectRepeatModel),
           _verSpace,
-          if (bookingConfig.repeatType == 6)
+          if (bookingConfig.repeatType == RepeatType.custom)
             CustomRepeatModelView(
               config: bookingConfig,
             ),
           _verSpace,
-          if (bookingConfig.repeatType > 0)
+          if (bookingConfig.repeatType != RepeatType.none)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -522,7 +522,7 @@ class _DesktopViewState extends State<DesktopView> {
 
   ({int endsInDays, int maxLimit}) _configRepeatEnds() {
     final bookingConfig = widget.bookingConfig;
-    final type = bookingConfig.repeatType.repeatType;
+    final type = bookingConfig.repeatType;
 
     var endsInDays = bookingConfig.endsIn;
     final maxLimit = bookingConfig.limitCount != 0 ? bookingConfig.limitCount : 7;

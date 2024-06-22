@@ -99,7 +99,8 @@ class MeetingClient {
                   maxFramerate: 15,
                 )),
             defaultAudioOutputOptions: AudioOutputOptions(speakerOn: options.enableSpeaker),
-            defaultScreenShareCaptureOptions: const ScreenShareCaptureOptions(useiOSBroadcastExtension: true, maxFrameRate: 15.0),
+            defaultScreenShareCaptureOptions:
+                const ScreenShareCaptureOptions(useiOSBroadcastExtension: true, maxFrameRate: 15.0),
           ),
         );
       });
@@ -201,8 +202,31 @@ class MeetingClient {
 
         return result;
       case OperationParticipantType.nickname:
-        return Future.value(true);
+        final result = await MeetingRepository().modifyParticipantName(
+          meetingID: roomID!,
+          userID: loginUserID,
+          participantUserID: userID!,
+          nickname: to! as String,
+        );
+
+        return result;
+      case OperationParticipantType.setHost:
+        final result = await MeetingRepository().setMeetingHost(
+          meetingID: roomID!,
+          userID: loginUserID,
+          hostUserID: userID!,
+          coHostUserIDs: [],
+        );
+
+        return result;
       case OperationParticipantType.kickoff:
+        final result = await MeetingRepository().kickParticipant(
+          meetingID: roomID!,
+          userID: loginUserID,
+          participantUserIDs: [userID!],
+        );
+
+        return result;
       case null:
         return Future(() => false);
     }

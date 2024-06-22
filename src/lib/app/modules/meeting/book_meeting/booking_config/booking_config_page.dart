@@ -58,30 +58,32 @@ class BookingConfigPage extends GetView<BookingConfigController> {
           _verSpace,
           _buildMobileItemView(
               label: StrRes.meetingStartTime,
-              value: DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(controller.bookingConfig.value.beginTime), format: controller.format),
+              value: DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(controller.bookingConfig.value.beginTime),
+                  format: controller.format),
               onTap: _selectMeetingBeginTime),
           _buildMobileItemView(
               label: StrRes.meetingDuration,
               value: '${(controller.bookingConfig.value.duration / 3600).toStringAsFixed(1)} ${StrRes.hours}',
               showRightArrow: true,
               onTap: _selectMeetingDuration),
-          /*
-          _buildMobileItemView(label: StrRes.timeZone, showRightArrow: true, onTap: _selectTimezone),
-
+          // _buildMobileItemView(label: StrRes.timeZone, showRightArrow: true, onTap: _selectTimezone),
           _buildMobileItemView(
               label: StrRes.repeatFrequency,
-              value: controller.bookingConfig.value.repeatType.repeatType.title,
+              value: controller.bookingConfig.value.repeatType.title,
               showRightArrow: true,
               onTap: _selectRepeatFrequency),
-           */
-          controller.bookingConfig.value.repeatType > 0
-              ? _buildMobileItemView(label: StrRes.endsIn, value: _endsInDaysText, showRightArrow: true, onTap: _selectRepeatEnds)
+          controller.bookingConfig.value.repeatType != RepeatType.none
+              ? _buildMobileItemView(
+                  label: StrRes.endsIn, value: _endsInDaysText, showRightArrow: true, onTap: _selectRepeatEnds)
               : Container(),
           _verSpace,
           _buildMobileItemView(
-              label: StrRes.enterMeetingPassword, switchOn: controller.bookingConfig.value.enableMeetingPassword, onChanged: _enablePassword),
+              label: StrRes.enterMeetingPassword,
+              switchOn: controller.bookingConfig.value.enableMeetingPassword,
+              onChanged: _enablePassword),
           if (controller.bookingConfig.value.enableMeetingPassword)
-            _buildMobileInputItemView(controller.pswEditingController, focusNode: controller.inputPswFocusNode, onSubmitted: _inputPassword),
+            _buildMobileInputItemView(controller.pswEditingController,
+                focusNode: controller.inputPswFocusNode, onSubmitted: _inputPassword),
           /*_buildMobileItemView(
               label: StrRes.allowMembersEnterFirst,
               switchOn: controller.bookingConfig.value.enableEnterBeforeHost,
@@ -89,15 +91,20 @@ class BookingConfigPage extends GetView<BookingConfigController> {
            */
           _verSpace,
           _buildMobileItemView(
-              label: StrRes.enterMeetingEnableMicrophone, switchOn: controller.bookingConfig.value.enableMicrophone, onChanged: _enableMicrophone),
+              label: StrRes.enterMeetingEnableMicrophone,
+              switchOn: controller.bookingConfig.value.enableMicrophone,
+              onChanged: _enableMicrophone),
           _buildMobileItemView(
-              label: StrRes.enterMeetingEnableVideo, switchOn: controller.bookingConfig.value.enableCamera, onChanged: _enableCamera),
+              label: StrRes.enterMeetingEnableVideo,
+              switchOn: controller.bookingConfig.value.enableCamera,
+              onChanged: _enableCamera),
         ],
       ),
     );
   }
 
-  Widget _buildMobileInputItemView(TextEditingController textEditingController, {required ValueChanged<String> onSubmitted, FocusNode? focusNode}) {
+  Widget _buildMobileInputItemView(TextEditingController textEditingController,
+      {required ValueChanged<String> onSubmitted, FocusNode? focusNode}) {
     return Container(
       alignment: Alignment.center,
       color: Colors.white,
@@ -205,17 +212,20 @@ class BookingConfigPage extends GetView<BookingConfigController> {
   }
 
   void _selectRepeatFrequency() async {
-    final result = await MNavigator.startRepeatModel(type: controller.bookingConfig.value.repeatType) as int?;
+    final result =
+        await MNavigator.startRepeatModel(type: controller.bookingConfig.value.repeatType.rawValue) as String?;
     // final result = Get.parameters['text'];
     controller.bookingConfig.update((val) {
-      val?.repeatType = result ?? 0;
+      val?.repeatType = result == null ? RepeatType.none : RepeatTypeExt.fromString(result);
     });
   }
 
   void _selectRepeatEnds() async {
     final config = _configRepeatEnds();
     final result = await MNavigator.startRepeatEnds(endsInDays: config.endsInDays, maxLimit: config.maxLimit);
-
+    if (result == null) {
+      return;
+    }
     final limitCount = result['limitCount'];
     final endsIn = result['endsIn'];
     controller.bookingConfig.update((val) {
@@ -267,7 +277,8 @@ class BookingConfigPage extends GetView<BookingConfigController> {
   String get _endsInDaysText {
     final config = _configRepeatEnds();
 
-    final date = DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(config.endsInDays), format: controller.endsInFormat);
+    final date =
+        DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(config.endsInDays), format: controller.endsInFormat);
     final limitCount = config.maxLimit;
 
     return sprintf(StrRes.endsInHit, [date, limitCount]);
@@ -275,7 +286,7 @@ class BookingConfigPage extends GetView<BookingConfigController> {
 
   ({int endsInDays, int maxLimit}) _configRepeatEnds() {
     final bookingConfig = controller.bookingConfig.value;
-    final type = bookingConfig.repeatType.repeatType;
+    final type = bookingConfig.repeatType;
 
     var endsInDays = bookingConfig.endsIn;
     final maxLimit = bookingConfig.limitCount != 0 ? bookingConfig.limitCount : 7;
@@ -306,7 +317,6 @@ class BookingConfigPage extends GetView<BookingConfigController> {
       var originalTime = DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime);
 
       for (int i = 0; i < maxLimit; i++) {
-        print('增加的日期: $originalTime');
         originalTime = originalTime.add(7.days);
       }
 
@@ -315,7 +325,6 @@ class BookingConfigPage extends GetView<BookingConfigController> {
       var originalTime = DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime);
 
       for (int i = 0; i < maxLimit; i++) {
-        print('增加的日期: $originalTime');
         originalTime = originalTime.add(14.days);
       }
 

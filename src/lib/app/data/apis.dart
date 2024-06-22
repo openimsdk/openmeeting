@@ -246,4 +246,53 @@ class Apis {
       return Future.error(e);
     }
   }
+
+  static Future<bool> modifyParticipantName(Map<String, dynamic> params) async {
+    try {
+      final result = await _showHud(
+        () => ApiService().post(
+          Urls.modifyParticipantName,
+          data: params,
+        ),
+      );
+
+      return result;
+    } catch (e, s) {
+      IMViews.showToast(e.toString());
+
+      return Future.error(e);
+    }
+  }
+
+  static Future<bool> kickParticipant(Map<String, dynamic> params) async {
+    try {
+      final result = await _showHud(
+        () => ApiService().post(
+          Urls.kickParticipants,
+          data: params,
+        ),
+      );
+
+      return result;
+    } catch (e, s) {
+      IMViews.showToast(e.toString());
+      return Future.error(e);
+    }
+  }
+
+  static Future<bool> setMeetingHost(Map<String, dynamic> params) async {
+    try {
+      final result = await _showHud(
+        () => ApiService().post(
+          Urls.setMeetingHost,
+          data: params,
+        ),
+      );
+
+      return result;
+    } catch (e, s) {
+      IMViews.showToast(e.toString());
+      return Future.error(e);
+    }
+  }
 }

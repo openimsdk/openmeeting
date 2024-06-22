@@ -10,6 +10,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart' as rtc;
 import 'package:openmeeting/app/data/models/pb_extension.dart';
 import 'package:openmeeting/app/widgets/meeting/desktop/meeting_alert_dialog.dart';
+import 'package:openmeeting/app/widgets/meeting/select_member_view.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:synchronized/synchronized.dart';
 
@@ -81,13 +82,15 @@ class _ControlsViewState extends State<ControlsView> {
 
   late StreamSubscription _meetingInfoChangedSub;
 
-  bool get _isHost => _meetingInfo?.creatorUserID == _participant.identity;
+  bool get _isHost => _meetingInfo?.hostUserID == _participant.identity;
 
   MeetingSetting? get setting => _meetingInfo?.setting;
 
-  bool get _disabledMicrophone => !_participant.isMicrophoneEnabled() && setting?.canParticipantsUnmuteMicrophone == false && !_isHost;
+  bool get _disabledMicrophone =>
+      !_participant.isMicrophoneEnabled() && setting?.canParticipantsUnmuteMicrophone == false && !_isHost;
 
-  bool get _disabledCamera => !_participant.isCameraEnabled() && setting?.canParticipantsEnableCamera == false && !_isHost;
+  bool get _disabledCamera =>
+      !_participant.isCameraEnabled() && setting?.canParticipantsEnableCamera == false && !_isHost;
 
   bool get _disabledScreenShare => setting?.canParticipantsShareScreen == false && !_isHost;
 
@@ -239,7 +242,8 @@ class _ControlsViewState extends State<ControlsView> {
     }
     if (lkPlatformIs(PlatformType.iOS)) {
       var track = await LocalVideoTrack.createScreenShareTrack(
-        const ScreenShareCaptureOptions(useiOSBroadcastExtension: true, maxFrameRate: 15.0, params: VideoParametersPresets.screenShareH720FPS15),
+        const ScreenShareCaptureOptions(
+            useiOSBroadcastExtension: true, maxFrameRate: 15.0, params: VideoParametersPresets.screenShareH720FPS15),
       );
       await _participant.publishVideoTrack(track);
 
@@ -289,7 +293,9 @@ class _ControlsViewState extends State<ControlsView> {
                       time: IMUtils.seconds2HMS(_duration),
                       openSpeakerphone: _openSpeakerphone,
                       onMinimize: widget.onMinimize,
-                      onEndMeeting: _openCloseMeetingSheet,
+                      onEndMeeting: () {
+                        _onEndMeeting(context);
+                      },
                       onTapSpeakerphone: _onTapSpeaker,
                       onViewMeetingDetail: _viewMeetingDetail,
                     )),
@@ -312,17 +318,7 @@ class _ControlsViewState extends State<ControlsView> {
                     membersCount: membersCount,
                     isHost: _isHost,
                     onEndMeeting: (ctx) {
-                      if (_isHost) {
-                        MeetingPopMenu.showMeetingWidget(ctx, onTap2: () {
-                          widget.onOperation?.call(ctx, OperationType.leave);
-                        }, onTap3: () {
-                          widget.onOperation?.call(ctx, OperationType.end);
-                        });
-                      } else {
-                        MeetingPopMenu.showMeetingWidget(ctx, onTap2: () {
-                          widget.onOperation?.call(ctx, OperationType.leave);
-                        });
-                      }
+                      _onEndMeeting(ctx);
                     },
                   )
                 : ToolsBarMobile(

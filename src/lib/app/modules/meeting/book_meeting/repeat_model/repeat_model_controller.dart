@@ -11,7 +11,7 @@ class ModelItem {
 }
 
 class RepeatModelController extends GetxController {
-  final int? rawType;
+  final String? rawType;
 
   RepeatModelController({this.rawType});
 
@@ -23,7 +23,7 @@ class RepeatModelController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    type = rawType?.repeatType ?? RepeatType.none;
+    type = rawType == null ? RepeatType.none : RepeatTypeExt.fromString(rawType!);
 
     modelList.addAll([
       ModelItem(type: RepeatType.none, value: 0),

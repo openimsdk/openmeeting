@@ -1162,4 +1162,5 @@ class StrRes {
   static String get keepClose => 'keepClose'.tr;
   static String get cancelMeetingConfirmHit => 'cancelMeetingConfirmHit'.tr;
   static String get iKnew => 'iKnew'.tr;
+  static String get assignAndLeave => 'assignAndLeave'.tr;
 }

@@ -79,7 +79,7 @@ class _MeetingRoomContainerState extends State<MeetingRoomContainer> {
           ),
         if (showParticipants)
           Container(
-            constraints: BoxConstraints(maxWidth: Platform.isMacOS ? 320 : 350),
+            constraints: BoxConstraints(maxWidth: 350),
             child: ParticipantsDesktopView(
               participantsSubject: participantsSubject!,
               meetingInfoChangedSubject: meetingInfoChangedSubject!,

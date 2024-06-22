@@ -2,6 +2,7 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
+import 'package:openmeeting/app/data/models/define.dart';
 import 'package:openmeeting/app/data/models/pb_extension.dart';
 import 'package:sprintf/sprintf.dart';
 
@@ -73,8 +74,9 @@ class BookingConfigController extends GetxController {
         meetingID: meetingInfo!.meetingID,
         updatingUserID: userInfo.userId,
         title: bookingConfig.value.name,
-        scheduledTime:
-            Int64(bookingConfig.value.beginTime.toString().length > 10 ? bookingConfig.value.beginTime ~/ 1000 : bookingConfig.value.beginTime),
+        scheduledTime: Int64(bookingConfig.value.beginTime.toString().length > 10
+            ? bookingConfig.value.beginTime ~/ 1000
+            : bookingConfig.value.beginTime),
         meetingDuration: Int64(bookingConfig.value.duration),
         password: bookingConfig.value.meetingPassword,
         disableCameraOnJoin: !bookingConfig.value.enableCamera,
@@ -90,8 +92,15 @@ class BookingConfigController extends GetxController {
             scheduledTime: Int64(bookingConfig.value.beginTime),
             meetingDuration: Int64(bookingConfig.value.duration),
             password: bookingConfig.value.meetingPassword),
-        setting:
-            MeetingSetting(disableCameraOnJoin: !bookingConfig.value.enableCamera, disableMicrophoneOnJoin: !bookingConfig.value.enableMicrophone),
+        setting: MeetingSetting(
+            disableCameraOnJoin: !bookingConfig.value.enableCamera,
+            disableMicrophoneOnJoin: !bookingConfig.value.enableMicrophone),
+        repeatInfo: MeetingRepeatInfo(
+          endDate: bookingConfig.value.endsIn.toString(),
+          repeatType: bookingConfig.value.repeatType.rawValue,
+          interval: bookingConfig.value.interval,
+          uintType: bookingConfig.value.unit.rawValue,
+        ),
       );
     }
     Get.back();

@@ -20,14 +20,14 @@ class RepeatModelPage extends GetView<RepeatModelController> {
       ),
       body: Obx(
         () => SingleChildScrollView(
-          padding: EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 10),
           child: Column(
             children: [
               ...controller.modelList.map((element) => _buildItemView(element)),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              // _buildCustomItemView(),
+              _buildCustomItemView(),
             ],
           ),
         ),

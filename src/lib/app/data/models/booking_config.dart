@@ -1,14 +1,16 @@
+import 'package:openmeeting/app/data/models/define.dart';
+
 class BookingConfig {
   String name;
   int beginTime;
   int duration;
   int timeZone;
-  int repeatType;
+  RepeatType repeatType;
   int endsIn;
   int limitCount;
   // custom repeat mode
-  int cycleValue;
-  int unit;
+  int interval;
+  UnitType unit;
   List<int>? weekdays;
   int monthUnit;
   List<int>? dates;
@@ -24,11 +26,11 @@ class BookingConfig {
     required this.beginTime,
     required this.duration,
     this.timeZone = 8,
-    this.repeatType = 0,
+    this.repeatType = RepeatType.none,
     this.endsIn = 0,
     this.limitCount = 0,
-    this.cycleValue = 1,
-    this.unit = 0,
+    this.interval = 1,
+    this.unit = UnitType.day,
     this.weekdays,
     this.monthUnit = 0,
     this.dates,
@@ -44,11 +46,11 @@ class BookingConfig {
         beginTime: json['beginTime'],
         duration: json['duration'],
         timeZone: json['timeZone'],
-        repeatType: json['repeatType'],
+        repeatType: json['repeatType'] == null ? RepeatType.none : RepeatTypeExt.fromString(json['repeatType']),
         endsIn: json['endsIn'],
         limitCount: json['limitCount'],
-        cycleValue: json['cycleValue'],
-        unit: json['unit'],
+        interval: json['interval'],
+        unit: json['unit'] == null ? UnitType.day : UnitTypeExt.fromString(json['unit']),
         weekdays: json['weekdays'],
         monthUnit: json['monthUnit'],
         dates: json['dates'],
@@ -64,11 +66,11 @@ class BookingConfig {
         'beginTime': beginTime,
         'duration': duration,
         'timeZone': timeZone,
-        'repeatType': repeatType,
+        'repeatType': repeatType.rawValue,
         'endsIn': endsIn,
         'limitCount': limitCount,
-        'cycleValue': cycleValue,
-        'unit': unit,
+        'interval': interval,
+        'unit': unit.rawValue,
         'weekdays': weekdays,
         'monthUnit': monthUnit,
         'dates': dates,

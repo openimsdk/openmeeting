@@ -29,7 +29,7 @@ class MNavigator {
 
   static startEnableCamera() => Get.toNamed(MRoutes.enableCamera);
   static startSelectedTimezone() => Get.toNamed(MRoutes.selectedTimezone);
-  static startRepeatModel({int? type}) => Get.toNamed(MRoutes.repeatModel, parameters: {if (type != null) 'type': type.toString()});
+  static startRepeatModel({String? type}) => Get.toNamed(MRoutes.repeatModel, parameters: {if (type != null) 'type': type.toString()});
   static startCustomRepeat() => Get.toNamed(MRoutes.repeatModel + MRoutes.customRepeat);
   static startRepeatEnds({int? endsInDays, int? maxLimit}) => Get.toNamed(MRoutes.repeatEnds,
       parameters: {if (endsInDays != null) 'endsInDays': endsInDays.toString(), if (maxLimit != null) 'maxLimit': maxLimit.toString()});

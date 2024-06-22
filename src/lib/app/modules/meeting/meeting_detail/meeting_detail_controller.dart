@@ -73,7 +73,8 @@ class MeetingDetailController extends GetxController {
 
     final cert = await repository.getLiveKitToken(meetingInfo.meetingID, userInfo.userId);
     if (PlatformExt.isDesktop) {
-      windowsManager.newRoom(UserInfo(userID: userInfo.userId, nickname: userInfo.nickname), cert, meetingInfo.meetingID);
+      windowsManager.newRoom(
+          UserInfo(userID: userInfo.userId, nickname: userInfo.nickname), cert, meetingInfo.meetingID);
     } else {
       await MeetingClient().connect(Get.context!,
           url: cert.url,
@@ -106,7 +107,7 @@ class MeetingDetailController extends GetxController {
   }
 
   _cancelMeeting() {
-    MeetingAlertDialog.show(Get.context!, '', StrRes.cancelMeetingConfirmHit, onConfirm: () async {
+    MeetingAlertDialog.show(Get.context!, StrRes.cancelMeetingConfirmHit, onConfirm: () async {
       final result = await repository.endMeeting(meetingInfo.meetingID, userInfo.userId);
 
       if (result) {

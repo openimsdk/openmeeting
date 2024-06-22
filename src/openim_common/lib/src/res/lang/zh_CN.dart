@@ -596,4 +596,5 @@ const Map<String, String> zh_CN = {
   'keepClose': '保持关闭',
   'cancelMeetingConfirmHit': '确定取消该会议吗？',
   'iKnew': '知道了',
+  'assignAndLeave': '设置并离开',
 };

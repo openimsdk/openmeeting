@@ -3,11 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:openim_common/openim_common.dart';
+import 'package:openmeeting/app/data/models/pb_extension.dart';
 import 'package:openmeeting/app/widgets/meeting/desktop/meeting_alert_dialog.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -33,7 +32,7 @@ class MeetingMembersSheetView extends StatefulWidget {
   final Function()? onInvite;
   final bool isHost;
   final Future<bool> Function<T>({OperationParticipantType type, String userID, T to})? onOperation;
-
+  
   @override
   State<MeetingMembersSheetView> createState() => _MeetingMembersSheetViewState();
 }
@@ -44,7 +43,6 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
   MeetingInfoSetting? _meetingInfo;
   MeetingSetting? get setting => _meetingInfo?.setting;
   final List<ParticipantTrack> _participantTracks = [];
-
   // List<String> get _pinedUserIDList => setting?.pinedUserIDList ?? [];
 
   // List<String> get _beWatchedUserIDList => setting?.beWatchedUserIDList ?? [];
@@ -82,52 +80,59 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
     });
   }
 
-  _invite() {
-    widget.controller == null ? widget.onInvite?.call() : widget.controller?.reverse().then((value) => widget.onInvite?.call());
+  void _invite() {
+    widget.controller == null
+        ? widget.onInvite?.call()
+        : widget.controller?.reverse().then((value) => widget.onInvite?.call());
   }
 
-  _muteAll() {
+  void _muteAll() {
     widget.onOperation?.call(type: OperationParticipantType.muteAll);
   }
 
-  _unmuteAll() {
+  void _unmuteAll() {
     widget.onOperation?.call(type: OperationParticipantType.unMuteAll);
   }
 
-  _pinThisMember(String userID, bool pined) async {
+  void _pinThisMember(String userID, bool pined) async {
     await widget.onOperation?.call(type: OperationParticipantType.pined, userID: userID, to: pined);
   }
 
-  _allSeeHim(String userID, bool seeHim) async {
+  void _allSeeHim(String userID, bool seeHim) async {
     await widget.onOperation?.call(type: OperationParticipantType.focus, userID: userID, to: seeHim);
   }
 
-  /// String meetingID, String? streamType, String userID,
-  ///       bool mute, bool muteAll
-  _onTapCamera(String userID, bool value) async {
+  void _onTapCamera(String userID, bool value) async {
     await widget.onOperation?.call(type: OperationParticipantType.camera, userID: userID, to: value);
   }
 
-  _onTapMic(String userID, bool value) async {
+  void _onTapMic(String userID, bool value) async {
     await widget.onOperation?.call(type: OperationParticipantType.microphone, userID: userID, to: value);
   }
 
-  void _onTapMore(BuildContext ctx, String userID) {
-    MeetingAlertDialog.showMemberSetting(context,
-        valueNotifier: valueNotifier,
-        onEnableCamera: () {
-          _onTapCamera(userID, !valueNotifier.value.cameraIsEnable);
-        },
-        onEnableMic: () {
-          _onTapMic(userID, !valueNotifier.value.micIsEnable);
-        },
-        onChangeNickname: () {
-          // widget.onOperation?.call(type: OperationParticipantType.nickname, userID: userID, to: );
-        },
-        onSetHost: () {},
-        onKickoff: () {
-          widget.onOperation?.call(type: OperationParticipantType.kickoff, userID: userID);
-        });
+  void _onTapMore(BuildContext ctx, String userID, String nickname) {
+    final itemIsHost = userID == _meetingInfo?.creatorUserID;
+
+    MeetingAlertDialog.showMemberSetting(context, valueNotifier: valueNotifier, onEnableCamera: () {
+      _onTapCamera(userID, !valueNotifier.value.cameraIsEnable);
+    }, onEnableMic: () {
+      _onTapMic(userID, !valueNotifier.value.micIsEnable);
+    }, onChangeNickname: () {
+      MeetingAlertDialog.showInputText(context, title: StrRes.changeNickname, nickname: nickname, onConfirm: (value) {
+        Logger.print('change nickname: $value');
+        widget.onOperation?.call(type: OperationParticipantType.nickname, userID: userID, to: value);
+      });
+    },
+        onSetHost: itemIsHost
+            ? null
+            : () {
+                widget.onOperation?.call(type: OperationParticipantType.setHost, userID: userID);
+              },
+        onKickoff: itemIsHost
+            ? null
+            : () {
+                widget.onOperation?.call(type: OperationParticipantType.kickoff, userID: userID);
+              });
   }
 
   @override
@@ -189,7 +194,8 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
     final isMicrophoneEnabled = participant.isMicrophoneEnabled();
     final isCameraEnabled = participant.isCameraEnabled();
 
-    Logger.print('====participant.identity:$userID, participant.isCameraEnabled: ${participant.isCameraEnabled()}, participant.isMicrophoneEnabled:'
+    Logger.print(
+        '====participant.identity:$userID, participant.isCameraEnabled: ${participant.isCameraEnabled()}, participant.isMicrophoneEnabled:'
         ' ${participant.isMicrophoneEnabled()}');
     try {
       var data = json.decode(participant.metadata!);
@@ -199,7 +205,12 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
       // faceURL = userInfo.faceURL;
       if (valueNotifier.value.userID == userID) {
         Future.delayed(const Duration(milliseconds: 100), () {
-          valueNotifier.value = (userID: userID, nickname: nickname ?? '', cameraIsEnable: isCameraEnabled, micIsEnable: isMicrophoneEnabled);
+          valueNotifier.value = (
+            userID: userID,
+            nickname: nickname ?? '',
+            cameraIsEnable: isCameraEnabled,
+            micIsEnable: isMicrophoneEnabled
+          );
         });
       }
     } catch (e, s) {
@@ -242,10 +253,11 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
                       if (widget.isHost)
                         Padding(
                           padding: EdgeInsets.only(left: 16.w),
-                          child: (isCameraEnabled ? ImageRes.meetingCameraOnGray : ImageRes.meetingCameraOffGray).toImage
-                            ..width = 30.w
-                            ..height = 30.h
-                            ..onTap = () => _onTapCamera(userID, !isCameraEnabled),
+                          child:
+                              (isCameraEnabled ? ImageRes.meetingCameraOnGray : ImageRes.meetingCameraOffGray).toImage
+                                ..width = 30.w
+                                ..height = 30.h
+                                ..onTap = () => _onTapCamera(userID, !isCameraEnabled),
                         ),
                       if (widget.isHost)
                         Padding(
@@ -254,9 +266,13 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
                             ..width = 30.w
                             ..height = 30.h
                             ..onTap = () {
-                              valueNotifier.value =
-                                  (userID: userID, nickname: nickname ?? '', cameraIsEnable: isCameraEnabled, micIsEnable: isMicrophoneEnabled);
-                              _onTapMore(ctx, userID);
+                              valueNotifier.value = (
+                                userID: userID,
+                                nickname: nickname ?? '',
+                                cameraIsEnable: isCameraEnabled,
+                                micIsEnable: isMicrophoneEnabled
+                              );
+                              _onTapMore(ctx, userID, nickname ?? '');
                             },
                         ),
                     ],

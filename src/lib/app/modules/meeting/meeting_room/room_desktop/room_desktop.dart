@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
@@ -17,7 +16,12 @@ import '../../../../widgets/meeting/participant_info.dart';
 
 class MeetingDesktopRoom extends MeetingView {
   const MeetingDesktopRoom(super.room, super.listener,
-      {super.key, required super.roomID, super.onParticipantOperation, super.options, super.onOperation, super.onSubjectInit});
+      {super.key,
+      required super.roomID,
+      super.onParticipantOperation,
+      super.options,
+      super.onOperation,
+      super.onSubjectInit});
 
   @override
   MeetingViewState<MeetingDesktopRoom> createState() => _MeetingRoomState();
@@ -115,7 +119,7 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
     final microphoneOnEntry = operateUser.microphoneOnEntry;
 
     if (cameraOnEntry) {
-      MeetingAlertDialog.show(context, '', sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
+      MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
           forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
         widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
       });
@@ -124,7 +128,7 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
     }
 
     if (microphoneOnEntry) {
-      MeetingAlertDialog.show(context, '', sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
+      MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
           forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
         widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
       });
@@ -265,8 +269,8 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
     return track;
   }
 
-  bool get anyOneHasVideo =>
-      participantTracks.any((e) => (e.screenShareTrack != null && !e.screenShareTrack!.muted) || (e.videoTrack != null && !e.videoTrack!.muted));
+  bool get anyOneHasVideo => participantTracks.any((e) =>
+      (e.screenShareTrack != null && !e.screenShareTrack!.muted) || (e.videoTrack != null && !e.videoTrack!.muted));
 
   // _onPageChange(int pages) {
   //   setState(() {
@@ -279,8 +283,9 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
     return count;
   }
 
-  int get pageCount => _fixPages((participantTracks.length % 4 == 0 ? participantTracks.length ~/ 4 : participantTracks.length ~/ 4 + 1) +
-      (null == _firstParticipantTrack ? 0 : 1));
+  int get pageCount => _fixPages(
+      (participantTracks.length % 4 == 0 ? participantTracks.length ~/ 4 : participantTracks.length ~/ 4 + 1) +
+          (null == _firstParticipantTrack ? 0 : 1));
 
   @override
   Widget buildChild() {
@@ -306,11 +311,13 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
 
   void _meetingClosed(RoomDisconnectedEvent event) {
     Logger.print('_meetingClosed: ${event.reason == DisconnectReason.disconnected}');
-    if (event.reason != DisconnectReason.disconnected || meetingInfo?.creatorUserID == widget.room.localParticipant?.identity) {
+    if (event.reason != DisconnectReason.disconnected ||
+        meetingInfo?.creatorUserID == widget.room.localParticipant?.identity) {
       return;
     }
 
-    MeetingAlertDialog.show(context, '', event.reason == DisconnectReason.disconnected ? StrRes.meetingIsOver : StrRes.meetingClosedHint,
+    MeetingAlertDialog.show(
+        context, event.reason == DisconnectReason.disconnected ? StrRes.meetingIsOver : StrRes.meetingClosedHint,
         confirmText: event.reason == DisconnectReason.disconnected ? StrRes.iKnew : null, onConfirm: () {
       widget.onOperation?.call(context, OperationType.onlyClose);
     });

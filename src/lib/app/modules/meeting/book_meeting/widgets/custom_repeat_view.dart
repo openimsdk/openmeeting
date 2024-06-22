@@ -1,11 +1,10 @@
-import 'dart:ffi';
-
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:openim_common/openim_common.dart';
+import 'package:openmeeting/app/data/models/define.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -14,7 +13,7 @@ import '../../../../data/models/booking_config.dart';
 
 class _ModelItem {
   final String title;
-  final int value;
+  final dynamic value;
 
   const _ModelItem({required this.title, required this.value});
 }
@@ -29,7 +28,11 @@ class CustomRepeatModelView extends StatefulWidget {
 }
 
 class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
-  final units = [_ModelItem(title: StrRes.day, value: 0), _ModelItem(title: StrRes.week, value: 1), _ModelItem(title: StrRes.month, value: 2)];
+  final units = [
+    _ModelItem(title: UnitType.day.title, value: UnitType.day.rawValue),
+    _ModelItem(title: UnitType.week.title, value: UnitType.week.rawValue),
+    _ModelItem(title: UnitType.month.title, value: UnitType.month.rawValue)
+  ];
   final cycleValues = [
     List.generate(100, (index) => _ModelItem(title: (index + 1).toString(), value: index + 1)),
     List.generate(12, (index) => _ModelItem(title: (index + 1).toString(), value: index + 1)),
@@ -39,9 +42,8 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
   final monthsUnits = [_ModelItem(title: StrRes.day, value: 0), _ModelItem(title: StrRes.month, value: 2)];
 
   late final bookingConfig = Rx<BookingConfig?>(null);
-  int get _selectedUnit => bookingConfig.value!.unit;
+  int get _selectedUnit => units.indexWhere((element) => element.value == bookingConfig.value?.unit);
   final _selectedValue = 0.obs;
-  final _selectedMonthValue = 0.obs;
   final _selectedMonthUnit = 0.obs;
 
   late ValueNotifier<String> _durationValueListenable;
@@ -108,7 +110,8 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
             constraints: BoxConstraints(minWidth: constraints.maxWidth, minHeight: 52.h, maxHeight: 52.h),
             child: Obx(
               () => Text(
-                sprintf(StrRes.customRepeatModelHint, ['${cycleValues[_selectedUnit][_selectedValue.value]}${units[_selectedUnit]}']),
+                sprintf(StrRes.customRepeatModelHint,
+                    ['${cycleValues[_selectedUnit][_selectedValue.value]}${units[_selectedUnit]}']),
                 style: Styles.ts_0C1C33_17sp,
               ),
             ),
@@ -157,7 +160,7 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
               itemExtent: 38.h,
               onSelectedItemChanged: (index) {
                 print('index: $index');
-                bookingConfig.value!.unit = index;
+                bookingConfig.value!.unit = UnitTypeExt.fromString(units[index].value);
               },
               itemBuilder: (context, index) {
                 return Container(alignment: Alignment.center, child: Text(units[index].title));
@@ -194,7 +197,7 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
                     valueListenable: _durationValueListenable,
                     onChanged: (value) {
                       bookingConfig.update((val) {
-                        val?.cycleValue = cycleValues[_selectedUnit].indexWhere((element) => element.title == value);
+                        val?.interval = cycleValues[_selectedUnit].indexWhere((element) => element.title == value);
                       });
                     }),
               ),
@@ -205,7 +208,9 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
                     valueListenable: _unitsValueListenable,
                     onChanged: (value) {
                       bookingConfig.update((val) {
-                        val?.unit = units.indexWhere((element) => element.title == value);
+                        final index = units.indexWhere((element) => element.title == value);
+
+                        val?.unit = UnitTypeExt.fromString(units[index].value);
                       });
                     }),
               ),
@@ -224,13 +229,15 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
           ),
           _verSpace,
           if (_selectedUnit == 1) _buildWeekdayView(),
-          if (_selectedUnit == 2) _selectedMonthUnit.value == 0 ? _buildSelectedDateView() : _buildCurrentWeekdayInMonthView(),
+          if (_selectedUnit == 2)
+            _selectedMonthUnit.value == 0 ? _buildSelectedDateView() : _buildCurrentWeekdayInMonthView(),
         ],
       ),
     );
   }
 
-  Widget _buildDropdownItem<T>({String? title, required List<T> items, required ValueNotifier<T> valueListenable, ValueChanged<T>? onChanged}) {
+  Widget _buildDropdownItem<T>(
+      {String? title, required List<T> items, required ValueNotifier<T> valueListenable, ValueChanged<T>? onChanged}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -354,7 +361,8 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
     );
   }
 
-  Widget _buildSelectedDateItem({required String title, required String text, String? placeholder, required VoidCallback onTap}) {
+  Widget _buildSelectedDateItem(
+      {required String title, required String text, String? placeholder, required VoidCallback onTap}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,

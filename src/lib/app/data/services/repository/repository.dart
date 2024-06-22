@@ -14,7 +14,8 @@ class MeetingRepository implements IMeetingRepository {
     };
     final result = await Apis.getMeetings(params);
 
-    return List<MeetingInfoSetting>.from(result['meetingDetails']?.map((e) => MeetingInfoSetting()..mergeFromProto3Json(e)).toList() ?? []);
+    return List<MeetingInfoSetting>.from(
+        result['meetingDetails']?.map((e) => MeetingInfoSetting()..mergeFromProto3Json(e)).toList() ?? []);
   }
 
   @override
@@ -36,7 +37,8 @@ class MeetingRepository implements IMeetingRepository {
       {required CreateMeetingType type,
       required String creatorUserID,
       required CreatorDefinedMeetingInfo creatorDefinedMeetingInfo,
-      required MeetingSetting setting}) async {
+      required MeetingSetting setting,
+      MeetingRepeatInfo? repeatInfo}) async {
     final params = {
       'creatorUserID': creatorUserID,
       'creatorDefinedMeetingInfo': {
@@ -47,7 +49,8 @@ class MeetingRepository implements IMeetingRepository {
         'meetingDuration': creatorDefinedMeetingInfo.meetingDuration.toInt(),
         'password': creatorDefinedMeetingInfo.password,
       },
-      'setting': setting.toProto3Json()
+      'setting': setting.toProto3Json(),
+      'repeatInfo': repeatInfo?.toProto3Json(),
     };
 
     if (type == CreateMeetingType.quick) {
@@ -90,7 +93,8 @@ class MeetingRepository implements IMeetingRepository {
     };
     final result = await Apis.getMeetings(params);
 
-    return List<MeetingInfoSetting>.from(result['meetingDetails']?.map((e) => MeetingInfoSetting()..mergeFromProto3Json(e)).toList() ?? []);
+    return List<MeetingInfoSetting>.from(
+        result['meetingDetails']?.map((e) => MeetingInfoSetting()..mergeFromProto3Json(e)).toList() ?? []);
   }
 
   @override
@@ -167,6 +171,68 @@ class MeetingRepository implements IMeetingRepository {
 
     try {
       await Apis.operateAllStream(params);
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> modifyParticipantName(
+      {required String meetingID,
+      required String userID,
+      required String participantUserID,
+      required String nickname}) async {
+    final params = {
+      'meetingID': meetingID,
+      'userID': userID,
+      'participantUserID': participantUserID,
+      'nickname': nickname,
+    };
+
+    try {
+      await Apis.modifyParticipantName(params);
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> kickParticipant(
+      {required String meetingID, required String userID, required List<String> participantUserIDs}) async {
+    final params = {
+      'meetingID': meetingID,
+      'userID': userID,
+      'participantUserIDs': participantUserIDs,
+    };
+
+    try {
+      await Apis.kickParticipant(params);
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> setMeetingHost(
+      {required String meetingID,
+      required String userID,
+      required String hostUserID,
+      required List<String> coHostUserIDs}) async {
+    final params = {
+      'meetingID': meetingID,
+      'userID': userID,
+      'hostUserID': hostUserID,
+      'coHostUserIDs': coHostUserIDs,
+    };
+
+    try {
+      await Apis.setMeetingHost(params);
 
       return true;
     } catch (e) {

@@ -121,7 +121,7 @@ class _MeetingRoomState extends MeetingViewState<MeetingRoom> {
     final microphoneOnEntry = operateUser.microphoneOnEntry;
 
     if (cameraOnEntry) {
-      MeetingAlertDialog.show(context, '', sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
+      MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
           forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
         widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
       });
@@ -130,7 +130,7 @@ class _MeetingRoomState extends MeetingViewState<MeetingRoom> {
     }
 
     if (microphoneOnEntry) {
-      MeetingAlertDialog.show(context, '', sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
+      MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
           forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
         widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
       });

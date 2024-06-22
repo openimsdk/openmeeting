@@ -15,4 +15,7 @@ class Urls {
   static const setPersonalSetting = '/meeting/set_personal_setting';
   static const updateSetting = '/meeting/update_meeting';
   static const operateAllStream = '/meeting/operate_meeting_all_stream';
+  static const modifyParticipantName = '/meeting/modify_meeting_participant_name';
+  static const kickParticipants = '/meeting/remove_participants';
+  static const setMeetingHost = '/meeting/set_meeting_host_info';
 }

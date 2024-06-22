@@ -596,4 +596,5 @@ const Map<String, String> en_US = {
   'keepClose': 'Keep Close',
   'cancelMeetingConfirmHit': 'Are you sure to cancel this meeting?',
   'iKnew': 'I know',
+  'assignAndLeave': 'Assign and leave',
 };

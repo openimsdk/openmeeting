@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +31,7 @@ void main(List<String> args) => Config.init(() async {
 
         WindowController.fromWindowId(kWindowId!).setTitle('Open Meeting');
         WindowController.fromWindowId(kWindowId!).show();
+        
         return;
       } else {
         await windowManager.ensureInitialized();

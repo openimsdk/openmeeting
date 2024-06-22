@@ -133,6 +133,7 @@ enum OperationParticipantType {
   camera,
   microphone,
   nickname,
+  setHost,
   kickoff,
   muteAll,
   unMuteAll,
@@ -143,22 +144,22 @@ enum RoomSetting { allowParticipantUnMute, allowParticipantVideo, onlyHostCanSha
 enum RepeatType { none, daily, weekday, weekly, biweekly, monthly, custom }
 
 extension RepeatTypeExt on RepeatType {
-  int get rawValue {
+  String get rawValue {
     switch (this) {
       case RepeatType.none:
-        return 0;
+        return 'None';
       case RepeatType.daily:
-        return 1;
+        return 'Daily';
       case RepeatType.weekday:
-        return 2;
+        return 'Weekday';
       case RepeatType.weekly:
-        return 3;
+        return 'Weekly';
       case RepeatType.biweekly:
-        return 4;
+        return 'Biweekly';
       case RepeatType.monthly:
-        return 5;
+        return 'Monthly';
       case RepeatType.custom:
-        return 6;
+        return 'Custom';
     }
   }
 
@@ -180,27 +181,68 @@ extension RepeatTypeExt on RepeatType {
         return StrRes.custom;
     }
   }
-}
 
-extension RepeatTypeToIntExt on int {
-  RepeatType get repeatType {
-    switch (this) {
-      case 0:
+  static RepeatType fromString(String value) {
+    switch (value) {
+      case 'None':
         return RepeatType.none;
-      case 1:
+      case 'Daily':
         return RepeatType.daily;
-      case 2:
+      case 'Weekday':
         return RepeatType.weekday;
-      case 3:
+      case 'Weekly':
         return RepeatType.weekly;
-      case 4:
+      case 'Biweekly':
         return RepeatType.biweekly;
-      case 5:
+      case 'Monthly':
         return RepeatType.monthly;
-      case 6:
+      case 'Custom':
         return RepeatType.custom;
       default:
         return RepeatType.none;
+    }
+  }
+}
+
+enum UnitType {
+  day,
+  week,
+  month,
+}
+
+extension UnitTypeExt on UnitType {
+  String get title {
+    switch (this) {
+      case UnitType.day:
+        return StrRes.day;
+      case UnitType.week:
+        return StrRes.week;
+      case UnitType.month:
+        return StrRes.month;
+    }
+  }
+
+  String get rawValue {
+    switch (this) {
+      case UnitType.day:
+        return 'Day';
+      case UnitType.week:
+        return 'Week';
+      case UnitType.month:
+        return 'Month';
+    }
+  }
+
+  static UnitType fromString(String value) {
+    switch (value) {
+      case 'Day':
+        return UnitType.day;
+      case 'Week':
+        return UnitType.week;
+      case 'Month':
+        return UnitType.month;
+      default:
+        return UnitType.day;
     }
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
-import 'package:openmeeting/routes/m_navigator.dart';
 import 'package:sprintf/sprintf.dart';
 
 import 'repeat_ends_controller.dart';

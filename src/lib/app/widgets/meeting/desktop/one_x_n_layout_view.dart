@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:openim_common/openim_common.dart';
 

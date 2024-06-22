@@ -45,7 +45,7 @@ class MeetingPopMenu {
           if (onTap2 != null)
             OutlinedButton(
               onPressed: () {
-                Navigator.of(context)..pop();
+                Navigator.of(context).pop();
                 onTap2.call();
               },
               style: ButtonStyle(
@@ -211,7 +211,11 @@ class MeetingPopMenu {
   }
 
   static void showSimple(BuildContext context,
-      {double contentDyOffset = 0, required String title1, required VoidCallback onTap1, String? title2, VoidCallback? onTap2}) {
+      {double contentDyOffset = 0,
+      required String title1,
+      required VoidCallback onTap1,
+      String? title2,
+      VoidCallback? onTap2}) {
     // internal
     Widget buildContent() {
       return ListView(
@@ -278,7 +282,8 @@ class MeetingPopMenu {
     );
   }
 
-  static void showEnableCameraSetting(BuildContext context, {bool enableCamera = false, ValueChanged<bool>? onOperation, VoidCallback? onPop}) {
+  static void showEnableCameraSetting(BuildContext context,
+      {bool enableCamera = false, ValueChanged<bool>? onOperation, VoidCallback? onPop}) {
     bool selected = enableCamera;
     // internal
     Widget buildContent() {
@@ -324,14 +329,12 @@ class MeetingPopMenu {
   static void showSimpleWidget(BuildContext context, Widget widget,
       {PopoverDirection direction = PopoverDirection.bottom, double arrowDxOffset = 0}) {
     showPopover(
-      context: context,
-      bodyBuilder: (context) => widget,
-      onPop: () => Logger.print('Popover was popped!'),
-      backgroundColor: Colors.white,
-      transition: PopoverTransition.other,
-      direction: direction,
-      arrowDxOffset: arrowDxOffset,
-      arrowHeight: 0,
-    );
+        context: context,
+        bodyBuilder: (context) => widget,
+        onPop: () => Logger.print('Popover was popped!'),
+        transition: PopoverTransition.other,
+        direction: direction,
+        arrowDxOffset: arrowDxOffset,
+        arrowHeight: 0);
   }
 }

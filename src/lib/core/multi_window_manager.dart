@@ -33,65 +33,6 @@ class RustDeskMultiWindowManager {
   final List<int> _roomWindows = [];
   final List<int> _settingWindows = [];
 
-  moveTabToNewWindow(int windowId, String peerId, String sessionId) async {
-    var params = {
-      'type': WindowType.room.rawValue,
-      'id': peerId,
-      'tab_window_id': windowId,
-      'session_id': sessionId,
-    };
-    await _newSession(
-      WindowType.room,
-      WindowEvent.newRoom.rawValue,
-      peerId,
-      _roomWindows,
-      jsonEncode(params),
-    );
-  }
-
-  // This function must be called in the main window thread.
-  // Because the _remoteDesktopWindows is managed in that thread.
-  openMonitorSession(int windowId, String peerId, int display, int displayCount, Rect? screenRect) async {
-    if (_roomWindows.length > 1) {
-      for (final windowId in _roomWindows) {
-        if (await DesktopMultiWindow.invokeMethod(
-            windowId,
-            WindowEvent.activeDisplaySession.rawValue,
-            jsonEncode({
-              'id': peerId,
-              'display': display,
-            }))) {
-          return;
-        }
-      }
-    }
-
-    final displays = display == kAllDisplayValue ? List.generate(displayCount, (index) => index) : [display];
-    var params = {
-      'type': WindowType.room.rawValue,
-      'id': peerId,
-      'tab_window_id': windowId,
-      'display': display,
-      'displays': displays,
-    };
-    if (screenRect != null) {
-      params['screen_rect'] = {
-        'l': screenRect.left,
-        't': screenRect.top,
-        'r': screenRect.right,
-        'b': screenRect.bottom,
-      };
-    }
-    await _newSession(
-      WindowType.room,
-      WindowEvent.newRoom.rawValue,
-      peerId,
-      _roomWindows,
-      jsonEncode(params),
-      screenRect: screenRect,
-    );
-  }
-
   Future<void> windowOnTop(int? id) async {
     if (!PlatformExt.isDesktop) {
       return;
@@ -99,9 +40,6 @@ class RustDeskMultiWindowManager {
     Logger.print("Bring window '$id' on top");
     if (id == null) {
       // main window
-      // if (stateGlobal.isMinimized) {
-      //   await windowManager.restore();
-      // }
       await windowManager.show();
       await windowManager.focus();
       await windowsManager.registerActiveWindow(kMainWindowId);
@@ -146,7 +84,7 @@ class RustDeskMultiWindowManager {
 
   Future<MultiWindowCallResult> _newSession(
     WindowType type,
-    String methodName,
+    WindowEvent methodName,
     String remoteId,
     List<int> windows,
     String msg, {
@@ -155,22 +93,24 @@ class RustDeskMultiWindowManager {
     if (_inactiveWindows.isNotEmpty) {
       for (final windowId in windows) {
         if (_inactiveWindows.contains(windowId)) {
-          // if (screenRect == null) {
-          //   await restoreWindowPosition(type,
-          //       windowId: windowId, peerId: remoteId);
-          // }
-          await DesktopMultiWindow.invokeMethod(windowId, methodName, msg);
-          WindowController.fromWindowId(windowId).show();
+          await DesktopMultiWindow.invokeMethod(windowId, methodName.rawValue, msg);
+
+          if (methodName != WindowEvent.newRoom) {
+            WindowController.fromWindowId(windowId).show();
+          }
           registerActiveWindow(windowId);
+
           return MultiWindowCallResult(windowId, null);
         }
       }
     }
     final windowId = await newSessionWindow(type, remoteId, msg, windows, screenRect != null);
+
     return MultiWindowCallResult(windowId, null);
   }
 
-  Future<MultiWindowCallResult> newSession(WindowType type, String methodName, UserInfo userFullInfo, List<int> windows,
+  Future<MultiWindowCallResult> newSession(
+      WindowType type, WindowEvent methodName, UserInfo userFullInfo, List<int> windows,
       {LiveKit? certificate, String? roomID}) async {
     final params = MeetingScreenInfo(
       type: type,
@@ -181,7 +121,7 @@ class RustDeskMultiWindowManager {
 
     final msg = jsonEncode(params.toMap());
 
-    if (windows.isNotEmpty) {
+    if (windows.length > 1) {
       for (final windowId in windows) {
         if (await DesktopMultiWindow.invokeMethod(windowId, WindowEvent.activeSession.rawValue, msg)) {
           return MultiWindowCallResult(windowId, null);
@@ -195,7 +135,7 @@ class RustDeskMultiWindowManager {
   Future<MultiWindowCallResult> newRoom(UserInfo userFullInfo, LiveKit certificate, String roomID) async {
     return await newSession(
       WindowType.room,
-      WindowEvent.newRoom.rawValue,
+      WindowEvent.newRoom,
       userFullInfo,
       _roomWindows,
       certificate: certificate,
@@ -206,7 +146,7 @@ class RustDeskMultiWindowManager {
   Future<MultiWindowCallResult> newSetting(UserInfo userFullInfo) async {
     return await newSession(
       WindowType.setting,
-      WindowEvent.newSetting.rawValue,
+      WindowEvent.newSetting,
       userFullInfo,
       _settingWindows,
     );
@@ -224,6 +164,7 @@ class RustDeskMultiWindowManager {
       }
     }
     final res = await DesktopMultiWindow.invokeMethod(wnds[0], methodName, args);
+
     return MultiWindowCallResult(wnds[0], res);
   }
 
@@ -262,10 +203,10 @@ class RustDeskMultiWindowManager {
   }
 
   Future<void> closeAllSubWindows() async {
-    await Future.wait(WindowType.values.map((e) => closeWindows(e)));
+    await Future.wait(WindowType.values.map((e) => _closeWindows(e)));
   }
 
-  Future<void> closeWindows(WindowType type) async {
+  Future<void> _closeWindows(WindowType type) async {
     if (type == WindowType.main) {
       // skip main window, use window manager instead
       return;
@@ -273,7 +214,7 @@ class RustDeskMultiWindowManager {
 
     List<int> windows = [];
     try {
-      windows = await DesktopMultiWindow.getAllSubWindowIds();
+      windows = _findWindowsByType(type);
     } catch (e) {
       debugPrint('Failed to getAllSubWindowIds of $type, $e');
       return;
@@ -289,13 +230,12 @@ class RustDeskMultiWindowManager {
         await WindowController.fromWindowId(wId).setPreventClose(false);
         await WindowController.fromWindowId(wId).close();
         _activeWindows.remove(wId);
-        _inactiveWindows.remove(wId);
       } catch (e) {
         debugPrint("$e");
         return;
       }
     }
-    await _notifyActiveWindow();
+
     clearWindowType(type);
   }
 
@@ -328,19 +268,12 @@ class RustDeskMultiWindowManager {
     await _notifyActiveWindow();
   }
 
-  Future<void> destroyWindow(int windowId) async {
-    await WindowController.fromWindowId(windowId).setPreventClose(false);
-    await WindowController.fromWindowId(windowId).close();
-    _roomWindows.remove(windowId);
-    _settingWindows.remove(windowId);
-  }
-
   /// Remove active window which has [`windowId`]
   ///
   /// [Availability]
   /// This function should only be called from main window.
   /// For other windows, please post a unregister(hide) event to main window handler:
-  /// `rustDeskWinManager.call(WindowType.Main, kWindowEventHide, {"id": windowId!});`
+  /// `windowsManager.call(WindowType.Main, kWindowEventHide, {"id": windowId!});`
   Future<void> unregisterActiveWindow(int windowId) async {
     _activeWindows.remove(windowId);
     if (windowId != kMainWindowId) {

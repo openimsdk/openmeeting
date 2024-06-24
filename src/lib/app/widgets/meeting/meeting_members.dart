@@ -32,7 +32,7 @@ class MeetingMembersSheetView extends StatefulWidget {
   final Function()? onInvite;
   final bool isHost;
   final Future<bool> Function<T>({OperationParticipantType type, String userID, T to})? onOperation;
-  
+
   @override
   State<MeetingMembersSheetView> createState() => _MeetingMembersSheetViewState();
 }
@@ -87,11 +87,11 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
   }
 
   void _muteAll() {
-    widget.onOperation?.call(type: OperationParticipantType.muteAll);
+    widget.onOperation?.call(type: OperationParticipantType.muteAll, to: true);
   }
 
   void _unmuteAll() {
-    widget.onOperation?.call(type: OperationParticipantType.unMuteAll);
+    widget.onOperation?.call(type: OperationParticipantType.muteAll, to: false);
   }
 
   void _pinThisMember(String userID, bool pined) async {

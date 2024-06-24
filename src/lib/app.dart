@@ -93,8 +93,6 @@ class MeetingSubWindow extends StatelessWidget {
                 return locale;
               },
               supportedLocales: const [Locale('zh', 'CN'), Locale('en', 'US')],
-              // getPages: [page.page],
-              // initialRoute: page.route,
               home: homePage(),
               theme: _themeData,
             ),
@@ -154,9 +152,9 @@ class MeetingSubWindow extends StatelessWidget {
 ThemeData get _themeData => ThemeData.light().copyWith(
       scaffoldBackgroundColor: Colors.grey.shade50,
       canvasColor: Colors.white,
-      appBarTheme: AppBarTheme(color: Colors.white),
-      textSelectionTheme: TextSelectionThemeData().copyWith(cursorColor: Colors.blue),
-      checkboxTheme: CheckboxThemeData().copyWith(
+      appBarTheme: const AppBarTheme(color: Colors.white),
+      textSelectionTheme: const TextSelectionThemeData().copyWith(cursorColor: Colors.blue),
+      checkboxTheme: const CheckboxThemeData().copyWith(
         checkColor: WidgetStateProperty.all(Colors.white),
         fillColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.disabled)) {
@@ -168,6 +166,21 @@ ThemeData get _themeData => ThemeData.light().copyWith(
           return Colors.white;
         }),
         side: BorderSide(color: Colors.grey.shade500, width: 1),
+      ),
+      dialogTheme: const DialogTheme().copyWith(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+          ),
+        ),
       ),
       cupertinoOverrideTheme: CupertinoThemeData(
         brightness: Brightness.light,

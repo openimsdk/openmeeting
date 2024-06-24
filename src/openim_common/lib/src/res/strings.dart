@@ -1163,4 +1163,5 @@ class StrRes {
   static String get cancelMeetingConfirmHit => 'cancelMeetingConfirmHit'.tr;
   static String get iKnew => 'iKnew'.tr;
   static String get assignAndLeave => 'assignAndLeave'.tr;
+  static String get muteAllHint => 'muteAllHint'.tr;
 }

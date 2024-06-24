@@ -597,4 +597,5 @@ const Map<String, String> en_US = {
   'cancelMeetingConfirmHit': 'Are you sure to cancel this meeting?',
   'iKnew': 'I know',
   'assignAndLeave': 'Assign and leave',
+  'muteAllHint': 'All participants will be muted',
 };

@@ -136,7 +136,6 @@ enum OperationParticipantType {
   setHost,
   kickoff,
   muteAll,
-  unMuteAll,
 }
 
 enum RoomSetting { allowParticipantUnMute, allowParticipantVideo, onlyHostCanShareScreen, defaultMuted }

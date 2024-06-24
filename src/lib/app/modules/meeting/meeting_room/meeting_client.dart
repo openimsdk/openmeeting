@@ -52,6 +52,8 @@ class MeetingClient {
       return;
     }
 
+    
+
     if (realClose) {
       await windowsManager.closeAllSubWindows();
     } else {
@@ -194,11 +196,8 @@ class MeetingClient {
 
         return MeetingRepository().setPersonalSetting(roomID!, userID!, setting);
       case OperationParticipantType.muteAll:
-        final result = await MeetingRepository().operateAllStream(roomID!, loginUserID, microphoneOnEntry: false);
-
-        return result;
-      case OperationParticipantType.unMuteAll:
-        final result = await MeetingRepository().operateAllStream(roomID!, loginUserID, microphoneOnEntry: true);
+        final result =
+            await MeetingRepository().operateAllStream(roomID!, loginUserID, microphoneOnEntry: !(to as bool));
 
         return result;
       case OperationParticipantType.nickname:

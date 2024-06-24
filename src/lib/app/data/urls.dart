@@ -1,4 +1,3 @@
-import '../../../config.dart';
 
 class Urls {
   static const login = '/user/login';

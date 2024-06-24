@@ -381,23 +381,68 @@ class _ControlsViewState extends State<ControlsView> {
     );
   }
 
-  void _openCloseMeetingSheet() {
-    OverlayWidget().showBottomSheet(
-      context: context,
-      child: (AnimationController? controller) => MeetingCloseSheetView(
-        controller: controller,
-        isHost: _isHost,
-        onEnd: () async {
-          Logger().printInfo(info: '========= onEnd =======');
-          widget.onOperation?.call(context, OperationType.end);
-          // widget.onClose?.call(null);
-        },
-        onLeave: () {
-          widget.onOperation?.call(context, OperationType.leave);
-          // widget.onClose?.call(null);
-        },
-      ),
-    );
+  void _onEndMeeting(BuildContext ctx) {
+    if (PlatformExt.isMobile) {
+      OverlayWidget().showBottomSheet(
+        context: context,
+        child: (AnimationController? controller) => MeetingCloseSheetView(
+          controller: controller,
+          isHost: _isHost,
+          onEnd: () async {
+            Logger().printInfo(info: '========= onEnd =======');
+            widget.onOperation?.call(context, OperationType.end);
+          },
+          onLeave: () {
+            Logger().printInfo(info: '========= onLeave =======');
+            if (_isHost) {
+              OverlayWidget().showBottomSheet(
+                context: context,
+                child: (AnimationController? controller) {
+                  return SelectMemberViewForMobile(
+                      participants: widget.participantsSubject.value,
+                      onSelected: (value) {
+                        controller?.reverse();
+                        MeetingAlertDialog.show(context, 'Are you sure?', onConfirm: () async {
+                          await widget.onParticipantOperation
+                              ?.call(type: OperationParticipantType.setHost, userID: value);
+                          if (mounted) {
+                            widget.onOperation?.call(context, OperationType.leave);
+                          }
+                        });
+                      });
+                },
+              );
+            } else {
+              widget.onOperation?.call(context, OperationType.leave);
+            }
+          },
+        ),
+      );
+    } else {
+      if (_isHost) {
+        MeetingPopMenu.showMeetingWidget(ctx, onTap2: () {
+          MeetingPopMenu.showSimpleWidget(
+            ctx,
+            SelectMemberViewForDesktop(
+                participants: widget.participantsSubject.value,
+                onSelected: (value) {
+                  MeetingAlertDialog.show(context, 'Are you sure?', onConfirm: () async {
+                    await widget.onParticipantOperation?.call(type: OperationParticipantType.setHost, userID: value);
+                    if (mounted) {
+                      widget.onOperation?.call(context, OperationType.leave);
+                    }
+                  });
+                }),
+          );
+        }, onTap3: () {
+          widget.onOperation?.call(ctx, OperationType.end);
+        });
+      } else {
+        MeetingPopMenu.showMeetingWidget(ctx, onTap2: () {
+          widget.onOperation?.call(ctx, OperationType.leave);
+        });
+      }
+    }
   }
 
   void _confirmSettings(MeetingSetting request) {

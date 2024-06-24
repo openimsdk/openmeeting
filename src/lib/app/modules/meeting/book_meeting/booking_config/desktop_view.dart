@@ -147,7 +147,10 @@ class _DesktopViewState extends State<DesktopView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildInputItem(
-              title: StrRes.meetingSubject, text: bookingConfig.name, placeholder: StrRes.plsInputYouMeetingName, onChanged: _inputMeetingName),
+              title: StrRes.meetingSubject,
+              text: bookingConfig.name,
+              placeholder: StrRes.plsInputYouMeetingName,
+              onChanged: _inputMeetingName),
           _verSpace,
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -155,7 +158,8 @@ class _DesktopViewState extends State<DesktopView> {
               Flexible(
                 child: _buildSelectedDateItem(
                     title: StrRes.started,
-                    text: DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime), format: 'MM-dd'),
+                    text: DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime),
+                        format: 'MM-dd'),
                     onTap: _selectMeetingBeginDate),
               ),
               const SizedBox(
@@ -163,7 +167,9 @@ class _DesktopViewState extends State<DesktopView> {
               ),
               Flexible(
                 child: _buildDropdownItem(
-                    items: timeSlots.map((e) => e).toList(), valueListenable: timeSlotsValueListenable, onChanged: _selectMeetingBeginTime),
+                    items: timeSlots.map((e) => e).toList(),
+                    valueListenable: timeSlotsValueListenable,
+                    onChanged: _selectMeetingBeginTime),
               )
             ],
           ),
@@ -201,7 +207,8 @@ class _DesktopViewState extends State<DesktopView> {
                   child: endsInTypeValueListenable.value == repeatEndsTypes.first.title
                       ? _buildSelectedDateItem(
                           title: '',
-                          text: DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(_configRepeatEnds().endsInDays), format: 'yyyy-MM-dd'),
+                          text: DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(_configRepeatEnds().endsInDays),
+                              format: 'yyyy-MM-dd'),
                           onTap: _selectMeetingBeginDate)
                       : _buildNumberPicker(),
                 ),
@@ -213,20 +220,33 @@ class _DesktopViewState extends State<DesktopView> {
             style: Styles.ts_0C1C33_14sp_medium,
           ),
           _verSpace,
-          _buildCheckBoxItem(title: StrRes.enterMeetingPassword, value: bookingConfig.enableMeetingPassword, onChanged: _enablePassword),
+          _buildCheckBoxItem(
+              title: StrRes.enterMeetingPassword,
+              value: bookingConfig.enableMeetingPassword,
+              onChanged: _enablePassword),
           if (bookingConfig.enableMeetingPassword)
-            _buildInputItem(text: bookingConfig.meetingPassword ?? '', placeholder: StrRes.enterMeetingPassword, onChanged: _inputPassword),
+            _buildInputItem(
+                text: bookingConfig.meetingPassword ?? '',
+                placeholder: StrRes.enterMeetingPassword,
+                onChanged: _inputPassword),
           _verSpace,
-          _buildCheckBoxItem(title: StrRes.allowMembersEnterFirst, value: bookingConfig.enableEnterBeforeHost, onChanged: _enableEnterBeforeHost),
+          _buildCheckBoxItem(
+              title: StrRes.allowMembersEnterFirst,
+              value: bookingConfig.enableEnterBeforeHost,
+              onChanged: _enableEnterBeforeHost),
           _verSpace,
           Text(
-            StrRes.securitySetting,
+            StrRes.enterMeetingSetting,
             style: Styles.ts_0C1C33_14sp_medium,
           ),
           _verSpace,
-          _buildCheckBoxItem(title: StrRes.enterMeetingEnableMicrophone, value: bookingConfig.enableMicrophone, onChanged: _enableMicrophone),
+          _buildCheckBoxItem(
+              title: StrRes.enterMeetingEnableMicrophone,
+              value: bookingConfig.enableMicrophone,
+              onChanged: _enableMicrophone),
           _verSpace,
-          _buildCheckBoxItem(title: StrRes.enterMeetingEnableVideo, value: bookingConfig.enableCamera, onChanged: _enableCamera),
+          _buildCheckBoxItem(
+              title: StrRes.enterMeetingEnableVideo, value: bookingConfig.enableCamera, onChanged: _enableCamera),
         ],
       ),
     );
@@ -257,7 +277,8 @@ class _DesktopViewState extends State<DesktopView> {
     );
   }
 
-  Widget _buildSelectedDateItem({required String title, required String text, String? placeholder, required VoidCallback onTap}) {
+  Widget _buildSelectedDateItem(
+      {required String title, required String text, String? placeholder, required VoidCallback onTap}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -284,7 +305,10 @@ class _DesktopViewState extends State<DesktopView> {
   }
 
   Widget _buildDropdownItem(
-      {String? title, required List<String> items, required ValueNotifier<String?> valueListenable, ValueChanged<String>? onChanged}) {
+      {String? title,
+      required List<String> items,
+      required ValueNotifier<String?> valueListenable,
+      ValueChanged<String>? onChanged}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -409,8 +433,9 @@ class _DesktopViewState extends State<DesktopView> {
     if (result?.isNotEmpty == true) {
       setState(() {
         final index = timeSlots.indexWhere((element) => element == timeSlotsValueListenable.value);
-        bookingConfig.beginTime =
-            DateTime.fromMillisecondsSinceEpoch(result!.first!.millisecondsSinceEpoch).add(Duration(minutes: index * 15 * 60)).millisecondsSinceEpoch;
+        bookingConfig.beginTime = DateTime.fromMillisecondsSinceEpoch(result!.first!.millisecondsSinceEpoch)
+            .add(Duration(minutes: index * 15 * 60))
+            .millisecondsSinceEpoch;
       });
     }
     print('${result}');
@@ -418,13 +443,14 @@ class _DesktopViewState extends State<DesktopView> {
 
   void _selectMeetingBeginTime(String value) async {
     final index = timeSlots.indexWhere((element) => element == value);
-    bookingConfig.beginTime =
-        DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime).add(Duration(minutes: index * 15 * 60)).millisecondsSinceEpoch;
+    bookingConfig.beginTime = DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime)
+        .add(Duration(minutes: index * 15 * 60))
+        .millisecondsSinceEpoch;
   }
 
   void _selectMeetingDuration(String value) {
     final index = durations.indexWhere((element) => element.title == value);
-    bookingConfig.duration = durations[index].value;
+    bookingConfig.duration = (durations[index].value * 60 * 60).toInt();
   }
 
   void _selectTimezone(String value) async {}

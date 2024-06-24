@@ -8,6 +8,7 @@ import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/meeting.pb.dart';
 import 'package:openmeeting/main.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:window_manager/window_manager.dart';
 import '../../../../../core/multi_window_manager.dart';
 import '../../../../data/models/define.dart';
 import '../../../../widgets/meeting/desktop/participants_view.dart';
@@ -79,7 +80,7 @@ class _MeetingRoomContainerState extends State<MeetingRoomContainer> {
           ),
         if (showParticipants)
           Container(
-            constraints: BoxConstraints(maxWidth: 350),
+            constraints: const BoxConstraints(maxWidth: 350),
             child: ParticipantsDesktopView(
               participantsSubject: participantsSubject!,
               meetingInfoChangedSubject: meetingInfoChangedSubject!,
@@ -96,14 +97,18 @@ class _MeetingRoomContainerState extends State<MeetingRoomContainer> {
   }
 
   Future<void> _showParticipants() async {
-    var bounds = await WindowController.fromWindowId(kWindowId!).getFrame();
-    if (!showParticipants) {
-      bounds = Offset(bounds.left, bounds.top) & Size(bounds.width + 320, bounds.height);
-    } else {
-      bounds = Offset(bounds.left, bounds.top) & Size(bounds.width - 320, bounds.height);
-    }
+    final isFullScreen = await WindowController.fromWindowId(kWindowId!).isFullScreen();
 
-    WindowController.fromWindowId(kWindowId!).setFrame(bounds);
+    if (!isFullScreen) {
+      var bounds = await WindowController.fromWindowId(kWindowId!).getFrame();
+      if (!showParticipants) {
+        bounds = Offset(bounds.left, bounds.top) & Size(bounds.width + 320, bounds.height);
+      } else {
+        bounds = Offset(bounds.left, bounds.top) & Size(bounds.width - 320, bounds.height);
+      }
+
+      WindowController.fromWindowId(kWindowId!).setFrame(bounds);
+    }
 
     setState(() {
       showParticipants = !showParticipants;

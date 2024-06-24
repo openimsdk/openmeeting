@@ -247,7 +247,7 @@ class Apis {
     }
   }
 
-  static Future<bool> modifyParticipantName(Map<String, dynamic> params) async {
+  static Future modifyParticipantName(Map<String, dynamic> params) async {
     try {
       final result = await _showHud(
         () => ApiService().post(
@@ -264,7 +264,7 @@ class Apis {
     }
   }
 
-  static Future<bool> kickParticipant(Map<String, dynamic> params) async {
+  static Future kickParticipant(Map<String, dynamic> params) async {
     try {
       final result = await _showHud(
         () => ApiService().post(
@@ -276,11 +276,12 @@ class Apis {
       return result;
     } catch (e, s) {
       IMViews.showToast(e.toString());
+      
       return Future.error(e);
     }
   }
 
-  static Future<bool> setMeetingHost(Map<String, dynamic> params) async {
+  static Future setMeetingHost(Map<String, dynamic> params) async {
     try {
       final result = await _showHud(
         () => ApiService().post(
@@ -292,6 +293,7 @@ class Apis {
       return result;
     } catch (e, s) {
       IMViews.showToast(e.toString());
+
       return Future.error(e);
     }
   }

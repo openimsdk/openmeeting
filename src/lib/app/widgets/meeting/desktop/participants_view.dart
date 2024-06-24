@@ -184,86 +184,46 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
   }
 
   Widget _buildBottomButtons() {
+    Widget buildButton(String title, VoidCallback onPressed) {
+      return OutlinedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+          side: WidgetStateProperty.all(
+            BorderSide(
+              color: Styles.c_E8EAEF,
+              width: 1,
+            ),
+          ),
+        ),
+        child: Text(
+          title,
+          style: Styles.ts_0C1C33_14sp,
+        ),
+      );
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Builder(
-          builder: (ctx) => OutlinedButton(
-            onPressed: () {
-              _meetingRoomSetting(ctx);
-            },
-            style: ButtonStyle(
-              padding: WidgetStateProperty.all(
-                EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              ),
-              shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-              side: WidgetStateProperty.all(
-                BorderSide(
-                  color: Styles.c_E8EAEF,
-                  width: 1,
-                ),
-              ),
-            ),
-            child: Text(
-              StrRes.meetingRoomSetting,
-              style: Styles.ts_0C1C33_14sp,
-            ),
-          ),
+          builder: (ctx) => buildButton(StrRes.meetingRoomSetting, () {
+            _meetingRoomSetting(ctx);
+          }),
         ),
-        OutlinedButton(
-          onPressed: () {
-            _muteAll(true);
-          },
-          style: ButtonStyle(
-            padding: WidgetStateProperty.all(
-              EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            ),
-            shape: WidgetStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-            side: WidgetStateProperty.all(
-              BorderSide(
-                color: Styles.c_E8EAEF,
-                width: 1,
-              ),
-            ),
-          ),
-          child: Text(
-            StrRes.muteAll,
-            style: Styles.ts_0C1C33_14sp,
-          ),
-        ),
-        OutlinedButton(
-          onPressed: () {
-            _muteAll(false);
-          },
-          style: ButtonStyle(
-            padding: WidgetStateProperty.all(
-              EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            ),
-            shape: WidgetStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-            side: WidgetStateProperty.all(
-              BorderSide(
-                color: Styles.c_E8EAEF,
-                width: 1,
-              ),
-            ),
-          ),
-          child: Text(
-            StrRes.unmuteAll,
-            style: Styles.ts_0C1C33_14sp,
-          ),
-        )
+        buildButton(StrRes.muteAll, () {
+          _muteAll(true);
+        }),
+        buildButton(StrRes.unmuteAll, () {
+          _muteAll(false);
+        }),
       ],
     );
   }
@@ -376,7 +336,17 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
   }
 
   void _muteAll(bool muteAll) async {
-    await widget.onOperation?.call(type: OperationParticipantType.muteAll, userID: '', to: muteAll);
+    if (muteAll) {
+      MeetingAlertDialog.showMuteAll(context, onConfirm: (canEnableMicphone) async {
+        await widget.onOperation?.call(type: OperationParticipantType.muteAll, userID: '', to: muteAll);
+        if (mounted) {
+          setting?.canParticipantsUnmuteMicrophone = canEnableMicphone;
+          widget.onRoomOperation?.call(context, OperationType.roomSettings, value: setting);
+        }
+      });
+    } else {
+      await widget.onOperation?.call(type: OperationParticipantType.muteAll, userID: '', to: muteAll);
+    }
   }
 
   void _meetingRoomSetting(BuildContext ctx) {

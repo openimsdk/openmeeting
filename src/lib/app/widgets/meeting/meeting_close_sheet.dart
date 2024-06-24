@@ -24,6 +24,12 @@ class MeetingCloseSheetView extends StatelessWidget {
           SheetItem(
             label: StrRes.leaveMeeting,
             onTap: () => controller?.reverse().then((value) {
+              if (isHost) {
+                OverlayWidget().dismiss();
+                onLeave?.call();
+
+                return;
+              }
               OverlayWidget().showDialog(
                 context: context,
                 child: CustomDialog(

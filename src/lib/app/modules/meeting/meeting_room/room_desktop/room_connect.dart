@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:desktop_multi_window/desktop_multi_window.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:livekit_client/livekit_client.dart';
@@ -132,8 +130,7 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
   void onWindowClose() {
     Logger.print('========[Room Connect] window close');
     if (_room == null) {
-      Navigator.of(Get.context!).pop();
-      MeetingClient().closeWindow();
+      _closeWindowsHelper();
     } else {
       _showEndPopup(null, immediatelyClose: true);
     }
@@ -148,9 +145,9 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
         contentDyOffset: ctx == null ? kTabBarHeight - MediaQuery.of(context).size.height : 0, onTap2: () {
       MeetingAlertDialog.show(context, title: StrRes.leaveMeetingConfirmHint, '', onConfirm: () {
         if (immediatelyClose) {
-          Navigator.of(Get.context!).pop();
-          MeetingClient().closeWindow();
+          _closeWindowsHelper();
         }
+
         MeetingClient().operateRoom(context, OperationType.leave);
         completer.complete(true);
       });
@@ -159,16 +156,18 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
             ? null
             : () {
                 MeetingAlertDialog.show(context, title: StrRes.endMeetingConfirmHit, '', onConfirm: () {
-                  if (immediatelyClose) {
-                    Navigator.of(Get.context!).pop();
-                    MeetingClient().closeWindow(realClose: true);
-                  }
+                  _closeWindowsHelper(realClose: immediatelyClose);
                   MeetingClient().operateRoom(context, OperationType.end);
                   completer.complete(true);
                 });
               });
 
     return completer.future;
+  }
+
+  void _closeWindowsHelper({bool realClose = false}) {
+    Navigator.of(Get.context!).popUntil((route) => route.isFirst);
+    MeetingClient().closeWindow(realClose: realClose);
   }
 
   @override

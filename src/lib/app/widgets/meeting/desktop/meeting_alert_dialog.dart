@@ -9,7 +9,7 @@ import 'package:sprintf/sprintf.dart';
 class MeetingAlertDialog {
   static void show(BuildContext context, String content,
       {bool forMobile = false,
-      String? title, 
+      String? title,
       String? confirmText,
       VoidCallback? onConfirm,
       String? cancelText,
@@ -38,6 +38,79 @@ class MeetingAlertDialog {
         },
         title: title,
         content: content,
+      );
+    }
+
+    if (forMobile) {
+      OverlayWidget().showDialog(context: context, child: buildContent(context));
+    } else {
+      showDialog(context: context, builder: (_) => buildContent(context));
+    }
+  }
+
+  static void showMuteAll(
+    BuildContext context, {
+    bool forMobile = false,
+    ValueChanged<bool>? onConfirm,
+  }) {
+    bool checkBoxValue = true;
+
+    Widget buildContent(BuildContext ctx) {
+      return AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              StrRes.muteAllHint,
+              style: Styles.ts_0C1C33_12sp,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                StatefulBuilder(
+                  builder: (BuildContext ctx, StateSetter setState) {
+                    return Checkbox(
+                        value: checkBoxValue,
+                        onChanged: (value) {
+                          setState(() {
+                            checkBoxValue = value!;
+                          });
+                        });
+                  },
+                ),
+                Text(
+                  StrRes.allowMembersOpenMic,
+                  style: Styles.ts_8E9AB0_12sp,
+                ),
+              ],
+            )
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: Text(StrRes.cancel, style: Styles.ts_0C1C33_12sp),
+            onPressed: () {
+              if (forMobile) {
+                OverlayWidget().hideDialog();
+              } else {
+                Navigator.of(context).pop();
+              }
+            },
+          ),
+          TextButton(
+            child: Text(StrRes.confirm, style: Styles.ts_0C1C33_12sp),
+            onPressed: () {
+              if (forMobile) {
+                OverlayWidget().hideDialog();
+              } else {
+                Navigator.of(context).pop();
+              }
+              onConfirm?.call(checkBoxValue);
+            },
+            style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.blue)),
+          ),
+        ],
       );
     }
 

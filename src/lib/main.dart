@@ -24,14 +24,14 @@ void main(List<String> args) => Config.init(() async {
         argument['windowId'] = kWindowId;
         int type = argument['type'] ?? -1;
         kWindowType = type.windowType;
-        
+
         WindowController.fromWindowId(kWindowId!).setPreventClose(true);
 
         runApp(MeetingSubWindow(args: argument));
 
         WindowController.fromWindowId(kWindowId!).setTitle('Open Meeting');
         WindowController.fromWindowId(kWindowId!).show();
-        
+
         return;
       } else {
         await windowManager.ensureInitialized();
@@ -48,7 +48,7 @@ void main(List<String> args) => Config.init(() async {
           skipTaskbar: false,
           fullScreen: false,
           titleBarStyle: TitleBarStyle.normal,
-          title: "Open Meeting",
+          title: 'Open Meeting',
           zoomButtonVisibility: false,
         );
 

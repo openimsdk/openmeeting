@@ -60,6 +60,12 @@ class MeetingDetailController extends GetxController {
     IMUtils.copy(text: meetingInfo.meetingID);
   }
 
+  Future<String?> getMeetingPassword(String meetingID, String userID) async {
+    final result = await repository.getMeetingInfo(meetingID, userID);
+
+    return result?.password;
+  }
+
   enterMeeting() async {
     if (MeetingClient().isBusy) {
       IMViews.showToast(StrRes.callingBusy);

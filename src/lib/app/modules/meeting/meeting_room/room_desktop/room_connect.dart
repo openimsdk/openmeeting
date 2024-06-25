@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ import '../../../../data/models/define.dart';
 import '../../../../data/models/meeting_option.dart';
 import '../../../../widgets/meeting/desktop/meeting_alert_dialog.dart';
 import '../../../../widgets/meeting/desktop/meeting_pop_menu.dart';
-import '../../../../widgets/meeting/desktop/window_action_panel.dart';
 import '../meeting_client.dart';
 import 'room_container.dart';
 
@@ -57,7 +57,7 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
       if (call.method == WindowEvent.hide.rawValue) {
         await windowsManager.unregisterActiveWindow(call.arguments['id']);
       } else if (call.method == WindowEvent.show.rawValue) {
-        await windowsManager.registerActiveWindow(call.arguments["id"]);
+        await windowsManager.registerActiveWindow(call.arguments['id']);
       } else if (call.method == WindowEvent.activeSession.rawValue) {
         if (call.arguments != null) {
           final msg = jsonDecode(call.arguments) as Map<String, dynamic>;
@@ -78,6 +78,7 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
   void dispose() {
     super.dispose();
     DesktopMultiWindow.removeListener(this);
+    windowsManager.setMethodHandler(null);
     Logger.print('========dispose');
   }
 
@@ -142,6 +143,7 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
     final loginUserID = widget.userFullInfo.userID;
     final roomMetadata = (MeetingMetadata()..mergeFromProto3Json(jsonDecode(_room!.metadata!))).detail;
     MeetingPopMenu.showMeetingWidget(ctx ?? context,
+        arrowDxOffset: Platform.isMacOS ? 0 : MediaQuery.of(context).size.width - 200,
         contentDyOffset: ctx == null ? kTabBarHeight - MediaQuery.of(context).size.height : 0, onTap2: () {
       MeetingAlertDialog.show(context, title: StrRes.leaveMeetingConfirmHint, '', onConfirm: () {
         if (immediatelyClose) {
@@ -178,30 +180,6 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
         child: _buildLoadingIndicator(),
       ),
     );
-  }
-
-  Widget _buildAppbar(BuildContext context) {
-    return Offstage(
-        offstage: useCompatibleUiMode,
-        child: SizedBox(
-          height: kTabBarHeight,
-          child: Column(
-            children: [
-              SizedBox(
-                height: kTabBarHeight - 1,
-                child: WindowActionPanel(
-                  isMainWindow: false,
-                  onClose: (ctx) {
-                    return _showEndPopup(ctx);
-                  },
-                ),
-              ),
-              const Divider(
-                height: 1,
-              ),
-            ],
-          ),
-        ));
   }
 
   Widget _buildLoadingIndicator() {

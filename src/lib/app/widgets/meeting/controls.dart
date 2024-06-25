@@ -80,6 +80,12 @@ class _ControlsViewState extends State<ControlsView> {
   final _lockAudio = Lock();
   final _lockScreenShare = Lock();
 
+  List<MediaDevice>? _audioInputs;
+  List<MediaDevice>? _audioOutputs;
+  List<MediaDevice>? _videoInputs;
+
+  StreamSubscription? _devicesSubscription;
+
   late StreamSubscription _meetingInfoChangedSub;
 
   bool get _isHost => _meetingInfo?.hostUserID == _participant.identity;
@@ -98,6 +104,11 @@ class _ControlsViewState extends State<ControlsView> {
 
   @override
   void initState() {
+    _devicesSubscription = Hardware.instance.onDeviceChange.stream.listen((List<MediaDevice> devices) {
+      _loadDevices(devices);
+    });
+    Hardware.instance.enumerateDevices().then(_loadDevices);
+
     _openSpeakerphone = widget.options.enableSpeaker;
     _participant.addListener(_onChange);
     _meetingInfoChangedSub = widget.meetingInfoChangedSubject.listen(_onChangedMeetingInfo);
@@ -136,9 +147,26 @@ class _ControlsViewState extends State<ControlsView> {
     });
   }
 
+  void _loadDevices(List<MediaDevice> devices) async {
+    _audioInputs = devices.where((d) => d.kind == 'audioinput').toList();
+    _audioOutputs = devices.where((d) => d.kind == 'audiooutput').toList();
+    _videoInputs = devices.where((d) => d.kind == 'videoinput').toList();
+    setState(() {});
+  }
+
   void _onChange() {
     // trigger refresh
     // setState(() {});
+  }
+
+  void _selectAudioOutput(MediaDevice device) async {
+    await widget.room.setAudioOutputDevice(device);
+    setState(() {});
+  }
+
+  void _selectAudioInput(MediaDevice device) async {
+    await widget.room.setAudioInputDevice(device);
+    setState(() {});
   }
 
   _toggleAudio() async {
@@ -312,6 +340,7 @@ class _ControlsViewState extends State<ControlsView> {
                     enabledScreenShare: !_disabledScreenShare,
                     onTapCamera: _toggleVideo,
                     onTapMicrophone: _toggleAudio,
+                    onTapMicrophoneRightIcon: _selectDevices,
                     onTapScreenShare: _toggleScreenShare,
                     onTapSettings: _openSettingsSheet,
                     onTapMemberList: _openMembersSheet,
@@ -469,5 +498,23 @@ class _ControlsViewState extends State<ControlsView> {
         ),
       );
     }
+  }
+
+  void _selectDevices(BuildContext? ctx) {
+    MeetingPopMenu.showSelectDevices(ctx ?? context,
+        speakers: _audioOutputs ?? [],
+        inputs: _audioInputs ?? [],
+        defaultAudioInputDeviceID: widget.room.selectedAudioInputDeviceId,
+        defaultSpeakerDeviceID: widget.room.selectedAudioOutputDeviceId, onComfirm: (value) {
+      final inputs = value.inputs;
+      final speakers = value.speaker;
+
+      if (inputs != null) {
+        _selectAudioInput(inputs);
+      }
+      if (speakers != null) {
+        _selectAudioOutput(speakers);
+      }
+    });
   }
 }

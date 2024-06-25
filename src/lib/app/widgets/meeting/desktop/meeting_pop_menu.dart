@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:livekit_client/livekit_client.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:popover/popover.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ import 'room_setting_panel.dart';
 class MeetingPopMenu {
   static void showMeetingWidget(BuildContext context,
       {double contentDyOffset = 0,
+      double arrowDxOffset = 0,
       String? title1,
       VoidCallback? onTap1,
       String? title2,
@@ -82,16 +85,17 @@ class MeetingPopMenu {
     }
 
     showPopover(
-      context: context,
-      bodyBuilder: (context) => buildContent(),
-      onPop: () => Logger.print('Popover was popped!'),
-      backgroundColor: Colors.white,
-      barrierColor: Colors.transparent,
-      barrierLabel: '',
-      transition: PopoverTransition.other,
-      width: 200,
-      contentDyOffset: contentDyOffset,
-    );
+        context: context,
+        bodyBuilder: (context) => buildContent(),
+        onPop: () => Logger.print('Popover was popped!'),
+        backgroundColor: Colors.white,
+        barrierColor: Colors.transparent,
+        barrierLabel: '',
+        transition: PopoverTransition.other,
+        width: 200,
+        contentDyOffset: contentDyOffset,
+        arrowDxOffset: arrowDxOffset,
+        arrowHeight: 0);
   }
 
   static void showMeetingDetailWidget(
@@ -327,7 +331,7 @@ class MeetingPopMenu {
   }
 
   static void showSimpleWidget(BuildContext context, Widget widget,
-      {PopoverDirection direction = PopoverDirection.bottom, double arrowDxOffset = 0}) {
+      {PopoverDirection direction = PopoverDirection.bottom, double arrowDxOffset = 0, double width = 0}) {
     showPopover(
         context: context,
         bodyBuilder: (context) => widget,
@@ -335,6 +339,93 @@ class MeetingPopMenu {
         transition: PopoverTransition.other,
         direction: direction,
         arrowDxOffset: arrowDxOffset,
-        arrowHeight: 0);
+        arrowHeight: 0,
+        width: width);
+  }
+
+  static void showSelectDevices(BuildContext context,
+      {required List<MediaDevice> speakers,
+      String? defaultSpeakerDeviceID,
+      required List<MediaDevice> inputs,
+      String? defaultAudioInputDeviceID,
+      required ValueChanged<({MediaDevice? speaker, MediaDevice? inputs})> onComfirm}) {
+    var selectedSpeakerDeviceID = defaultSpeakerDeviceID;
+    var selectedAudioInputDeviceID = defaultAudioInputDeviceID;
+
+    Widget buildContent() {
+      return StatefulBuilder(builder: (_, setState) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            LayoutBuilder(builder: (_, constraints) {
+              return Container(
+                padding: EdgeInsets.only(left: 16),
+                constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                color: Colors.grey.shade100,
+                child: Text('select speaker', style: Styles.ts_0C1C33_14sp),
+              );
+            }),
+            ...speakers.map(
+              (device) => Row(
+                children: [
+                  Flexible(
+                    child: ListTile(
+                      dense: true,
+                      leading: Checkbox(
+                        value: device.deviceId == selectedSpeakerDeviceID,
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              selectedSpeakerDeviceID = device.deviceId;
+                            },
+                          );
+
+                          onComfirm.call((speaker: device, inputs: null));
+                        },
+                      ),
+                      title: Text(device.label),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            LayoutBuilder(builder: (_, constraints) {
+              return Container(
+                padding: EdgeInsets.only(left: 16),
+                constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                color: Colors.grey.shade100,
+                child: Text('select input', style: Styles.ts_0C1C33_14sp),
+              );
+            }),
+            ...inputs.map(
+              (device) => Row(
+                children: [
+                  Flexible(
+                    child: ListTile(
+                      dense: true,
+                      leading: Checkbox(
+                        value: device.deviceId == selectedAudioInputDeviceID,
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              selectedAudioInputDeviceID = device.deviceId;
+                            },
+                          );
+
+                          onComfirm.call((speaker: null, inputs: device));
+                        },
+                      ),
+                      title: Text(device.label),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      });
+    }
+
+    showSimpleWidget(context, buildContent(), width: 200);
   }
 }

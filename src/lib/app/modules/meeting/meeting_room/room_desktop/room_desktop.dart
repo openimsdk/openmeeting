@@ -310,7 +310,15 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
   }
 
   void _meetingClosed(RoomDisconnectedEvent event) {
-    Logger.print('_meetingClosed: ${event.reason == DisconnectReason.disconnected}');
+    Logger.print('_meetingClosed: ${event.reason}');
+
+    if (event.reason == DisconnectReason.roomDeleted) {
+      MeetingAlertDialog.showDisconnect(context, StrRes.meetingIsOver, confirmText: StrRes.iKnew, onConfirm: () {
+        widget.onOperation?.call(context, OperationType.onlyClose);
+      });
+      return;
+    }
+
     if (event.reason != DisconnectReason.disconnected ||
         meetingInfo?.creatorUserID == widget.room.localParticipant?.identity) {
       return;

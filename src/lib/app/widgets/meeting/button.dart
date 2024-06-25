@@ -5,7 +5,7 @@ import 'package:sprintf/sprintf.dart';
 
 class ImageButton extends StatelessWidget {
   const ImageButton({
-    Key? key,
+    super.key,
     required this.icon,
     this.iconWidth,
     this.iconHeight,
@@ -17,7 +17,9 @@ class ImageButton extends StatelessWidget {
     this.expanded = false,
     this.enabled = true,
     this.color,
-  }) : super(key: key);
+    this.rightIcon,
+    this.onPressedRightIcon,
+  });
   final String icon;
   final double? iconWidth;
   final double? iconHeight;
@@ -29,6 +31,8 @@ class ImageButton extends StatelessWidget {
   final bool expanded;
   final bool enabled;
   final Color? color;
+  final Widget? rightIcon;
+  final ValueChanged<BuildContext?>? onPressedRightIcon;
 
   const ImageButton.minimize({
     super.key,
@@ -38,6 +42,8 @@ class ImageButton extends StatelessWidget {
     this.width,
     this.height,
     this.color,
+    this.rightIcon,
+    this.onPressedRightIcon,
   })  : label = null,
         textStyle = null,
         icon = ImageRes.liveClose,
@@ -52,6 +58,8 @@ class ImageButton extends StatelessWidget {
     this.width,
     this.height,
     this.color,
+    this.rightIcon,
+    this.onPressedRightIcon,
     bool on = true,
   })  : label = null,
         textStyle = null,
@@ -67,6 +75,8 @@ class ImageButton extends StatelessWidget {
     this.width,
     this.height,
     this.color,
+    this.rightIcon,
+    this.onPressedRightIcon,
   })  : label = null,
         textStyle = null,
         icon = ImageRes.meetingExpandArrow,
@@ -85,6 +95,8 @@ class ImageButton extends StatelessWidget {
     this.textStyle,
     this.expanded = true,
     this.color,
+    this.rightIcon,
+    this.onPressedRightIcon,
   })  : label = on ? StrRes.meetingMute : StrRes.meetingUnmute,
         icon = on ? ImageRes.meetingMicOnWhite : ImageRes.meetingMicOffWhite;
 
@@ -100,6 +112,8 @@ class ImageButton extends StatelessWidget {
     this.textStyle,
     this.expanded = true,
     this.color,
+    this.rightIcon,
+    this.onPressedRightIcon,
   })  : label = on ? StrRes.meetingCloseVideo : StrRes.meetingOpenVideo,
         icon = on ? ImageRes.meetingCameraOnWhite : ImageRes.meetingCameraOffWhite;
 
@@ -115,6 +129,8 @@ class ImageButton extends StatelessWidget {
     this.textStyle,
     this.expanded = true,
     this.color,
+    this.rightIcon,
+    this.onPressedRightIcon,
   })  : label = on ? StrRes.meetingEndSharing : StrRes.meetingShareScreen,
         icon = on ? ImageRes.meetingScreenShareOn : ImageRes.meetingScreenShareOff;
 
@@ -129,6 +145,8 @@ class ImageButton extends StatelessWidget {
     this.textStyle,
     this.expanded = true,
     this.color,
+    this.rightIcon,
+    this.onPressedRightIcon,
   })  : label = sprintf(StrRes.meetingMembers, [count]),
         icon = ImageRes.meetingMembers,
         enabled = true;
@@ -143,6 +161,8 @@ class ImageButton extends StatelessWidget {
     this.textStyle,
     this.expanded = true,
     this.color,
+    this.rightIcon,
+    this.onPressedRightIcon,
   })  : label = StrRes.settings,
         icon = ImageRes.meetingSetting,
         enabled = true;
@@ -153,26 +173,38 @@ class ImageButton extends StatelessWidget {
   }
 
   Widget get _child => Material(
-        color: Colors.transparent,
-        child: Opacity(
-          opacity: enabled ? 1 : .5,
-          child: InkWell(
-            onTap: enabled ? onTap : null,
-            child: SizedBox(
-              width: width,
-              height: height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  icon.toImage
-                    ..width = (iconWidth ?? 30.w)
-                    ..height = (iconHeight ?? 30.h)
-                    ..color = color,
-                  if (null != label) label!.toText..style = textStyle ?? Styles.ts_FFFFFF_10sp,
-                ],
+      color: Colors.transparent,
+      child: Row(
+        children: [
+          Opacity(
+            opacity: enabled ? 1 : .5,
+            child: InkWell(
+              onTap: enabled ? onTap : null,
+              child: SizedBox(
+                width: width,
+                height: height,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    icon.toImage
+                      ..width = (iconWidth ?? 30.w)
+                      ..height = (iconHeight ?? 30.h)
+                      ..color = color,
+                    if (null != label) label!.toText..style = textStyle ?? Styles.ts_FFFFFF_10sp,
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      );
+          if (rightIcon != null)
+            Builder(builder: (ctx) {
+              return IconButton(
+                onPressed: () {
+                  onPressedRightIcon?.call(ctx);
+                },
+                icon: rightIcon!,
+              );
+            }),
+        ],
+      ));
 }

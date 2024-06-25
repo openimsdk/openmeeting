@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/meeting.pb.dart';
@@ -35,20 +36,27 @@ class MeetingController extends GetxController with WindowListener {
   @override
   void onInit() {
     super.onInit();
-    windowManager.addListener(this);
-    windowsManager.registerActiveWindowListener(onActiveWindowChanged);
+    // queryUnfinishedMeeting();
+    queryMeetingInTimer();
 
-    windowsManager.setMethodHandler((call, fromWindowId) async {
-      if (call.method == WindowEvent.hide.rawValue) {
-        await windowsManager.unregisterActiveWindow(call.arguments['id']);
-      } else if (call.method == WindowEvent.show.rawValue) {
-        await windowsManager.registerActiveWindow(call.arguments["id"]);
-      } else if (call.method == WindowEvent.activeSession.rawValue) {
-        windowsManager.windowOnTop(0);
-        return true;
-      }
+    DesktopMultiWindow.setMethodHandler((call, fromWindowId) async {
       Logger.print("[Main] call ${call.method} with args ${call.arguments} from window $fromWindowId");
     });
+
+    windowsManager.registerActiveWindowListener(onActiveWindowChanged);
+
+    // windowsManager.setMethodHandler((call, fromWindowId) async {
+    //   Logger.print("[Main] call ${call.method} with args ${call.arguments} from window $fromWindowId");
+
+    //   if (call.method == WindowEvent.hide.rawValue) {
+    //     await windowsManager.unregisterActiveWindow(call.arguments['id']);
+    //   } else if (call.method == WindowEvent.show.rawValue) {
+    //     await windowsManager.registerActiveWindow(call.arguments["id"]);
+    //   } else if (call.method == WindowEvent.activeSession.rawValue) {
+    //     windowsManager.windowOnTop(0);
+    //     return true;
+    //   }
+    // });
   }
 
   /// Window status callback
@@ -58,10 +66,7 @@ class MeetingController extends GetxController with WindowListener {
       // close all sub windows
       try {
         if (Platform.isLinux) {
-          await Future.wait([
-            // saveWindowPosition(WindowType.Main),
-            windowsManager.closeAllSubWindows()
-          ]);
+          await Future.wait([windowsManager.closeAllSubWindows()]);
         } else {
           await windowsManager.closeAllSubWindows();
         }
@@ -71,17 +76,12 @@ class MeetingController extends GetxController with WindowListener {
         Logger.print("Start closing Open Meeting...");
         await windowManager.setPreventClose(false);
         await windowManager.close();
-        // if (isMacOS) {
-        //   RdPlatformChannel.instance.terminate();
-        // }
       }
     }
   }
 
   @override
   void onReady() {
-    queryUnfinishedMeeting();
-
     MeetingClient().onClose = () {
       queryUnfinishedMeeting();
     };
@@ -115,6 +115,12 @@ class MeetingController extends GetxController with WindowListener {
 
   Future onRefresh() {
     return queryUnfinishedMeeting();
+  }
+
+  void queryMeetingInTimer() {
+    Timer.periodic(2.seconds, (_) {
+      queryUnfinishedMeeting();
+    });
   }
 
   List<MeetingInfoExt> groupMeetingsByDate(List<MeetingInfoSetting> meetings) {
@@ -155,6 +161,12 @@ class MeetingController extends GetxController with WindowListener {
     });
 
     return groupedMeetings;
+  }
+
+  Future<String?> getMeetingPassword(String meetingID, String userID) async {
+    final result = await repository.getMeetingInfo(meetingID, userID);
+
+    return result?.password;
   }
 
   String getMeetingDuration(MeetingInfoSetting meetingInfo) {
@@ -207,7 +219,9 @@ class MeetingController extends GetxController with WindowListener {
       type: CreateMeetingType.quick,
       creatorUserID: userInfo.userId,
       creatorDefinedMeetingInfo: CreatorDefinedMeetingInfo(
-          title: _meetingName, scheduledTime: Int64(DateTime.now().millisecondsSinceEpoch), meetingDuration: Int64(1 * 60 * 60)),
+          title: _meetingName,
+          scheduledTime: Int64(DateTime.now().millisecondsSinceEpoch),
+          meetingDuration: Int64(1 * 60 * 60)),
       setting: MeetingSetting(
           canParticipantsEnableCamera: true,
           canParticipantsShareScreen: true,

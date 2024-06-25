@@ -48,6 +48,42 @@ class MeetingAlertDialog {
     }
   }
 
+  static void showDisconnect(BuildContext context, String content,
+      {bool forMobile = false, String? confirmText, VoidCallback? onConfirm}) {
+    Logger.print('content: $content');
+
+    Widget buildContent(BuildContext ctx) {
+      return AlertDialog(
+        content: Text(
+          content,
+          style: Styles.ts_0C1C33_12sp,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              if (forMobile) {
+                OverlayWidget().hideDialog();
+              } else {
+                Navigator.of(context).pop();
+              }
+              onConfirm?.call();
+            },
+            child: Text(
+              confirmText ?? StrRes.confirm,
+              style: Styles.ts_0089FF_17sp,
+            ),
+          ),
+        ],
+      );
+    }
+
+    if (forMobile) {
+      OverlayWidget().showDialog(context: context, child: buildContent(context));
+    } else {
+      showDialog(context: context, builder: (_) => buildContent(context));
+    }
+  }
+
   static void showMuteAll(
     BuildContext context, {
     bool forMobile = false,

@@ -18,6 +18,7 @@ abstract class ToolsBar extends StatelessWidget {
     this.onTapMemberList,
     this.onTapCamera,
     this.onTapMicrophone,
+    this.onTapMicrophoneRightIcon,
     this.onTapScreenShare,
     this.membersCount = 0,
     this.isHost = false,
@@ -26,6 +27,7 @@ abstract class ToolsBar extends StatelessWidget {
   final Function()? onTapSettings;
   final Function()? onTapMemberList;
   final Function()? onTapMicrophone;
+  final ValueChanged<BuildContext?>? onTapMicrophoneRightIcon;
   final Function()? onTapCamera;
   final Function()? onTapScreenShare;
   final bool enabledMicrophone;
@@ -107,6 +109,7 @@ class ToolsBarDesktop extends ToolsBar {
       super.onTapMemberList,
       super.onTapCamera,
       super.onTapMicrophone,
+      super.onTapMicrophoneRightIcon,
       super.onTapScreenShare,
       super.membersCount = 0,
       super.isHost = false,
@@ -123,13 +126,19 @@ class ToolsBarDesktop extends ToolsBar {
       color: CupertinoColors.white,
       child: Row(
         children: [
+          const SizedBox(
+            width: 16,
+          ),
           ImageButton.microphone(
             on: openedMicrophone,
             enabled: enabledMicrophone,
             onTap: onTapMicrophone,
+            rightIcon: const Icon(Icons.keyboard_arrow_up_outlined),
+            onPressedRightIcon: onTapMicrophoneRightIcon,
             expanded: false,
             color: color,
             textStyle: textStyle,
+            iconWidth: 40,
           ),
           ImageButton.camera(
             on: openedCamera,

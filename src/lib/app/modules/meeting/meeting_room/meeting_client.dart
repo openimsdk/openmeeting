@@ -5,6 +5,7 @@ import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/define.dart';
 import 'package:openmeeting/app/data/models/meeting.pb.dart';
 import 'package:openmeeting/app/data/services/repository/repository.dart';
+import 'package:openmeeting/core/data_sp.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../core/multi_window_manager.dart';
@@ -28,12 +29,22 @@ class MeetingClient {
   late UserInfo userInfo;
 
   OverlayEntry? _holder;
-  bool isBusy = false;
+
+  set busy(bool value) {
+    DataSp.putMeetingClientIsBusy(value);
+  }
+
+  bool get isBusy => DataSp.getMeetingClientIsBusy();
+
   String? roomID;
 
   VoidCallback? onClose;
 
   void close() async {
+    if (PlatformExt.isDesktop) {
+      return;
+    }
+
     roomID = null;
     onClose?.call();
 
@@ -42,7 +53,7 @@ class MeetingClient {
       _holder = null;
     }
 
-    isBusy = false;
+    busy = false;
     // The next line disables the wakelock again.
     if (await WakelockPlus.enabled) WakelockPlus.disable();
   }
@@ -52,16 +63,16 @@ class MeetingClient {
       return;
     }
 
-    
-
     if (realClose) {
       await windowsManager.closeAllSubWindows();
     } else {
       final controller = WindowController.fromWindowId(kWindowId!);
 
       await controller.hide();
-      await windowsManager.call(WindowType.room, WindowEvent.hide.rawValue, {"id": kWindowId!});
+      await windowsManager.call(WindowType.room, WindowEvent.hide, {"id": kWindowId!});
     }
+
+    busy = false;
   }
 
   Future<({EventsListener<RoomEvent> listener, Room room})?> connect(
@@ -75,7 +86,7 @@ class MeetingClient {
         '=======options: enableMicrophone: ${options.enableMicrophone}, enableSpeaker: ${options.enableSpeaker}, enableVideo: ${options.enableVideo}, videoIsMirroring: ${options.videoIsMirroring} \n token: $token url: $url roomID: $roomID =======');
     try {
       if (isBusy) return null;
-      isBusy = true;
+      busy = true;
 
       FocusScope.of(ctx).requestFocus(FocusNode());
       //create new room

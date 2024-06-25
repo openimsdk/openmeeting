@@ -10,11 +10,9 @@ class MeetingSetupPage extends GetView<MeetingSetupController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PlatformExt.isDesktop
-          ? null
-          : TitleBar.back(
-              title: StrRes.meetingSettings,
-            ),
+      appBar: TitleBar.back(
+        title: StrRes.meetingSettings,
+      ),
       backgroundColor: Styles.c_F8F9FA,
       body: Obx(() => SingleChildScrollView(
             child: Column(

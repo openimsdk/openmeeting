@@ -15,7 +15,8 @@ class MeetingSetupDesktop extends StatefulWidget {
   State<MeetingSetupDesktop> createState() => _MeetingSetupDesktopState();
 }
 
-class _MeetingSetupDesktopState extends State<MeetingSetupDesktop> with AutomaticKeepAliveClientMixin, MultiWindowListener {
+class _MeetingSetupDesktopState extends State<MeetingSetupDesktop>
+    with AutomaticKeepAliveClientMixin, MultiWindowListener {
   int tabIndex = 0;
 
   @override
@@ -52,7 +53,7 @@ class _MeetingSetupDesktopState extends State<MeetingSetupDesktop> with Automati
       final controller = WindowController.fromWindowId(kWindowId!);
 
       await controller.hide();
-      await windowsManager.call(WindowType.main, WindowEvent.hide.rawValue, {"id": widget.windowId});
+      await windowsManager.call(WindowType.main, WindowEvent.hide, {"id": widget.windowId});
     });
   }
 

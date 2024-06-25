@@ -22,10 +22,10 @@ class MultiWindowCallResult {
 /// Window Manager
 /// mainly use it in `Main Window`
 /// use it in sub window is not recommended
-class RustDeskMultiWindowManager {
-  RustDeskMultiWindowManager._();
+class DeskMultiWindowManager {
+  DeskMultiWindowManager._();
 
-  static final instance = RustDeskMultiWindowManager._();
+  static final instance = DeskMultiWindowManager._();
 
   final Set<int> _inactiveWindows = {};
   final Set<int> _activeWindows = {};
@@ -47,19 +47,21 @@ class RustDeskMultiWindowManager {
       WindowController.fromWindowId(id)
         ..focus()
         ..show();
-      windowsManager.call(WindowType.main, WindowEvent.show.rawValue, {"id": id});
+      windowsManager.call(WindowType.main, WindowEvent.show, {"id": id});
     }
   }
 
   Future<int> newSessionWindow(
     WindowType type,
-    String remoteId,
     String msg,
     List<int> windows,
     bool withScreenRect,
   ) async {
     final windowController = await DesktopMultiWindow.createWindow(msg);
     final windowId = windowController.windowId;
+
+    Logger.print('==== create new window: $windowId ====');
+
     if (!withScreenRect) {
       var frame = const Offset(0, 0) & Size(1280 + windowId * 20, 720 + windowId * 20);
 
@@ -85,7 +87,6 @@ class RustDeskMultiWindowManager {
   Future<MultiWindowCallResult> _newSession(
     WindowType type,
     WindowEvent methodName,
-    String remoteId,
     List<int> windows,
     String msg, {
     Rect? screenRect,
@@ -104,7 +105,7 @@ class RustDeskMultiWindowManager {
         }
       }
     }
-    final windowId = await newSessionWindow(type, remoteId, msg, windows, screenRect != null);
+    final windowId = await newSessionWindow(type, msg, windows, screenRect != null);
 
     return MultiWindowCallResult(windowId, null);
   }
@@ -129,7 +130,7 @@ class RustDeskMultiWindowManager {
       }
     }
 
-    return _newSession(type, methodName, type.rawValue.toString(), windows, msg);
+    return _newSession(type, methodName, windows, msg);
   }
 
   Future<MultiWindowCallResult> newRoom(UserInfo userFullInfo, LiveKit certificate, String roomID) async {
@@ -152,18 +153,18 @@ class RustDeskMultiWindowManager {
     );
   }
 
-  Future<MultiWindowCallResult> call(WindowType type, String methodName, dynamic args) async {
+  Future<MultiWindowCallResult> call(WindowType type, WindowEvent methodName, dynamic args) async {
     final wnds = _findWindowsByType(type);
     if (wnds.isEmpty) {
       return MultiWindowCallResult(kInvalidWindowId, null);
     }
     for (final windowId in wnds) {
       if (_activeWindows.contains(windowId)) {
-        final res = await DesktopMultiWindow.invokeMethod(windowId, methodName, args);
+        final res = await DesktopMultiWindow.invokeMethod(windowId, methodName.rawValue, args);
         return MultiWindowCallResult(windowId, res);
       }
     }
-    final res = await DesktopMultiWindow.invokeMethod(wnds[0], methodName, args);
+    final res = await DesktopMultiWindow.invokeMethod(wnds[0], methodName.rawValue, args);
 
     return MultiWindowCallResult(wnds[0], res);
   }
@@ -291,4 +292,4 @@ class RustDeskMultiWindowManager {
   }
 }
 
-final windowsManager = RustDeskMultiWindowManager.instance;
+final windowsManager = DeskMultiWindowManager.instance;

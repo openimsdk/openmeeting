@@ -2,18 +2,10 @@ import 'dart:io';
 
 import 'package:openim_common/openim_common.dart';
 
-const kAllDisplayValue = -1;
 const int kMainWindowId = 0;
 const int kInvalidWindowId = -1;
 
-enum WindowEvent {
-  hide,
-  show,
-  newRoom,
-  newSetting,
-  activeSession,
-  activeDisplaySession,
-}
+enum WindowEvent { hide, show, newRoom, newSetting, activeSession, activeDisplaySession, sendMessage }
 
 extension WindowEventExt on WindowEvent {
   String get rawValue {
@@ -30,6 +22,8 @@ extension WindowEventExt on WindowEvent {
         return 'active_session';
       case WindowEvent.activeDisplaySession:
         return 'active_display_session';
+      case WindowEvent.sendMessage:
+        return 'send_message';
     }
   }
 }
@@ -53,7 +47,10 @@ extension WindowsTargetExt on int {
   WindowsTarget get windowsVersion => getWindowsTarget(this);
 }
 
-bool get useCompatibleUiMode => Platform.isWindows && const [WindowsTarget.w7].contains(windowsBuildNumber.windowsVersion);
+bool get useCompatibleUiMode =>
+    Platform.isWindows && const [WindowsTarget.w7].contains(windowsBuildNumber.windowsVersion);
+
+const double kTabBarHeight = 28.0;
 
 /// return a human readable windows version
 WindowsTarget getWindowsTarget(int buildNumber) {

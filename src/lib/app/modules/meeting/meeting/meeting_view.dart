@@ -230,7 +230,9 @@ class MeetingPage extends GetView<MeetingController> {
                     Container(
                       margin: EdgeInsets.only(left: 8.w),
                       decoration: BoxDecoration(
-                        color: controller.isStartedMeeting(meetingInfo) ? Styles.c_0089FF.withOpacity(0.1) : Colors.orangeAccent.withOpacity(0.1),
+                        color: controller.isStartedMeeting(meetingInfo)
+                            ? Styles.c_0089FF.withOpacity(0.1)
+                            : Colors.orangeAccent.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(2),
                       ),
                       padding: EdgeInsets.symmetric(
@@ -294,7 +296,8 @@ class MeetingPage extends GetView<MeetingController> {
                 onTap: () {
                   controller.showPopEnableCamera.value = !controller.showPopEnableCamera.value;
                   if (controller.showPopEnableCamera.value) {
-                    MeetingPopMenu.showEnableCameraSetting(ctx, enableCamera: controller.isEnableVideo, onOperation: (value) {
+                    MeetingPopMenu.showEnableCameraSetting(ctx, enableCamera: controller.isEnableVideo,
+                        onOperation: (value) {
                       controller.isEnableVideo = value;
                     }, onPop: () {
                       controller.showPopEnableCamera.value = false;
@@ -345,14 +348,18 @@ class MeetingPage extends GetView<MeetingController> {
         ),
       );
 
-  void showCheckPasswordDialog(MeetingInfoSetting info) {
-    if (!info.shouldCheckPassword || info.creatorUserID == controller.userInfo.userId) {
+  void showCheckPasswordDialog(MeetingInfoSetting info) async {
+    if (info.creatorUserID == controller.userInfo.userId) {
       controller.quickEnterMeeting(info.meetingID);
 
       return;
     }
-    MeetingAlertDialog.showEnterMeetingWithPasswordDialog(Get.context!, info.creatorNickname, onConfirm: (password) async {
-      final result = info.password == password;
+
+    final basePassword = await controller.getMeetingPassword(info.meetingID, info.creatorUserID);
+
+    MeetingAlertDialog.showEnterMeetingWithPasswordDialog(Get.context!, info.creatorNickname,
+        onConfirm: (password) async {
+      final result = basePassword == password;
 
       if (!result) {
         IMViews.showToast(StrRes.wrongMeetingPassword);

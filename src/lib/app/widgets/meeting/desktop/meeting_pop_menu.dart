@@ -359,10 +359,10 @@ class MeetingPopMenu {
           children: [
             LayoutBuilder(builder: (_, constraints) {
               return Container(
-                padding: EdgeInsets.only(left: 16),
+                padding: const EdgeInsets.only(left: 16),
                 constraints: BoxConstraints(minWidth: constraints.maxWidth),
                 color: Colors.grey.shade100,
-                child: Text('select speaker', style: Styles.ts_0C1C33_14sp),
+                child: Text(StrRes.selectSpeaker, style: Styles.ts_0C1C33_14sp),
               );
             }),
             ...speakers.map(
@@ -391,10 +391,10 @@ class MeetingPopMenu {
             ),
             LayoutBuilder(builder: (_, constraints) {
               return Container(
-                padding: EdgeInsets.only(left: 16),
+                padding: const EdgeInsets.only(left: 16),
                 constraints: BoxConstraints(minWidth: constraints.maxWidth),
                 color: Colors.grey.shade100,
-                child: Text('select input', style: Styles.ts_0C1C33_14sp),
+                child: Text(StrRes.selectInput, style: Styles.ts_0C1C33_14sp),
               );
             }),
             ...inputs.map(

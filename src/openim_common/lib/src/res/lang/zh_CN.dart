@@ -598,4 +598,6 @@ const Map<String, String> zh_CN = {
   'iKnew': '知道了',
   'assignAndLeave': '设置并离开',
   'muteAllHint': '所有参会人员即将静音',
+  'selectSpeaker': '选择扬声器',
+  'selectInput': '选择输入源',
 };

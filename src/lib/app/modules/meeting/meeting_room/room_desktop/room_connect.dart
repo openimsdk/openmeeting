@@ -9,6 +9,7 @@ import 'package:livekit_client/livekit_client.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/meeting.pb.dart';
 import 'package:openmeeting/app/data/models/pb_extension.dart';
+import 'package:window_manager/window_manager.dart';
 import '../../../../../core/multi_window_manager.dart';
 import '../../../../data/models/define.dart';
 import '../../../../data/models/meeting_option.dart';
@@ -38,7 +39,7 @@ class RoomConnectDesktopView extends StatefulWidget {
 }
 
 class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
-    with AutomaticKeepAliveClientMixin, MultiWindowListener {
+    with AutomaticKeepAliveClientMixin, MultiWindowListener, WindowListener {
   final loading = _LoadingStatus.loading.obs;
   Room? _room;
   late String _roomID;
@@ -77,8 +78,7 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
   @override
   void dispose() {
     super.dispose();
-    DesktopMultiWindow.removeListener(this);
-    windowsManager.setMethodHandler(null);
+    // windowsManager.setMethodHandler(null);
     Logger.print('========dispose');
   }
 
@@ -167,9 +167,10 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
     return completer.future;
   }
 
-  void _closeWindowsHelper({bool realClose = false}) {
+  void _closeWindowsHelper({bool realClose = false}) async {
     Navigator.of(Get.context!).popUntil((route) => route.isFirst);
     MeetingClient().closeWindow(realClose: realClose);
+    MeetingClient().sendBusyMessage(false);
   }
 
   @override
@@ -190,6 +191,7 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
                 ? Container()
                 : ElevatedButton(
                     onPressed: () {
+                      MeetingClient().busy = false;
                       _connectRoom();
                     },
                     child: Text('Retry')),

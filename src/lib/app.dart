@@ -54,7 +54,6 @@ class InitBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<PushController>(PushController());
-    DataSp.putMeetingClientIsBusy(false);
   }
 }
 

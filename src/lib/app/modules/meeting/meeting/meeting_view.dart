@@ -357,6 +357,12 @@ class MeetingPage extends GetView<MeetingController> {
 
     final basePassword = await controller.getMeetingPassword(info.meetingID, info.creatorUserID);
 
+    if (basePassword?.isEmpty == true) {
+      controller.quickEnterMeeting(info.meetingID);
+
+      return;
+    }
+
     MeetingAlertDialog.showEnterMeetingWithPasswordDialog(Get.context!, info.creatorNickname,
         onConfirm: (password) async {
       final result = basePassword == password;

@@ -21,7 +21,7 @@ import '../../../data/models/meeting_option.dart';
 import '../../../data/services/repository/repository_adapter.dart';
 import '../meeting_room/meeting_client.dart';
 
-class MeetingController extends GetxController with WindowListener {
+class MeetingController extends GetxController with WindowListener, MultiWindowListener {
   final meetingInfoList = <MeetingInfoExt>[].obs;
   final nicknameMapping = <String, String>{}.obs;
   final userInfo = Get.find<AppController>().userInfo!;
@@ -41,22 +41,17 @@ class MeetingController extends GetxController with WindowListener {
 
     DesktopMultiWindow.setMethodHandler((call, fromWindowId) async {
       Logger.print("[Main] call ${call.method} with args ${call.arguments} from window $fromWindowId");
+      if (call.method == WindowEvent.sendMessage.rawValue) {
+        final params = Map<String, dynamic>.from(call.arguments);
+        final isBusy = params['isBusy'];
+
+        if (isBusy != null) {
+          MeetingClient().busy = isBusy;
+        }
+      }
     });
 
     windowsManager.registerActiveWindowListener(onActiveWindowChanged);
-
-    // windowsManager.setMethodHandler((call, fromWindowId) async {
-    //   Logger.print("[Main] call ${call.method} with args ${call.arguments} from window $fromWindowId");
-
-    //   if (call.method == WindowEvent.hide.rawValue) {
-    //     await windowsManager.unregisterActiveWindow(call.arguments['id']);
-    //   } else if (call.method == WindowEvent.show.rawValue) {
-    //     await windowsManager.registerActiveWindow(call.arguments["id"]);
-    //   } else if (call.method == WindowEvent.activeSession.rawValue) {
-    //     windowsManager.windowOnTop(0);
-    //     return true;
-    //   }
-    // });
   }
 
   /// Window status callback
@@ -91,7 +86,7 @@ class MeetingController extends GetxController with WindowListener {
   @override
   onClose() {
     super.onClose();
-    windowManager.removeListener(this);
+    windowsManager.setMethodHandler(null);
   }
 
   @override

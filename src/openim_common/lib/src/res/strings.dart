@@ -1164,4 +1164,6 @@ class StrRes {
   static String get iKnew => 'iKnew'.tr;
   static String get assignAndLeave => 'assignAndLeave'.tr;
   static String get muteAllHint => 'muteAllHint'.tr;
+  static String get selectInput => 'selectInput'.tr;
+  static String get selectSpeaker => 'selectSpeaker'.tr;
 }

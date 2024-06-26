@@ -16,7 +16,6 @@ class DataSp {
   static const _meetingEnableSpeaker = '%s_meetingEnableSpeaker';
   static const _meetingEnableVideo = '%s_meetingEnableVideo';
   static const _meetingEnableVideoMirroring = '%s_meetingEnableVideoMirroring';
-  static const _meetingClientIsBusy = '_meetingClientIsBusy';
 
   DataSp._();
 
@@ -109,15 +108,5 @@ class DataSp {
 
   static bool getMeetingEnableVideoMirroring() {
     return SpUtil().getBool(getKey(_meetingEnableVideoMirroring), defValue: false) ?? false;
-  }
-
-  static Future<bool>? putMeetingClientIsBusy(bool isBusy) {
-    Logger.print("==== putMeetingClientIsBusy: $isBusy");
-    return SpUtil().putBool(_meetingClientIsBusy, isBusy);
-  }
-
-  static bool getMeetingClientIsBusy() {
-    Logger.print("==== getMeetingClientIsBusy: ${SpUtil().getBool(_meetingClientIsBusy, defValue: false)}");
-    return SpUtil().getBool(_meetingClientIsBusy, defValue: false) ?? false;
   }
 }

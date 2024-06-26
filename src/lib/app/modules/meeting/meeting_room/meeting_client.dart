@@ -30,11 +30,13 @@ class MeetingClient {
 
   OverlayEntry? _holder;
 
+  bool _isBusy = false;
+
   set busy(bool value) {
-    DataSp.putMeetingClientIsBusy(value);
+    _isBusy = value;
   }
 
-  bool get isBusy => DataSp.getMeetingClientIsBusy();
+  bool get isBusy => _isBusy;
 
   String? roomID;
 
@@ -72,7 +74,15 @@ class MeetingClient {
       await windowsManager.call(WindowType.room, WindowEvent.hide, {"id": kWindowId!});
     }
 
+    sendBusyMessage(false);
     busy = false;
+  }
+
+  void sendBusyMessage(bool b) {
+    if (!PlatformExt.isDesktop) {
+      return;
+    }
+    windowsManager.call(WindowType.main, WindowEvent.sendMessage, {'isBusy': b});
   }
 
   Future<({EventsListener<RoomEvent> listener, Room room})?> connect(
@@ -87,6 +97,7 @@ class MeetingClient {
     try {
       if (isBusy) return null;
       busy = true;
+      sendBusyMessage(true);
 
       FocusScope.of(ctx).requestFocus(FocusNode());
       //create new room

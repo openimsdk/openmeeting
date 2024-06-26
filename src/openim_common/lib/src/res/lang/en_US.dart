@@ -598,4 +598,6 @@ const Map<String, String> en_US = {
   'iKnew': 'I know',
   'assignAndLeave': 'Assign and leave',
   'muteAllHint': 'All participants will be muted',
+  'selectSpeaker': 'Select Speaker',
+  'selectInput': 'Select Input',
 };

@@ -169,12 +169,40 @@ class ImageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return expanded ? Expanded(child: _child) : _child;
+    return expanded
+        ? Expanded(child: rightIcon != null ? _desktopChild : _child)
+        : rightIcon != null
+            ? _desktopChild
+            : _child;
   }
 
   Widget get _child => Material(
       color: Colors.transparent,
+      child: Opacity(
+        opacity: enabled ? 1 : .5,
+        child: InkWell(
+          onTap: enabled ? onTap : null,
+          child: SizedBox(
+            width: width,
+            height: height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                icon.toImage
+                  ..width = (iconWidth ?? 30.w)
+                  ..height = (iconHeight ?? 30.h)
+                  ..color = color,
+                if (null != label) label!.toText..style = textStyle ?? Styles.ts_FFFFFF_10sp,
+              ],
+            ),
+          ),
+        ),
+      ));
+
+  Widget get _desktopChild => Material(
+      color: Colors.transparent,
       child: Row(
+        mainAxisSize: MainAxisSize.max,
         children: [
           Opacity(
             opacity: enabled ? 1 : .5,
@@ -199,9 +227,11 @@ class ImageButton extends StatelessWidget {
           if (rightIcon != null)
             Builder(builder: (ctx) {
               return IconButton(
-                onPressed: () {
-                  onPressedRightIcon?.call(ctx);
-                },
+                onPressed: !enabled
+                    ? null
+                    : () {
+                        onPressedRightIcon?.call(ctx);
+                      },
                 icon: rightIcon!,
               );
             }),

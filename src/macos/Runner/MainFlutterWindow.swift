@@ -27,7 +27,6 @@ class MainFlutterWindow: NSWindow {
         FlutterMultiWindowPlugin.setOnWindowCreatedCallback { controller in
             // Register the plugin which you want access from other isolate.
             ConnectivityPlusPlugin.register(with: controller.registrar(forPlugin: "ConnectivityPlusPlugin"))
-            FlutterMultiWindowPlugin.register(with: controller.registrar(forPlugin: "FlutterMultiWindowPlugin"))
             DeviceInfoPlusMacosPlugin.register(with: controller.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
             FlutterLocalNotificationsPlugin.register(with: controller.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
             FlutterWebRTCPlugin.register(with: controller.registrar(forPlugin: "FlutterWebRTCPlugin"))
@@ -38,7 +37,6 @@ class MainFlutterWindow: NSWindow {
             SharePlusMacosPlugin.register(with: controller.registrar(forPlugin: "SharePlusMacosPlugin"))
             SharedPreferencesPlugin.register(with: controller.registrar(forPlugin: "SharedPreferencesPlugin"))
             WakelockPlusMacosPlugin.register(with: controller.registrar(forPlugin: "WakelockPlusMacosPlugin"))
-            WindowManagerPlugin.register(with: controller.registrar(forPlugin: "WindowManagerPlugin"))
         }
         super.awakeFromNib()
     }

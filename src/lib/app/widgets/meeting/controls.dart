@@ -68,7 +68,7 @@ class ControlsView extends StatefulWidget {
 }
 
 class _ControlsViewState extends State<ControlsView> {
-  LocalParticipant get _participant => widget.participant;
+  LocalParticipant get _participant => widget.room.localParticipant!;
   MeetingInfoSetting? _meetingInfo;
   Timer? _callingTimer;
   int _duration = 0;
@@ -124,6 +124,7 @@ class _ControlsViewState extends State<ControlsView> {
     _meetingInfoChangedSub.cancel();
     _callingTimer?.cancel();
     _durationController.close();
+    _devicesSubscription?.cancel();
     super.dispose();
   }
 
@@ -335,8 +336,8 @@ class _ControlsViewState extends State<ControlsView> {
                     openedCamera: _participant.isCameraEnabled(),
                     openedMicrophone: _participant.isMicrophoneEnabled(),
                     openedScreenShare: _participant.isScreenShareEnabled(),
-                    enabledMicrophone: !_disabledMicrophone,
-                    enabledCamera: !_disabledCamera,
+                    enabledMicrophone: _audioInputs?.isEmpty == true ? false : !_disabledMicrophone,
+                    enabledCamera: _videoInputs?.isEmpty == true ? false : !_disabledCamera,
                     enabledScreenShare: !_disabledScreenShare,
                     onTapCamera: _toggleVideo,
                     onTapMicrophone: _toggleAudio,

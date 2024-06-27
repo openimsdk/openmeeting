@@ -17,6 +17,7 @@ extension MeetingInfoSettingExt on MeetingInfoSetting {
   String get hostUserID =>
       info.creatorDefinedMeeting.hostUserID.isNotEmpty ? info.creatorDefinedMeeting.hostUserID : creatorUserID;
   List<String> get coHostUSerID => info.creatorDefinedMeeting.coHostUSerID;
+  RepeatType get repeatType => RepeatTypeExt.fromString(repeatInfo.repeatType);
 }
 
 extension UserInfoExt on ui.UserInfo {

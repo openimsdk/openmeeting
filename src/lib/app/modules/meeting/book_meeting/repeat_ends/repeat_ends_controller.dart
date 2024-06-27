@@ -6,7 +6,7 @@ class RepeatEndsController extends GetxController {
   final int? maxLimit;
   RepeatEndsController({required this.endsInDays, required this.maxLimit});
 
-  final endsIn = DateTime.now().millisecondsSinceEpoch.obs;
+  final endsIn = 0.obs;
   final limitCount = 7.obs;
   final inputController = TextEditingController();
   final focusNode = FocusNode();
@@ -17,10 +17,12 @@ class RepeatEndsController extends GetxController {
     super.onInit();
     if (endsInDays != 0) {
       endsIn.value = endsInDays!;
+      checkedIndex.value = 0;
     }
     if (maxLimit != 0) {
       limitCount.value = maxLimit!;
       inputController.text = limitCount.value.toString();
+      checkedIndex.value = 1;
     }
 
     focusNode.addListener(() {

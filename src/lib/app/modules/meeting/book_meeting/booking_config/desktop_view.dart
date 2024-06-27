@@ -51,13 +51,13 @@ class _DesktopViewState extends State<DesktopView> {
   late ValueNotifier<String> timeZoneValueListenable;
 
   final repeatModels = [
-    _ModelItem(title: RepeatType.none.title, value: 0),
-    _ModelItem(title: RepeatType.daily.title, value: 1),
-    _ModelItem(title: RepeatType.weekday.title, value: 2),
-    _ModelItem(title: RepeatType.weekly.title, value: 3),
-    _ModelItem(title: RepeatType.biweekly.title, value: 4),
-    _ModelItem(title: RepeatType.monthly.title, value: 5),
-    _ModelItem(title: RepeatType.custom.title, value: 6),
+    _ModelItem(title: RepeatType.none.title, value: RepeatType.none),
+    _ModelItem(title: RepeatType.daily.title, value: RepeatType.daily),
+    _ModelItem(title: RepeatType.weekday.title, value: RepeatType.weekday),
+    _ModelItem(title: RepeatType.weekly.title, value: RepeatType.weekly),
+    _ModelItem(title: RepeatType.biweekly.title, value: RepeatType.biweekly),
+    _ModelItem(title: RepeatType.monthly.title, value: RepeatType.monthly),
+    _ModelItem(title: RepeatType.custom.title, value: RepeatType.custom),
   ];
   late ValueNotifier<String> repeatModelsValueListenable;
 
@@ -100,12 +100,14 @@ class _DesktopViewState extends State<DesktopView> {
     _databaseTimeZones.addAll(temp);
     timeZones.addAll(temp);
 
-    final currentRepeatModel = repeatModels.firstWhereOrNull((element) => element.value == bookingConfig.repeatType);
+    final currentRepeatModel =
+        repeatModels.firstWhereOrNull((element) => element.title == bookingConfig.repeatType.title);
     final currentRepeatModelStr = currentRepeatModel?.title ?? repeatModels.first.title;
     repeatModelsValueListenable = ValueNotifier(currentRepeatModelStr);
 
     final endsInConfig = _configRepeatEnds();
-    endsInTypeValueListenable = ValueNotifier(repeatEndsTypes.first.title);
+    final currentEndsInType = bookingConfig.endsIn == 0 ? repeatEndsTypes.last : repeatEndsTypes.first;
+    endsInTypeValueListenable = ValueNotifier(currentEndsInType.title);
     occurrencesController.text = endsInConfig.maxLimit.toString();
 
     super.initState();
@@ -132,7 +134,7 @@ class _DesktopViewState extends State<DesktopView> {
     int minute = dateTime.minute;
     int roundedMinute = (minute / 15).round() * 15;
     if (roundedMinute == 60) {
-      dateTime = dateTime.add(Duration(hours: 1));
+      dateTime = dateTime.add(const Duration(hours: 1));
       roundedMinute = 0;
     }
     return DateTime(dateTime.year, dateTime.month, dateTime.day, dateTime.hour, roundedMinute);
@@ -295,7 +297,7 @@ class _DesktopViewState extends State<DesktopView> {
             border: Border.all(color: Colors.grey.shade200, width: 1),
           ),
           placeholder: placeholder,
-          suffix: Icon(Icons.keyboard_arrow_down_rounded),
+          suffix: const Icon(Icons.keyboard_arrow_down_rounded),
           readOnly: true,
           style: Styles.ts_0C1C33_14sp,
           onTap: onTap,
@@ -337,7 +339,7 @@ class _DesktopViewState extends State<DesktopView> {
                       color: Colors.white,
                     ),
                   ),
-                  iconStyleData: IconStyleData(icon: Icon(Icons.keyboard_arrow_down_outlined)),
+                  iconStyleData: const IconStyleData(icon: Icon(Icons.keyboard_arrow_down_outlined)),
                   style: Styles.ts_0C1C33_14sp,
                 ),
               ),
@@ -366,6 +368,7 @@ class _DesktopViewState extends State<DesktopView> {
               if (int.parse(occurrencesController.text) > 1) {
                 occurrencesController.text = (int.parse(occurrencesController.text) - 1).toString();
               }
+              bookingConfig.repeatTimes = int.parse(occurrencesController.text);
             }),
           ),
           const VerticalDivider(
@@ -391,6 +394,8 @@ class _DesktopViewState extends State<DesktopView> {
               if (int.parse(occurrencesController.text) < 30) {
                 occurrencesController.text = (int.parse(occurrencesController.text) + 1).toString();
               }
+
+              bookingConfig.repeatTimes = int.parse(occurrencesController.text);
             }),
           ),
         ],
@@ -434,7 +439,7 @@ class _DesktopViewState extends State<DesktopView> {
       setState(() {
         final index = timeSlots.indexWhere((element) => element == timeSlotsValueListenable.value);
         bookingConfig.beginTime = DateTime.fromMillisecondsSinceEpoch(result!.first!.millisecondsSinceEpoch)
-            .add(Duration(minutes: index * 15 * 60))
+            .add(Duration(minutes: index * 15))
             .millisecondsSinceEpoch;
       });
     }
@@ -444,7 +449,7 @@ class _DesktopViewState extends State<DesktopView> {
   void _selectMeetingBeginTime(String value) async {
     final index = timeSlots.indexWhere((element) => element == value);
     bookingConfig.beginTime = DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime)
-        .add(Duration(minutes: index * 15 * 60))
+        .add(Duration(minutes: index * 15))
         .millisecondsSinceEpoch;
   }
 
@@ -461,7 +466,7 @@ class _DesktopViewState extends State<DesktopView> {
     if (index != 0) {
       final config = _configRepeatEnds();
       bookingConfig.endsIn = config.endsInDays;
-      bookingConfig.limitCount = config.maxLimit;
+      bookingConfig.repeatTimes = config.maxLimit;
     }
 
     setState(() {
@@ -494,7 +499,7 @@ class _DesktopViewState extends State<DesktopView> {
     if (value.isEmpty) {
       return;
     }
-    bookingConfig.limitCount = int.parse(value);
+    bookingConfig.repeatTimes = int.parse(value);
   }
 
   void _enablePassword(bool value) {
@@ -551,9 +556,9 @@ class _DesktopViewState extends State<DesktopView> {
     final type = bookingConfig.repeatType;
 
     var endsInDays = bookingConfig.endsIn;
-    final maxLimit = bookingConfig.limitCount != 0 ? bookingConfig.limitCount : 7;
+    final maxLimit = bookingConfig.repeatTimes != 0 ? bookingConfig.repeatTimes : 7;
 
-    if (type == RepeatType.daily) {
+    if (type == RepeatType.daily || type == RepeatType.custom) {
       endsInDays = bookingConfig.endsIn != 0
           ? bookingConfig.endsIn
           : DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime).add(maxLimit.days).millisecondsSinceEpoch;
@@ -579,7 +584,6 @@ class _DesktopViewState extends State<DesktopView> {
       var originalTime = DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime);
 
       for (int i = 0; i < maxLimit; i++) {
-        print('增加的日期: $originalTime');
         originalTime = originalTime.add(7.days);
       }
 
@@ -588,7 +592,6 @@ class _DesktopViewState extends State<DesktopView> {
       var originalTime = DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime);
 
       for (int i = 0; i < maxLimit; i++) {
-        print('增加的日期: $originalTime');
         originalTime = originalTime.add(14.days);
       }
 

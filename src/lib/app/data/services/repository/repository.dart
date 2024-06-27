@@ -50,7 +50,8 @@ class MeetingRepository implements IMeetingRepository {
         'password': creatorDefinedMeetingInfo.password,
       },
       'setting': setting.toProto3Json(),
-      'repeatInfo': repeatInfo?.toProto3Json(),
+      if (repeatInfo != null)
+        'repeatInfo': {...repeatInfo.toProto3Json() as Map, 'endDate': repeatInfo.endDate.toInt()},
     };
 
     if (type == CreateMeetingType.quick) {

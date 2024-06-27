@@ -229,7 +229,7 @@ class BookingConfigPage extends GetView<BookingConfigController> {
     final limitCount = result['limitCount'];
     final endsIn = result['endsIn'];
     controller.bookingConfig.update((val) {
-      val?.limitCount = limitCount;
+      val?.repeatTimes = limitCount;
       val?.endsIn = endsIn;
     });
   }
@@ -289,7 +289,7 @@ class BookingConfigPage extends GetView<BookingConfigController> {
     final type = bookingConfig.repeatType;
 
     var endsInDays = bookingConfig.endsIn;
-    final maxLimit = bookingConfig.limitCount != 0 ? bookingConfig.limitCount : 7;
+    final maxLimit = bookingConfig.repeatTimes != 0 ? bookingConfig.repeatTimes : 7;
 
     if (type == RepeatType.daily) {
       endsInDays = bookingConfig.endsIn != 0

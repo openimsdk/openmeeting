@@ -29,9 +29,9 @@ class CustomRepeatModelView extends StatefulWidget {
 
 class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
   final units = [
-    _ModelItem(title: UnitType.day.title, value: UnitType.day.rawValue),
-    _ModelItem(title: UnitType.week.title, value: UnitType.week.rawValue),
-    _ModelItem(title: UnitType.month.title, value: UnitType.month.rawValue)
+    _ModelItem(title: UnitType.day.title, value: UnitType.day),
+    _ModelItem(title: UnitType.week.title, value: UnitType.week),
+    _ModelItem(title: UnitType.month.title, value: UnitType.month)
   ];
   final cycleValues = [
     List.generate(100, (index) => _ModelItem(title: (index + 1).toString(), value: index + 1)),
@@ -63,7 +63,9 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
     _monthsUnitsListenable = ValueNotifier(monthsUnits[0].title);
 
     bookingConfig.value = widget.config;
-
+    if (bookingConfig.value != null) {
+      bookingConfig.value!.interval = 1;
+    }
     final DateFormat formatter = DateFormat('EEE');
     final now = formatter.format(DateTime.now());
 

@@ -7,7 +7,7 @@ class BookingConfig {
   int timeZone;
   RepeatType repeatType;
   int endsIn;
-  int limitCount;
+  int repeatTimes;
   // custom repeat mode
   int interval;
   UnitType unit;
@@ -28,8 +28,8 @@ class BookingConfig {
     this.timeZone = 8,
     this.repeatType = RepeatType.none,
     this.endsIn = 0,
-    this.limitCount = 0,
-    this.interval = 1,
+    this.repeatTimes = 0,
+    this.interval = 0,
     this.unit = UnitType.day,
     this.weekdays,
     this.monthUnit = 0,
@@ -48,7 +48,7 @@ class BookingConfig {
         timeZone: json['timeZone'],
         repeatType: json['repeatType'] == null ? RepeatType.none : RepeatTypeExt.fromString(json['repeatType']),
         endsIn: json['endsIn'],
-        limitCount: json['limitCount'],
+        repeatTimes: json['repeatTimes'],
         interval: json['interval'],
         unit: json['unit'] == null ? UnitType.day : UnitTypeExt.fromString(json['unit']),
         weekdays: json['weekdays'],
@@ -68,7 +68,7 @@ class BookingConfig {
         'timeZone': timeZone,
         'repeatType': repeatType.rawValue,
         'endsIn': endsIn,
-        'limitCount': limitCount,
+        'repeatTimes': repeatTimes,
         'interval': interval,
         'unit': unit.rawValue,
         'weekdays': weekdays,

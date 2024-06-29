@@ -64,13 +64,16 @@ class MPages {
       page: () => const SelectedTimezonePage(),
       binding: SelectedTimezoneBinding(),
     ),
-    _pageBuilder(name: MRoutes.repeatModel, page: () => const RepeatModelPage(), binding: RepeatModelBinding(), children: [
-      _pageBuilder(
-        name: MRoutes.customRepeat,
-        page: () => const CustomRepeatPage(),
-        binding: CustomRepeatBinding(),
-      ),
-    ]),
+    _pageBuilder(
+      name: MRoutes.repeatModel,
+      page: () => const RepeatModelPage(),
+      binding: RepeatModelBinding(),
+    ),
+    _pageBuilder(
+      name: MRoutes.customRepeat,
+      page: () => const CustomRepeatPage(),
+      binding: CustomRepeatBinding(),
+    ),
     _pageBuilder(
       name: MRoutes.repeatEnds,
       page: () => const RepeatEndsPage(),

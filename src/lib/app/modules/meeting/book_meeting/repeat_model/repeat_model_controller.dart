@@ -1,5 +1,6 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:get/get.dart';
+import 'package:openmeeting/app/data/models/booking_config.dart';
 
 import '../../../../data/models/define.dart';
 
@@ -11,9 +12,9 @@ class ModelItem {
 }
 
 class RepeatModelController extends GetxController {
-  final String? rawType;
+  final BookingConfig? config;
 
-  RepeatModelController({this.rawType});
+  RepeatModelController({this.config});
 
   final modelList = <ModelItem>[].obs;
   // final customModel = ModelItem(title: StrRes.custom, value: -1).obs;
@@ -23,7 +24,9 @@ class RepeatModelController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    type = rawType == null ? RepeatType.none : RepeatTypeExt.fromString(rawType!);
+    if (config?.repeatType != null) {
+      type = config!.repeatType;
+    }
 
     modelList.addAll([
       ModelItem(type: RepeatType.none, value: 0),

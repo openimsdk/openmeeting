@@ -331,7 +331,7 @@ class MeetingPopMenu {
   }
 
   static void showSimpleWidget(BuildContext context, Widget widget,
-      {PopoverDirection direction = PopoverDirection.bottom, double arrowDxOffset = 0, double width = 0}) {
+      {PopoverDirection direction = PopoverDirection.bottom, double arrowDxOffset = 0, double width = 0, double arrowHeight = 0}) {
     showPopover(
         context: context,
         bodyBuilder: (context) => widget,
@@ -339,7 +339,7 @@ class MeetingPopMenu {
         transition: PopoverTransition.other,
         direction: direction,
         arrowDxOffset: arrowDxOffset,
-        arrowHeight: 0,
+        arrowHeight: arrowHeight,
         width: width);
   }
 

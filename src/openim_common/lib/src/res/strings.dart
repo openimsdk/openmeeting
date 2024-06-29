@@ -1166,4 +1166,13 @@ class StrRes {
   static String get muteAllHint => 'muteAllHint'.tr;
   static String get selectInput => 'selectInput'.tr;
   static String get selectSpeaker => 'selectSpeaker'.tr;
+  static String get currentScheduleDeselectedHint => 'currentScheduleDeselectedHint'.tr;
+  static String get monday => 'monday'.tr;
+  static String get tuesday => 'tuesday'.tr;
+  static String get wednesday => 'wednesday'.tr;
+  static String get thursday => 'thursday'.tr;
+  static String get friday => 'friday'.tr;
+  static String get saturday => 'saturday'.tr;
+  static String get sunday => 'sunday'.tr;
+  static String get participantRemovedHit => 'participantRemovedHit'.tr;
 }

@@ -122,7 +122,7 @@ extension WindowTypeExt on WindowType {
   }
 }
 
-enum OperationType { participants, roomSettings, leave, end, setting, onlyClose } // case setting for app setting
+enum  OperationType { participants, roomSettings, leave, end, setting, onlyClose } // case setting for app setting
 
 enum OperationParticipantType {
   pined,
@@ -271,6 +271,95 @@ extension MeetingStatusExt on MeetingStatus {
         return MeetingStatus.completed;
       default:
         throw Exception('Invalid MeetingStatus: $str');
+    }
+  }
+}
+
+enum Weekdays {
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday,
+}
+
+extension WeekdaysExt on Weekdays {
+  String get title {
+    switch (this) {
+      case Weekdays.monday:
+        return StrRes.monday;
+      case Weekdays.tuesday:
+        return StrRes.tuesday;
+      case Weekdays.wednesday:
+        return StrRes.wednesday;
+      case Weekdays.thursday:
+        return StrRes.thursday;
+      case Weekdays.friday:
+        return StrRes.friday;
+      case Weekdays.saturday:
+        return StrRes.saturday;
+      case Weekdays.sunday:
+        return StrRes.sunday;
+    }
+  }
+
+  String get rawValue {
+    switch (this) {
+      case Weekdays.monday:
+        return 'Monday';
+      case Weekdays.tuesday:
+        return 'Tuesday';
+      case Weekdays.wednesday:
+        return 'Wednesday';
+      case Weekdays.thursday:
+        return 'Thursday';
+      case Weekdays.friday:
+        return 'Friday';
+      case Weekdays.saturday:
+        return 'Saturday';
+      case Weekdays.sunday:
+        return 'Sunday';
+    }
+  }
+
+  static Weekdays fromString(String str) {
+    switch (str) {
+      case 'Monday':
+        return Weekdays.monday;
+      case 'Tuesday':
+        return Weekdays.tuesday;
+      case 'Wednesday':
+        return Weekdays.wednesday;
+      case 'Thursday':
+        return Weekdays.thursday;
+      case 'Friday':
+        return Weekdays.friday;
+      case 'Saturday':
+        return Weekdays.saturday;
+      case 'Sunday':
+        return Weekdays.sunday;
+      default:
+        throw Exception('Invalid Weekdays: $str');
+    }
+  }
+}
+
+enum HostType {
+  host,
+  coHost,
+}
+
+extension HostTypeExt on HostType {
+  static HostType fromString(String str) {
+    switch (str) {
+      case 'Host':
+        return HostType.host;
+      case 'CoHost':
+        return HostType.coHost;
+      default:
+        throw Exception('Invalid HostType: $str');
     }
   }
 }

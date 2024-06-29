@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/meeting.pb.dart';
 import 'package:openmeeting/main.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:window_manager/window_manager.dart';
 import '../../../../../core/multi_window_manager.dart';
 import '../../../../data/models/define.dart';
 import '../../../../widgets/meeting/desktop/participants_view.dart';

@@ -263,6 +263,14 @@ class MeetingAlertDialog {
     required VoidCallback? onKickoff,
   }) {
     Widget buildContent(BuildContext ctx) {
+      void hideDialog() {
+        if (forMobile) {
+          OverlayWidget().hideDialog();
+        } else {
+          Navigator.of(context).pop();
+        }
+      }
+
       Widget buildItem(Widget icon, String title, VoidCallback onTap, {bool showDivider = true}) {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -272,7 +280,10 @@ class MeetingAlertDialog {
                 dense: true,
                 leading: icon,
                 title: Text(title, style: Styles.ts_0C1C33_17sp),
-                onTap: onTap,
+                onTap: () {
+                  hideDialog();
+                  onTap();
+                },
               ),
             ),
             if (showDivider) Divider(height: 1, color: Styles.c_E8EAEF),
@@ -303,11 +314,7 @@ class MeetingAlertDialog {
                       Text(valueNotifier.value.nickname, style: Styles.ts_0C1C33_17sp),
                       CloseButton(
                         onPressed: () {
-                          if (forMobile) {
-                            OverlayWidget().hideDialog();
-                          } else {
-                            Navigator.of(context).pop();
-                          }
+                          hideDialog();
                         },
                       ),
                     ],
@@ -315,10 +322,9 @@ class MeetingAlertDialog {
                 ),
                 buildItem(
                     Icon(
-                        valueNotifier.value.cameraIsEnable
-                            ? Icons.video_camera_back_rounded
-                            : Icons.videocam_off_rounded,
-                        color: Styles.c_8E9AB0),
+                      valueNotifier.value.cameraIsEnable ? Icons.video_camera_back_rounded : Icons.videocam_off_rounded,
+                      color: Styles.c_8E9AB0,
+                    ),
                     valueNotifier.value.cameraIsEnable ? StrRes.meetingCloseVideo : StrRes.requestEnableVideo,
                     onEnableCamera),
                 buildItem(Icon(valueNotifier.value.micIsEnable ? Icons.mic : Icons.mic_off, color: Styles.c_8E9AB0),

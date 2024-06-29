@@ -146,6 +146,9 @@ class MeetingRepository implements IMeetingRepository {
     final params = request.toProto3Json() as Map<String, dynamic>;
     params['scheduledTime'] = request.scheduledTime.toInt();
     params['meetingDuration'] = request.meetingDuration.toInt();
+    final repeat = request.repeatInfo.toProto3Json() as Map<String, dynamic>;
+    repeat['endDate'] = request.repeatInfo.endDate.toInt();
+    params['repeatInfo'] = repeat;
 
     try {
       await Apis.updateMeetingSetting(params);

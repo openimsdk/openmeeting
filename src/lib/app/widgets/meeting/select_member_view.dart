@@ -26,13 +26,19 @@ abstract class SelectMemberViewState<T extends SelectMemberView> extends State<T
   String? get selectedUserID => _selectedUserID;
 
   @override
+  void initState() {
+    _selectedUserID = widget.participants.firstOrNull?.participant.identity;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return buildBody(context);
   }
 
   Widget buildBody(BuildContext context);
 
-  Widget buildList(BuildContext context) {
+  Widget buildList(BuildContext context, {double height = 30}) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: widget.participants.length,
@@ -47,7 +53,7 @@ abstract class SelectMemberViewState<T extends SelectMemberView> extends State<T
           dense: true,
           leading: AvatarView(
             text: nickname,
-            height: 30,
+            height: height,
           ),
           title: nickname.toText..style = Styles.ts_0C1C33_12sp,
           trailing: selectedUserID == userID ? Icon(Icons.check, color: Styles.c_0089FF) : null,
@@ -70,21 +76,37 @@ class SelectMemberViewForMobile extends SelectMemberView {
 class SelectMemberViewForMobileState extends SelectMemberViewState<SelectMemberViewForMobile> {
   @override
   Widget buildBody(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Select Member - Mobile'),
-          actions: [
-            TextButton(
-              onPressed: _selectedUserID == null
-                  ? null
-                  : () {
-                      widget.onSelected(selectedUserID!);
-                    },
-              child: Text('OK'),
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(8.0),
+            bottomLeft: Radius.zero,
+            topRight: Radius.circular(8.0),
+            bottomRight: Radius.zero),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          TextButton(
+            onPressed: _selectedUserID == null
+                ? null
+                : () {
+                    widget.onSelected(selectedUserID!);
+                  },
+            child: Text(
+              StrRes.determine,
+              style: Styles.ts_0C1C33_14sp,
             ),
-          ],
-        ),
-        body: buildList(context));
+          ),
+          const Divider(
+            height: 1,
+          ),
+          buildList(context, height: 42),
+        ],
+      ),
+    );
   }
 }
 
@@ -115,7 +137,7 @@ class SelectMemberViewForDesktopState extends SelectMemberViewState<SelectMember
           SizedBox(
             height: 30,
             child: CupertinoButton.filled(
-                padding: EdgeInsets.symmetric(vertical: 0),
+                padding: const EdgeInsets.symmetric(vertical: 0),
                 child: Text(
                   StrRes.assignAndLeave,
                 ),

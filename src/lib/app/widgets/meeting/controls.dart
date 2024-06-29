@@ -425,14 +425,26 @@ class _ControlsViewState extends State<ControlsView> {
           onLeave: () {
             Logger().printInfo(info: '========= onLeave =======');
             if (_isHost) {
+              final members = widget.participantsSubject.value;
+              final temp = members.where((element) => element.participant.identity != _participant.identity).toList();
+
+              if (temp.isEmpty) {
+                widget.onOperation?.call(context, OperationType.leave);
+
+                return;
+              }
+
               OverlayWidget().showBottomSheet(
                 context: context,
                 child: (AnimationController? controller) {
                   return SelectMemberViewForMobile(
-                      participants: widget.participantsSubject.value,
-                      onSelected: (value) {
-                        controller?.reverse();
-                        MeetingAlertDialog.show(context, 'Are you sure?', onConfirm: () async {
+                      participants: temp,
+                      onSelected: (value) async {
+                        await controller?.reverse();
+                        if (!mounted) {
+                          return;
+                        }
+                        MeetingAlertDialog.show(forMobile: true, context, 'Are you sure?', onConfirm: () async {
                           await widget.onParticipantOperation
                               ?.call(type: OperationParticipantType.setHost, userID: value);
                           if (mounted) {
@@ -451,10 +463,18 @@ class _ControlsViewState extends State<ControlsView> {
     } else {
       if (_isHost) {
         MeetingPopMenu.showMeetingWidget(ctx, onTap2: () {
+          final members = widget.participantsSubject.value;
+          final temp = members.where((element) => element.participant.identity != _participant.identity).toList();
+
+          if (temp.isEmpty) {
+            widget.onOperation?.call(context, OperationType.leave);
+
+            return;
+          }
           MeetingPopMenu.showSimpleWidget(
             ctx,
             SelectMemberViewForDesktop(
-                participants: widget.participantsSubject.value,
+                participants: temp,
                 onSelected: (value) {
                   MeetingAlertDialog.show(context, 'Are you sure?', onConfirm: () async {
                     await widget.onParticipantOperation?.call(type: OperationParticipantType.setHost, userID: value);
@@ -463,6 +483,7 @@ class _ControlsViewState extends State<ControlsView> {
                     }
                   });
                 }),
+            width: 200,
           );
         }, onTap3: () {
           widget.onOperation?.call(ctx, OperationType.end);

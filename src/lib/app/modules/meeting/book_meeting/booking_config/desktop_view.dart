@@ -558,7 +558,7 @@ class _DesktopViewState extends State<DesktopView> {
     var endsInDays = bookingConfig.endsIn;
     final maxLimit = bookingConfig.repeatTimes != 0 ? bookingConfig.repeatTimes : 7;
 
-    if (type == RepeatType.daily || type == RepeatType.custom) {
+    if (type == RepeatType.custom) {
       endsInDays = bookingConfig.endsIn != 0
           ? bookingConfig.endsIn
           : DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime).add(maxLimit.days).millisecondsSinceEpoch;
@@ -610,6 +610,25 @@ class _DesktopViewState extends State<DesktopView> {
       }
 
       endsInDays = originalTime.millisecondsSinceEpoch;
+    } else if (type == RepeatType.custom) {
+      final unit = bookingConfig.unit;
+      final interval = bookingConfig.interval;
+
+      if (unit == UnitType.day) {
+        endsInDays = bookingConfig.endsIn != 0
+            ? bookingConfig.endsIn
+            : DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime)
+                .add((maxLimit * interval).days)
+                .millisecondsSinceEpoch;
+      } else if (unit == UnitType.week) {
+        var originalTime = DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime);
+
+        for (int i = 0; i < maxLimit; i++) {
+          originalTime = originalTime.add(7.days * interval);
+        }
+
+        endsInDays = originalTime.millisecondsSinceEpoch;
+      }
     }
 
     return (endsInDays: endsInDays, maxLimit: maxLimit);

@@ -21,7 +21,7 @@ class _ModelItem {
 class CustomRepeatModelView extends StatefulWidget {
   const CustomRepeatModelView({super.key, required this.config});
 
-  final BookingConfig config;
+  final BookingConfig? config;
 
   @override
   State<CustomRepeatModelView> createState() => CustomRepeatModelViewState();
@@ -31,7 +31,7 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
   final units = [
     _ModelItem(title: UnitType.day.title, value: UnitType.day),
     _ModelItem(title: UnitType.week.title, value: UnitType.week),
-    _ModelItem(title: UnitType.month.title, value: UnitType.month)
+    // _ModelItem(title: UnitType.month.title, value: UnitType.month)
   ];
   final cycleValues = [
     List.generate(100, (index) => _ModelItem(title: (index + 1).toString(), value: index + 1)),
@@ -65,6 +65,15 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
     bookingConfig.value = widget.config;
     if (bookingConfig.value != null) {
       bookingConfig.value!.interval = 1;
+
+      if (bookingConfig.value!.interval > 0) {
+        _durationValueListenable.value = bookingConfig.value!.interval.toString();
+      }
+      if (bookingConfig.value!.unit == UnitType.week) {
+        _unitsValueListenable.value = units[1].title;
+      } else if (bookingConfig.value!.unit == UnitType.month) {
+        _unitsValueListenable.value = units[2].title;
+      }
     }
     final DateFormat formatter = DateFormat('EEE');
     final now = formatter.format(DateTime.now());
@@ -212,7 +221,7 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
                       bookingConfig.update((val) {
                         final index = units.indexWhere((element) => element.title == value);
 
-                        val?.unit = UnitTypeExt.fromString(units[index].value);
+                        val?.unit = units[index].value;
                       });
                     }),
               ),
@@ -277,8 +286,8 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
                     width: 150,
                     scrollbarTheme: ScrollbarThemeData(
                       radius: const Radius.circular(40),
-                      thickness: MaterialStateProperty.all(6),
-                      thumbVisibility: MaterialStateProperty.all(true),
+                      thickness: WidgetStateProperty.all(6),
+                      thumbVisibility: WidgetStateProperty.all(true),
                     ),
                   ),
                 ),
@@ -295,7 +304,7 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
       children: _weekdayValues
           .map((e) => _buildCheckBoxItem(
               title: e.title,
-              value: _selectedWeekdays.contains(e),
+              value: _selectedWeekdays.firstWhereOrNull((element) => element.title == e.title) != null,
               onChanged: (bool value) {
                 if (value) {
                   _selectedWeekdays.add(e);

@@ -36,8 +36,8 @@ class MeetingController extends GetxController with WindowListener, MultiWindowL
   @override
   void onInit() {
     super.onInit();
-    // queryUnfinishedMeeting();
-    queryMeetingInTimer();
+    queryUnfinishedMeeting();
+    // queryMeetingInTimer();
 
     DesktopMultiWindow.setMethodHandler((call, fromWindowId) async {
       Logger.print("[Main] call ${call.method} with args ${call.arguments} from window $fromWindowId");

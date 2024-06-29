@@ -14,10 +14,7 @@ class RepeatModelPage extends GetView<RepeatModelController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        title: const Text('RepeatModelPage'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(),
       body: Obx(
         () => SingleChildScrollView(
           padding: const EdgeInsets.only(top: 10),
@@ -68,7 +65,7 @@ class RepeatModelPage extends GetView<RepeatModelController> {
           color: Colors.grey.shade500,
         ),
         onTap: () async {
-          MNavigator.startCustomRepeat();
+          MNavigator.startCustomRepeat(config: controller.config);
         },
       ),
     );

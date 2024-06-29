@@ -600,4 +600,13 @@ const Map<String, String> zh_CN = {
   'muteAllHint': '所有参会人员即将静音',
   'selectSpeaker': '选择扬声器',
   'selectInput': '选择输入源',
+  'currentScheduleDeselectedHint': '当前日程无法取消选择。',
+  'monday': '星期一',
+  'tuesday': '星期二',
+  'wednesday': '星期三',
+  'thursday': '星期四',
+  'friday': '星期五',
+  'saturday': '星期六',
+  'sunday': '星期日',
+  'participantRemovedHit': '你已被请出会议。',
 };

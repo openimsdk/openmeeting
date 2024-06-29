@@ -21,7 +21,8 @@ import '../../../../widgets/meeting/participant_info.dart';
 import '../meeting_client.dart';
 
 class MeetingRoom extends MeetingView {
-  const MeetingRoom(super.room, super.listener, {super.key, required super.roomID, super.onParticipantOperation, super.onOperation, super.options});
+  const MeetingRoom(super.room, super.listener,
+      {super.key, required super.roomID, super.onParticipantOperation, super.onOperation, super.options});
 
   @override
   MeetingViewState<MeetingRoom> createState() => _MeetingRoomState();
@@ -104,39 +105,39 @@ class _MeetingRoomState extends MeetingViewState<MeetingRoom> {
   void _parseDataReceived(DataReceivedEvent event) {
     final jsonStr = utf8.decode(event.data);
     final map = jsonDecode(jsonStr);
-    final result = StreamOperateData()..mergeFromProto3Json(map);
+    final result = NotifyMeetingData()..mergeFromProto3Json(map);
     Logger.print('participant: ${event.participant?.identity} metadata: $map');
 
-    if (result.operation.isEmpty || result.operatorUserID == widget.room.localParticipant?.identity) {
-      return;
-    }
+    // if (result.operation.isEmpty || result.operatorUserID == widget.room.localParticipant?.identity) {
+    //   return;
+    // }
 
-    final operateUser = result.operation.firstWhereOrNull((element) {
-      return element.userID == widget.room.localParticipant?.identity;
-    });
+    // final operateUser = result.operation.firstWhereOrNull((element) {
+    //   return element.userID == widget.room.localParticipant?.identity;
+    // });
 
-    if (operateUser == null) return;
+    // if (operateUser == null) return;
 
-    final cameraOnEntry = operateUser.cameraOnEntry;
-    final microphoneOnEntry = operateUser.microphoneOnEntry;
+    // final cameraOnEntry = operateUser.cameraOnEntry;
+    // final microphoneOnEntry = operateUser.microphoneOnEntry;
 
-    if (cameraOnEntry) {
-      MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
-          forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
-        widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
-      });
-    } else {
-      widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
-    }
+    // if (cameraOnEntry) {
+    //   MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
+    //       forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
+    //     widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
+    //   });
+    // } else {
+    //   widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
+    // }
 
-    if (microphoneOnEntry) {
-      MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
-          forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
-        widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
-      });
-    } else {
-      widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
-    }
+    // if (microphoneOnEntry) {
+    //   MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
+    //       forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
+    //     widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
+    //   });
+    // } else {
+    //   widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
+    // }
 
     Logger.print(jsonStr);
   }
@@ -257,8 +258,9 @@ class _MeetingRoomState extends MeetingViewState<MeetingRoom> {
     return count;
   }
 
-  int get pageCount => _fixPages((participantTracks.length % 4 == 0 ? participantTracks.length ~/ 4 : participantTracks.length ~/ 4 + 1) +
-      (null == _firstParticipantTrack ? 0 : 1));
+  int get pageCount => _fixPages(
+      (participantTracks.length % 4 == 0 ? participantTracks.length ~/ 4 : participantTracks.length ~/ 4 + 1) +
+          (null == _firstParticipantTrack ? 0 : 1));
 
   @override
   Widget buildChild() => Container(
@@ -268,8 +270,8 @@ class _MeetingRoomState extends MeetingViewState<MeetingRoom> {
             widget.room.remoteParticipants.isEmpty
                 ? (_localParticipantTrack == null
                     ? const SizedBox()
-                    : ParticipantWidget.widgetFor(_localParticipantTrack!, options: widget.options, isZoom: true, useScreenShareTrack: true,
-                        onTapSwitchCamera: () {
+                    : ParticipantWidget.widgetFor(_localParticipantTrack!,
+                        options: widget.options, isZoom: true, useScreenShareTrack: true, onTapSwitchCamera: () {
                         _localParticipantTrack!.toggleCamera();
                       }))
                 : StatefulBuilder(

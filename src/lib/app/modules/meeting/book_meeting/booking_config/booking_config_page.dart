@@ -212,12 +212,29 @@ class BookingConfigPage extends GetView<BookingConfigController> {
   }
 
   void _selectRepeatFrequency() async {
-    final result =
-        await MNavigator.startRepeatModel(type: controller.bookingConfig.value.repeatType.rawValue) as String?;
-    // final result = Get.parameters['text'];
-    controller.bookingConfig.update((val) {
-      val?.repeatType = result == null ? RepeatType.none : RepeatTypeExt.fromString(result);
-    });
+    var result = await MNavigator.startRepeatModel(config: controller.bookingConfig.value);
+
+    if (result == null) {
+      return;
+    }
+
+    if (result is String) {
+      controller.bookingConfig.update((val) {
+        val?.repeatType = RepeatTypeExt.fromString(result);
+      });
+    } else {
+      // custom type
+      final unit = result['unit'];
+      final interval = result['interval'];
+
+      if (unit != null && interval != null) {
+        controller.bookingConfig.update((val) {
+          val?.repeatType = RepeatType.custom;
+          val?.unit = UnitTypeExt.fromString(unit);
+          val?.interval = int.parse(interval);
+        });
+      }
+    }
   }
 
   void _selectRepeatEnds() async {
@@ -289,7 +306,7 @@ class BookingConfigPage extends GetView<BookingConfigController> {
     final type = bookingConfig.repeatType;
 
     var endsInDays = bookingConfig.endsIn;
-    final maxLimit = bookingConfig.repeatTimes != 0 ? bookingConfig.repeatTimes : 7;
+    var maxLimit = bookingConfig.repeatTimes != 0 ? bookingConfig.repeatTimes : 7;
 
     if (type == RepeatType.daily) {
       endsInDays = bookingConfig.endsIn != 0
@@ -343,6 +360,25 @@ class BookingConfigPage extends GetView<BookingConfigController> {
       }
 
       endsInDays = originalTime.millisecondsSinceEpoch;
+    } else if (type == RepeatType.custom) {
+      final unit = bookingConfig.unit;
+      final interval = bookingConfig.interval;
+
+      if (unit == UnitType.day) {
+        endsInDays = bookingConfig.endsIn != 0
+            ? bookingConfig.endsIn
+            : DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime)
+                .add((maxLimit * interval).days)
+                .millisecondsSinceEpoch;
+      } else if (unit == UnitType.week) {
+        var originalTime = DateTime.fromMillisecondsSinceEpoch(bookingConfig.beginTime);
+
+        for (int i = 0; i < maxLimit; i++) {
+          originalTime = originalTime.add(7.days * interval);
+        }
+
+        endsInDays = originalTime.millisecondsSinceEpoch;
+      }
     }
 
     return (endsInDays: endsInDays, maxLimit: maxLimit);

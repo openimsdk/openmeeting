@@ -111,7 +111,8 @@ class MeetingPage extends GetView<MeetingController> {
                         ? Flexible(
                             child: StickyHeader(
                               child: CustomScrollView(
-                                physics: const BouncingScrollPhysics(),
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                shrinkWrap: true,
                                 slivers: [
                                   CupertinoSliverRefreshControl(
                                     onRefresh: controller.onRefresh,

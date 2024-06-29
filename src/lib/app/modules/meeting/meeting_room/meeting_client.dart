@@ -1,11 +1,11 @@
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:openmeeting/app/data/models/define.dart';
 import 'package:openmeeting/app/data/models/meeting.pb.dart';
 import 'package:openmeeting/app/data/services/repository/repository.dart';
-import 'package:openmeeting/core/data_sp.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../core/multi_window_manager.dart';
@@ -73,6 +73,7 @@ class MeetingClient {
       await controller.hide();
       await windowsManager.call(WindowType.room, WindowEvent.hide, {"id": kWindowId!});
     }
+    Navigator.of(Get.context!).popUntil((route) => route.isFirst);
 
     sendBusyMessage(false);
     busy = false;

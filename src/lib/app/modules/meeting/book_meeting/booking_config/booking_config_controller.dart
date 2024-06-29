@@ -53,6 +53,8 @@ class BookingConfigController extends GetxController {
       pswEditingController.text = meetingInfo!.password ?? '';
       bookingConfig.value.enableCamera = meetingInfo!.setting.disableCameraOnJoin;
       bookingConfig.value.enableMicrophone = meetingInfo!.setting.disableMicrophoneOnJoin;
+      bookingConfig.value.interval = meetingInfo!.repeatInfo.interval;
+      bookingConfig.value.unit = UnitTypeExt.fromString(meetingInfo!.repeatInfo.uintType);
       bookingConfig.value.repeatType = meetingInfo!.repeatType;
       bookingConfig.value.repeatTimes = meetingInfo!.repeatInfo.repeatTimes;
       bookingConfig.value.endsIn = meetingInfo!.repeatInfo.endDate.toInt();
@@ -84,6 +86,13 @@ class BookingConfigController extends GetxController {
         password: bookingConfig.value.meetingPassword,
         disableCameraOnJoin: !bookingConfig.value.enableCamera,
         disableMicrophoneOnJoin: !bookingConfig.value.enableMicrophone,
+        repeatInfo: MeetingRepeatInfo(
+          endDate: Int64(bookingConfig.value.endsIn),
+          repeatType: bookingConfig.value.repeatType.rawValue,
+          repeatTimes: bookingConfig.value.repeatTimes,
+          interval: bookingConfig.value.interval,
+          uintType: bookingConfig.value.unit.rawValue,
+        ),
       );
       await repository.updateMeetingSetting(request);
     } else {

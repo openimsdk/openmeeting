@@ -20,6 +20,10 @@ extension MeetingInfoSettingExt on MeetingInfoSetting {
   RepeatType get repeatType => RepeatTypeExt.fromString(repeatInfo.repeatType);
 }
 
+extension NotifyMeetingDataExt on NotifyMeetingData {
+  HostType get hostType => HostTypeExt.fromString(meetingHostData.hostType);
+}
+
 extension UserInfoExt on ui.UserInfo {
   UserInfo toPBUser() {
     return UserInfo(userID: userId, nickname: nickname);

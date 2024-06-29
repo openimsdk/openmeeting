@@ -600,4 +600,13 @@ const Map<String, String> en_US = {
   'muteAllHint': 'All participants will be muted',
   'selectSpeaker': 'Select Speaker',
   'selectInput': 'Select Input',
+  'currentScheduleDeselectedHint': 'The current schedule cannot be deselected.',
+  'monday': 'Monday',
+  'tuesday': 'Tuesday',
+  'wednesday': 'Wednesday',
+  'thursday': 'Thursday',
+  'friday': 'Friday',
+  'saturday': 'Saturday',
+  'sunday': 'Sunday',
+  'participantRemovedHit': 'You have been removed from the meeting.',
 };

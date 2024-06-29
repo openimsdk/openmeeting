@@ -168,7 +168,6 @@ class _RoomConnectDesktopViewState extends State<RoomConnectDesktopView>
   }
 
   void _closeWindowsHelper({bool realClose = false}) async {
-    Navigator.of(Get.context!).popUntil((route) => route.isFirst);
     MeetingClient().closeWindow(realClose: realClose);
     MeetingClient().sendBusyMessage(false);
   }

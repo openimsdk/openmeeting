@@ -6,7 +6,9 @@ class CustomRepeatBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<CustomRepeatController>(
-      () => CustomRepeatController(),
+      () => CustomRepeatController(
+        config: Get.arguments['config'],
+      ),
     );
   }
 }

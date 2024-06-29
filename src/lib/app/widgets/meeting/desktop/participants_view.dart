@@ -40,7 +40,7 @@ abstract class ParticipantsViewState<T extends ParticipantsView> extends State<T
 
   bool muteAll = false;
   MeetingSetting? get setting => _meetingInfo?.setting;
-  bool get isHost => _meetingInfo?.creatorUserID == widget.loginUserID;
+  bool get isHost => _meetingInfo?.hostUserID == widget.loginUserID;
 
   @override
   void initState() {
@@ -255,7 +255,7 @@ class _ParticipantsDesktopViewState extends ParticipantsViewState<ParticipantsDe
               ..style = Styles.ts_0C1C33_17sp
               ..maxLines = 1
               ..overflow = TextOverflow.ellipsis,
-            if (userID == _meetingInfo?.creatorUserID)
+            if (userID == _meetingInfo?.hostUserID)
               Text(
                 '(${StrRes.meetingHost}, ${StrRes.me})',
                 style: Styles.ts_8E9AB0_12sp,

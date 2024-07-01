@@ -55,14 +55,25 @@ class RepeatModelPage extends GetView<RepeatModelController> {
       color: Colors.white,
       height: 58.h,
       child: ListTile(
+        dense: true,
         title: Text(
           StrRes.custom,
           style: Styles.ts_0C1C33_17sp,
         ),
         splashColor: Colors.transparent,
-        trailing: Icon(
-          Icons.keyboard_arrow_right,
-          color: Colors.grey.shade500,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (controller.type == RepeatType.custom)
+              Text(
+                StrRes.hasBeenSet,
+                style: Styles.ts_0089FF_12sp,
+              ),
+            Icon(
+              Icons.keyboard_arrow_right,
+              color: Colors.grey.shade500,
+            ),
+          ],
         ),
         onTap: () async {
           MNavigator.startCustomRepeat(config: controller.config);

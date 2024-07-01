@@ -14,8 +14,7 @@ class MeetingRepository implements IMeetingRepository {
     };
     final result = await Apis.getMeetings(params);
 
-    return List<MeetingInfoSetting>.from(
-        result['meetingDetails']?.map((e) => MeetingInfoSetting()..mergeFromProto3Json(e)).toList() ?? []);
+    return List<MeetingInfoSetting>.from(result['meetingDetails']?.map((e) => MeetingInfoSetting()..mergeFromProto3Json(e)).toList() ?? []);
   }
 
   @override
@@ -51,7 +50,11 @@ class MeetingRepository implements IMeetingRepository {
       },
       'setting': setting.toProto3Json(),
       if (repeatInfo != null)
-        'repeatInfo': {...repeatInfo.toProto3Json() as Map, 'endDate': repeatInfo.endDate.toInt()},
+        'repeatInfo': {
+          ...repeatInfo.toProto3Json() as Map,
+          'endDate': repeatInfo.endDate.toInt(),
+          'repeatDaysOfWeek': repeatInfo.repeatDaysOfWeek.map((e) => e.value).toList()
+        },
     };
 
     if (type == CreateMeetingType.quick) {
@@ -94,8 +97,7 @@ class MeetingRepository implements IMeetingRepository {
     };
     final result = await Apis.getMeetings(params);
 
-    return List<MeetingInfoSetting>.from(
-        result['meetingDetails']?.map((e) => MeetingInfoSetting()..mergeFromProto3Json(e)).toList() ?? []);
+    return List<MeetingInfoSetting>.from(result['meetingDetails']?.map((e) => MeetingInfoSetting()..mergeFromProto3Json(e)).toList() ?? []);
   }
 
   @override
@@ -130,7 +132,7 @@ class MeetingRepository implements IMeetingRepository {
 
   @override
   Future<bool> setPersonalSetting(String meetingID, String userID, PersonalMeetingSetting setting) async {
-    final params = {'meetingID': meetingID, 'userID': userID, 'setting': setting.toProto3Json()};
+    final params = {'meetingID': meetingID, 'userID': userID, ...(setting.toProto3Json() as Map<String, dynamic>)};
 
     try {
       await Apis.setPersonalSetting(params);
@@ -148,6 +150,7 @@ class MeetingRepository implements IMeetingRepository {
     params['meetingDuration'] = request.meetingDuration.toInt();
     final repeat = request.repeatInfo.toProto3Json() as Map<String, dynamic>;
     repeat['endDate'] = request.repeatInfo.endDate.toInt();
+    repeat['repeatDaysOfWeek'] = request.repeatInfo.repeatDaysOfWeek.map((e) => e.value).toList();
     params['repeatInfo'] = repeat;
 
     try {
@@ -184,10 +187,7 @@ class MeetingRepository implements IMeetingRepository {
 
   @override
   Future<bool> modifyParticipantName(
-      {required String meetingID,
-      required String userID,
-      required String participantUserID,
-      required String nickname}) async {
+      {required String meetingID, required String userID, required String participantUserID, required String nickname}) async {
     final params = {
       'meetingID': meetingID,
       'userID': userID,
@@ -205,8 +205,7 @@ class MeetingRepository implements IMeetingRepository {
   }
 
   @override
-  Future<bool> kickParticipant(
-      {required String meetingID, required String userID, required List<String> participantUserIDs}) async {
+  Future<bool> kickParticipant({required String meetingID, required String userID, required List<String> participantUserIDs}) async {
     final params = {
       'meetingID': meetingID,
       'userID': userID,
@@ -224,10 +223,7 @@ class MeetingRepository implements IMeetingRepository {
 
   @override
   Future<bool> setMeetingHost(
-      {required String meetingID,
-      required String userID,
-      required String hostUserID,
-      required List<String> coHostUserIDs}) async {
+      {required String meetingID, required String userID, required String hostUserID, required List<String> coHostUserIDs}) async {
     final params = {
       'meetingID': meetingID,
       'userID': userID,

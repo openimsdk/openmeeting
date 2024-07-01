@@ -16,7 +16,12 @@ import '../../../../widgets/meeting/participant_info.dart';
 
 class MeetingDesktopRoom extends MeetingView {
   const MeetingDesktopRoom(super.room, super.listener,
-      {super.key, required super.roomID, super.onParticipantOperation, super.options, super.onOperation, super.onSubjectInit});
+      {super.key,
+      required super.roomID,
+      super.onParticipantOperation,
+      super.options,
+      super.onOperation,
+      super.onSubjectInit});
 
   @override
   MeetingViewState<MeetingDesktopRoom> createState() => _MeetingRoomState();
@@ -100,36 +105,38 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
     final result = NotifyMeetingData()..mergeFromProto3Json(map);
     Logger.print('participant: ${event.participant?.identity} metadata: $map');
 
-    // if (result.operation.isEmpty || result.operatorUserID == widget.room.localParticipant?.identity) {
-    //   return;
-    // }
+    final streamOperateData = result.streamOperateData;
 
-    // final operateUser = result.operation.firstWhereOrNull((element) {
-    //   return element.userID == widget.room.localParticipant?.identity;
-    // });
+    if (streamOperateData.operation.isEmpty || result.operatorUserID == widget.room.localParticipant?.identity) {
+      return;
+    }
 
-    // if (operateUser == null) return;
+    final operateUser = streamOperateData.operation.firstWhereOrNull((element) {
+      return element.userID == widget.room.localParticipant?.identity;
+    });
 
-    // final cameraOnEntry = operateUser.cameraOnEntry;
-    // final microphoneOnEntry = operateUser.microphoneOnEntry;
+    if (operateUser == null) return;
 
-    // if (cameraOnEntry) {
-    //   MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
-    //       forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
-    //     widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
-    //   });
-    // } else {
-    //   widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
-    // }
+    final cameraOnEntry = operateUser.cameraOnEntry;
+    final microphoneOnEntry = operateUser.microphoneOnEntry;
 
-    // if (microphoneOnEntry) {
-    //   MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
-    //       forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
-    //     widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
-    //   });
-    // } else {
-    //   widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
-    // }
+    if (cameraOnEntry) {
+      MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingEnableVideo]),
+          forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
+        widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
+      });
+    } else {
+      widget.room.localParticipant?.setCameraEnabled(cameraOnEntry);
+    }
+
+    if (microphoneOnEntry) {
+      MeetingAlertDialog.show(context, sprintf(StrRes.requestXDoHint, [StrRes.meetingUnmute]),
+          forMobile: true, confirmText: StrRes.confirm, cancelText: StrRes.keepClose, onConfirm: () {
+        widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
+      });
+    } else {
+      widget.room.localParticipant?.setMicrophoneEnabled(microphoneOnEntry);
+    }
 
     Logger.print(jsonStr);
   }
@@ -264,8 +271,8 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
     return track;
   }
 
-  bool get anyOneHasVideo =>
-      participantTracks.any((e) => (e.screenShareTrack != null && !e.screenShareTrack!.muted) || (e.videoTrack != null && !e.videoTrack!.muted));
+  bool get anyOneHasVideo => participantTracks.any((e) =>
+      (e.screenShareTrack != null && !e.screenShareTrack!.muted) || (e.videoTrack != null && !e.videoTrack!.muted));
 
   // _onPageChange(int pages) {
   //   setState(() {
@@ -278,8 +285,9 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
     return count;
   }
 
-  int get pageCount => _fixPages((participantTracks.length % 4 == 0 ? participantTracks.length ~/ 4 : participantTracks.length ~/ 4 + 1) +
-      (null == _firstParticipantTrack ? 0 : 1));
+  int get pageCount => _fixPages(
+      (participantTracks.length % 4 == 0 ? participantTracks.length ~/ 4 : participantTracks.length ~/ 4 + 1) +
+          (null == _firstParticipantTrack ? 0 : 1));
 
   @override
   Widget buildChild() {
@@ -314,18 +322,21 @@ class _MeetingRoomState extends MeetingViewState<MeetingDesktopRoom> {
     }
 
     if (event.reason == DisconnectReason.participantRemoved) {
-      MeetingAlertDialog.showDisconnect(context, StrRes.participantRemovedHit, confirmText: StrRes.iKnew, onConfirm: () {
+      MeetingAlertDialog.showDisconnect(context, StrRes.participantRemovedHit, confirmText: StrRes.iKnew,
+          onConfirm: () {
         widget.onOperation?.call(context, OperationType.onlyClose);
       });
 
       return;
     }
 
-    if (event.reason != DisconnectReason.disconnected || meetingInfo?.creatorUserID == widget.room.localParticipant?.identity) {
+    if (event.reason != DisconnectReason.disconnected ||
+        meetingInfo?.creatorUserID == widget.room.localParticipant?.identity) {
       return;
     }
 
-    MeetingAlertDialog.show(context, event.reason == DisconnectReason.disconnected ? StrRes.meetingIsOver : StrRes.meetingClosedHint,
+    MeetingAlertDialog.show(
+        context, event.reason == DisconnectReason.disconnected ? StrRes.meetingIsOver : StrRes.meetingClosedHint,
         confirmText: event.reason == DisconnectReason.disconnected ? StrRes.iKnew : null, onConfirm: () {
       widget.onOperation?.call(context, OperationType.onlyClose);
     });

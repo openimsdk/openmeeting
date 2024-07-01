@@ -15,6 +15,10 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'meeting.pbenum.dart';
+
+export 'meeting.pbenum.dart';
+
 /// Defines LiveKit access information.
 class LiveKit extends $pb.GeneratedMessage {
   factory LiveKit({
@@ -392,6 +396,7 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
     $core.String? repeatType,
     $core.String? uintType,
     $core.int? interval,
+    $core.Iterable<DayOfWeek>? repeatDaysOfWeek,
   }) {
     final $result = create();
     if (endDate != null) {
@@ -409,6 +414,9 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
     if (interval != null) {
       $result.interval = interval;
     }
+    if (repeatDaysOfWeek != null) {
+      $result.repeatDaysOfWeek.addAll(repeatDaysOfWeek);
+    }
     return $result;
   }
   MeetingRepeatInfo._() : super();
@@ -421,6 +429,7 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'repeatType', protoName: 'repeatType')
     ..aOS(4, _omitFieldNames ? '' : 'uintType', protoName: 'uintType')
     ..a<$core.int>(5, _omitFieldNames ? '' : 'interval', $pb.PbFieldType.O3)
+    ..pc<DayOfWeek>(6, _omitFieldNames ? '' : 'repeatDaysOfWeek', $pb.PbFieldType.KE, protoName: 'repeatDaysOfWeek', valueOf: DayOfWeek.valueOf, enumValues: DayOfWeek.values, defaultEnumValue: DayOfWeek.SUNDAY)
     ..hasRequiredFields = false
   ;
 
@@ -489,6 +498,9 @@ class MeetingRepeatInfo extends $pb.GeneratedMessage {
   $core.bool hasInterval() => $_has(4);
   @$pb.TagNumber(5)
   void clearInterval() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<DayOfWeek> get repeatDaysOfWeek => $_getList(5);
 }
 
 /// Settings controlling meeting features such as video, audio, and screen sharing permissions.

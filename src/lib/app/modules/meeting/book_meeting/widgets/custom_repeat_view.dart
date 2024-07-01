@@ -79,8 +79,8 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
     final now = formatter.format(DateTime.now());
 
     var value = [_ModelItem(title: now, value: DateTime.now().weekday)];
-    if (bookingConfig.value?.weekdays != null) {
-      value = bookingConfig.value!.weekdays!.map((e) => _weekdayValues[e]).toList();
+    if (bookingConfig.value?.repeatDaysOfWeek != null) {
+      value = bookingConfig.value!.repeatDaysOfWeek!.map((e) => _weekdayValues[e]).toList();
     }
     _selectedWeekdays.value = value;
   }
@@ -121,8 +121,7 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
             constraints: BoxConstraints(minWidth: constraints.maxWidth, minHeight: 52.h, maxHeight: 52.h),
             child: Obx(
               () => Text(
-                sprintf(StrRes.customRepeatModelHint,
-                    ['${cycleValues[_selectedUnit][_selectedValue.value]}${units[_selectedUnit]}']),
+                sprintf(StrRes.customRepeatModelHint, ['${cycleValues[_selectedUnit][_selectedValue.value]}${units[_selectedUnit]}']),
                 style: Styles.ts_0C1C33_17sp,
               ),
             ),
@@ -240,15 +239,13 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
           ),
           _verSpace,
           if (_selectedUnit == 1) _buildWeekdayView(),
-          if (_selectedUnit == 2)
-            _selectedMonthUnit.value == 0 ? _buildSelectedDateView() : _buildCurrentWeekdayInMonthView(),
+          if (_selectedUnit == 2) _selectedMonthUnit.value == 0 ? _buildSelectedDateView() : _buildCurrentWeekdayInMonthView(),
         ],
       ),
     );
   }
 
-  Widget _buildDropdownItem<T>(
-      {String? title, required List<T> items, required ValueNotifier<T> valueListenable, ValueChanged<T>? onChanged}) {
+  Widget _buildDropdownItem<T>({String? title, required List<T> items, required ValueNotifier<T> valueListenable, ValueChanged<T>? onChanged}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -372,8 +369,7 @@ class CustomRepeatModelViewState extends State<CustomRepeatModelView> {
     );
   }
 
-  Widget _buildSelectedDateItem(
-      {required String title, required String text, String? placeholder, required VoidCallback onTap}) {
+  Widget _buildSelectedDateItem({required String title, required String text, String? placeholder, required VoidCallback onTap}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,

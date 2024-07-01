@@ -46,8 +46,8 @@ class CustomRepeatController extends GetxController {
     nowWeekday = CustomRepeatModelItem(title: now, value: DateTime.now().weekday);
 
     var value = [nowWeekday];
-    if (config?.weekdays != null) {
-      value = config!.weekdays!.map((e) => weekdayValues[e]).toList();
+    if (config?.repeatDaysOfWeek != null) {
+      value = config!.repeatDaysOfWeek!.map((e) => weekdayValues[e]).toList();
     }
     selectedWeekdays.value = value;
 
@@ -65,7 +65,7 @@ class CustomRepeatController extends GetxController {
 
   List<CustomRepeatModelItem> _getWeekdays() {
     final now = DateTime.now();
-    final DateFormat formatter = DateFormat('EEE');
+    final DateFormat formatter = DateFormat('EEE', Get.locale?.languageCode);
 
     // Find the first day of the current week (assuming Monday as the first day)
     final startOfWeek = now.subtract(Duration(days: now.weekday - 1));

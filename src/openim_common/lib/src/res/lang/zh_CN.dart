@@ -609,4 +609,5 @@ const Map<String, String> zh_CN = {
   'saturday': '星期六',
   'sunday': '星期日',
   'participantRemovedHit': '你已被请出会议。',
+  'hasBeenSet': '已被设置',
 };

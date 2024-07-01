@@ -31,9 +31,9 @@ class CustomRepeatPage extends GetView<CustomRepeatController> {
               val?.unit = UnitTypeExt.fromString(unit);
               val?.interval = interval;
               final ws = controller.selectedWeekdays.map((e) => e.value).toList();
-              val?.weekdays = List<int>.from(ws);
+              val?.repeatDaysOfWeek = List<int>.from(ws);
             });
- 
+
             MNavigator.popToBookMeeting();
           },
         ),
@@ -93,9 +93,7 @@ class CustomRepeatPage extends GetView<CustomRepeatController> {
                   controller.selectedValue.value = index;
                 },
                 itemBuilder: (context, index) {
-                  return Container(
-                      alignment: Alignment.center,
-                      child: Text('${controller.values[controller.selectedUnit.value][index]}'));
+                  return Container(alignment: Alignment.center, child: Text('${controller.values[controller.selectedUnit.value][index]}'));
                 },
                 childCount: controller.values[controller.selectedUnit.value].length,
                 selectionOverlay: Container(
@@ -162,9 +160,7 @@ class CustomRepeatPage extends GetView<CustomRepeatController> {
         ),
         splashColor: Colors.transparent,
         trailing: Icon(Icons.check,
-            color: controller.selectedWeekdays.firstWhereOrNull((e) => e.title == item.title) != null
-                ? Colors.blue
-                : Colors.transparent),
+            color: controller.selectedWeekdays.firstWhereOrNull((e) => e.title == item.title) != null ? Colors.blue : Colors.transparent),
         onTap: () {
           if (controller.nowWeekday.title == item.title) {
             IMViews.showToast(StrRes.currentScheduleDeselectedHint);

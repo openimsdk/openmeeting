@@ -609,4 +609,5 @@ const Map<String, String> en_US = {
   'saturday': 'Saturday',
   'sunday': 'Sunday',
   'participantRemovedHit': 'You have been removed from the meeting.',
+  'hasBeenSet': 'Has been set.',
 };

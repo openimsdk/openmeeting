@@ -21,16 +21,14 @@ class MeetingMembersSheetView extends StatefulWidget {
     required this.participantsSubject,
     required this.meetingInfoChangedSubject,
     this.controller,
-    this.onInvite,
-    this.isHost = false,
+    required this.localUerID,
     this.onOperation,
   });
 
   final BehaviorSubject<List<ParticipantTrack>> participantsSubject;
   final BehaviorSubject<MeetingInfoSetting> meetingInfoChangedSubject;
   final AnimationController? controller;
-  final Function()? onInvite;
-  final bool isHost;
+  final String localUerID;
   final Future<bool> Function<T>({OperationParticipantType type, String userID, T to})? onOperation;
 
   @override
@@ -49,6 +47,8 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
 
   ValueNotifier<({bool cameraIsEnable, bool micIsEnable, String nickname, String userID})> valueNotifier =
       ValueNotifier((cameraIsEnable: false, micIsEnable: false, nickname: '', userID: ''));
+
+  bool get _isHost => _meetingInfo?.hostUserID == widget.localUerID;
 
   @override
   void initState() {
@@ -80,12 +80,6 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
     });
   }
 
-  void _invite() {
-    widget.controller == null
-        ? widget.onInvite?.call()
-        : widget.controller?.reverse().then((value) => widget.onInvite?.call());
-  }
-
   void _muteAll() {
     widget.onOperation?.call(type: OperationParticipantType.muteAll, to: true);
   }
@@ -111,7 +105,7 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
   }
 
   void _onTapMore(BuildContext ctx, String userID, String nickname) {
-    final itemIsHost = userID == _meetingInfo?.creatorUserID;
+    final itemIsHost = userID == _meetingInfo?.hostUserID;
 
     MeetingAlertDialog.showMemberSetting(context, valueNotifier: valueNotifier, onEnableCamera: () {
       _onTapCamera(userID, !valueNotifier.value.cameraIsEnable);
@@ -177,7 +171,7 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
                 itemCount: _participantTracks.length,
                 itemBuilder: (_, index) => _buildItemView(context, _participantTracks.elementAt(index).participant),
               )),
-              if (widget.isHost) _buildButton(),
+              if (_isHost) _buildButton(),
               12.verticalSpace,
             ],
           ),
@@ -194,8 +188,7 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
     final isMicrophoneEnabled = participant.isMicrophoneEnabled();
     final isCameraEnabled = participant.isCameraEnabled();
 
-    Logger.print(
-        '====participant.identity:$userID, participant.isCameraEnabled: ${participant.isCameraEnabled()}, participant.isMicrophoneEnabled:'
+    Logger.print('====participant.identity:$userID, participant.isCameraEnabled: ${participant.isCameraEnabled()}, participant.isMicrophoneEnabled:'
         ' ${participant.isMicrophoneEnabled()}');
     try {
       var data = json.decode(participant.metadata!);
@@ -205,17 +198,15 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
       // faceURL = userInfo.faceURL;
       if (valueNotifier.value.userID == userID) {
         Future.delayed(const Duration(milliseconds: 100), () {
-          valueNotifier.value = (
-            userID: userID,
-            nickname: nickname ?? '',
-            cameraIsEnable: isCameraEnabled,
-            micIsEnable: isMicrophoneEnabled
-          );
+          valueNotifier.value = (userID: userID, nickname: nickname ?? '', cameraIsEnable: isCameraEnabled, micIsEnable: isMicrophoneEnabled);
         });
       }
     } catch (e, s) {
       Logger.print('error: $e   stack$s');
     }
+
+    var isHost = _meetingInfo?.hostUserID == userID;
+
     return Container(
       height: 60.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -242,7 +233,7 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
                           ..maxLines = 1
                           ..overflow = TextOverflow.ellipsis,
                       ),
-                      if (widget.isHost)
+                      if (_isHost)
                         Padding(
                           padding: EdgeInsets.only(left: 16.w),
                           child: (isMicrophoneEnabled ? ImageRes.meetingMicOnGray : ImageRes.meetingMicOffGray).toImage
@@ -250,28 +241,23 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
                             ..height = 30.h
                             ..onTap = () => _onTapMic(userID, !isMicrophoneEnabled),
                         ),
-                      if (widget.isHost)
+                      if (_isHost)
                         Padding(
                           padding: EdgeInsets.only(left: 16.w),
-                          child:
-                              (isCameraEnabled ? ImageRes.meetingCameraOnGray : ImageRes.meetingCameraOffGray).toImage
-                                ..width = 30.w
-                                ..height = 30.h
-                                ..onTap = () => _onTapCamera(userID, !isCameraEnabled),
+                          child: (isCameraEnabled ? ImageRes.meetingCameraOnGray : ImageRes.meetingCameraOffGray).toImage
+                            ..width = 30.w
+                            ..height = 30.h
+                            ..onTap = () => _onTapCamera(userID, !isCameraEnabled),
                         ),
-                      if (widget.isHost)
+                      if (_isHost)
                         Padding(
                           padding: EdgeInsets.only(left: 16.w),
                           child: ImageRes.meetingMore.toImage
                             ..width = 30.w
                             ..height = 30.h
                             ..onTap = () {
-                              valueNotifier.value = (
-                                userID: userID,
-                                nickname: nickname ?? '',
-                                cameraIsEnable: isCameraEnabled,
-                                micIsEnable: isMicrophoneEnabled
-                              );
+                              valueNotifier.value =
+                                  (userID: userID, nickname: nickname ?? '', cameraIsEnable: isCameraEnabled, micIsEnable: isMicrophoneEnabled);
                               _onTapMore(ctx, userID, nickname ?? '');
                             },
                         ),
@@ -373,7 +359,7 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
         height: 66.h,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: widget.isHost
+        child: _isHost
             ? Row(
                 children: [
                   // _buildTextButton(text: StrRes.invite, onTap: _invite),
@@ -383,7 +369,7 @@ class _MeetingMembersSheetViewState extends State<MeetingMembersSheetView> {
                   _buildTextButton(text: StrRes.unmuteAll, onTap: _unmuteAll),
                 ],
               )
-            : _buildTextButton(text: StrRes.invite, onTap: _invite, expanded: false),
+            : Container() /*_buildTextButton(text: StrRes.invite, onTap: _invite, expanded: false)*/,
       );
 
   Widget _buildTextButton({

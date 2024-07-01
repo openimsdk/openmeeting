@@ -58,6 +58,7 @@ class BookingConfigController extends GetxController {
       bookingConfig.value.repeatType = meetingInfo!.repeatType;
       bookingConfig.value.repeatTimes = meetingInfo!.repeatInfo.repeatTimes;
       bookingConfig.value.endsIn = meetingInfo!.repeatInfo.endDate.toInt();
+      bookingConfig.value.repeatDaysOfWeek = meetingInfo!.repeatInfo.repeatDaysOfWeek.map((e) => e.value).toList();
     }
   }
 
@@ -75,13 +76,16 @@ class BookingConfigController extends GetxController {
     }
 
     if (isModify) {
+      final repeatDaysOfWeek = bookingConfig.value.repeatDaysOfWeek?.map((e) {
+        Logger.print('repeat days of week index: $e');
+        return DayOfWeek.valueOf(e - 1)!;
+      }).toList();
       final request = UpdateMeetingRequest(
         meetingID: meetingInfo!.meetingID,
         updatingUserID: userInfo.userId,
         title: bookingConfig.value.name,
-        scheduledTime: Int64(bookingConfig.value.beginTime.toString().length > 10
-            ? bookingConfig.value.beginTime ~/ 1000
-            : bookingConfig.value.beginTime),
+        scheduledTime:
+            Int64(bookingConfig.value.beginTime.toString().length > 10 ? bookingConfig.value.beginTime ~/ 1000 : bookingConfig.value.beginTime),
         meetingDuration: Int64(bookingConfig.value.duration),
         password: bookingConfig.value.meetingPassword,
         disableCameraOnJoin: !bookingConfig.value.enableCamera,
@@ -92,6 +96,7 @@ class BookingConfigController extends GetxController {
           repeatTimes: bookingConfig.value.repeatTimes,
           interval: bookingConfig.value.interval,
           uintType: bookingConfig.value.unit.rawValue,
+          repeatDaysOfWeek: repeatDaysOfWeek,
         ),
       );
       await repository.updateMeetingSetting(request);
@@ -104,15 +109,15 @@ class BookingConfigController extends GetxController {
             scheduledTime: Int64(bookingConfig.value.beginTime),
             meetingDuration: Int64(bookingConfig.value.duration),
             password: bookingConfig.value.meetingPassword),
-        setting: MeetingSetting(
-            disableCameraOnJoin: !bookingConfig.value.enableCamera,
-            disableMicrophoneOnJoin: !bookingConfig.value.enableMicrophone),
+        setting:
+            MeetingSetting(disableCameraOnJoin: !bookingConfig.value.enableCamera, disableMicrophoneOnJoin: !bookingConfig.value.enableMicrophone),
         repeatInfo: MeetingRepeatInfo(
           endDate: Int64(bookingConfig.value.endsIn),
           repeatType: bookingConfig.value.repeatType.rawValue,
           repeatTimes: bookingConfig.value.repeatTimes,
           interval: bookingConfig.value.interval,
           uintType: bookingConfig.value.unit.rawValue,
+          repeatDaysOfWeek: bookingConfig.value.repeatDaysOfWeek?.map((e) => DayOfWeek.valueOf(e - 1)!),
         ),
       );
     }

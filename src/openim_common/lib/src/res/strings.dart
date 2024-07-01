@@ -1175,4 +1175,5 @@ class StrRes {
   static String get saturday => 'saturday'.tr;
   static String get sunday => 'sunday'.tr;
   static String get participantRemovedHit => 'participantRemovedHit'.tr;
+  static String get hasBeenSet => 'hasBeenSet'.tr;
 }

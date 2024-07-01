@@ -11,7 +11,7 @@ class BookingConfig {
   // custom repeat mode
   int interval;
   UnitType unit;
-  List<int>? weekdays;
+  List<int>? repeatDaysOfWeek;
   int monthUnit;
   List<int>? dates;
 
@@ -31,7 +31,7 @@ class BookingConfig {
     this.repeatTimes = 0,
     this.interval = 0,
     this.unit = UnitType.day,
-    this.weekdays,
+    this.repeatDaysOfWeek,
     this.monthUnit = 0,
     this.dates,
     this.enableMeetingPassword = false,
@@ -51,7 +51,7 @@ class BookingConfig {
         repeatTimes: json['repeatTimes'],
         interval: json['interval'],
         unit: json['unit'] == null ? UnitType.day : UnitTypeExt.fromString(json['unit']),
-        weekdays: json['weekdays'],
+        repeatDaysOfWeek: json['repeatDaysOfWeek'],
         monthUnit: json['monthUnit'],
         dates: json['dates'],
         enableMeetingPassword: json['enableMeetingPassword'],
@@ -71,7 +71,7 @@ class BookingConfig {
         'repeatTimes': repeatTimes,
         'interval': interval,
         'unit': unit.rawValue,
-        'weekdays': weekdays,
+        'repeatDaysOfWeek': repeatDaysOfWeek,
         'monthUnit': monthUnit,
         'dates': dates,
         'enableMeetingPassword': enableMeetingPassword,

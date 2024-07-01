@@ -35,7 +35,7 @@ void main(List<String> args) => Config.init(() async {
         return;
       } else {
         await windowManager.ensureInitialized();
-        windowManager.setPreventClose(true);
+        // windowManager.setPreventClose(true);
         runApp(const MeetingApp());
 
         const size = Size(375, 667);

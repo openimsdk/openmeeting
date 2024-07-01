@@ -92,11 +92,9 @@ class _ControlsViewState extends State<ControlsView> {
 
   MeetingSetting? get setting => _meetingInfo?.setting;
 
-  bool get _disabledMicrophone =>
-      !_participant.isMicrophoneEnabled() && setting?.canParticipantsUnmuteMicrophone == false && !_isHost;
+  bool get _disabledMicrophone => !_participant.isMicrophoneEnabled() && setting?.canParticipantsUnmuteMicrophone == false && !_isHost;
 
-  bool get _disabledCamera =>
-      !_participant.isCameraEnabled() && setting?.canParticipantsEnableCamera == false && !_isHost;
+  bool get _disabledCamera => !_participant.isCameraEnabled() && setting?.canParticipantsEnableCamera == false && !_isHost;
 
   bool get _disabledScreenShare => setting?.canParticipantsShareScreen == false && !_isHost;
 
@@ -271,8 +269,7 @@ class _ControlsViewState extends State<ControlsView> {
     }
     if (lkPlatformIs(PlatformType.iOS)) {
       var track = await LocalVideoTrack.createScreenShareTrack(
-        const ScreenShareCaptureOptions(
-            useiOSBroadcastExtension: true, maxFrameRate: 15.0, params: VideoParametersPresets.screenShareH720FPS15),
+        const ScreenShareCaptureOptions(useiOSBroadcastExtension: true, maxFrameRate: 15.0, params: VideoParametersPresets.screenShareH720FPS15),
       );
       await _participant.publishVideoTrack(track);
 
@@ -383,8 +380,8 @@ class _ControlsViewState extends State<ControlsView> {
         controller: controller,
         participantsSubject: widget.participantsSubject,
         meetingInfoChangedSubject: widget.meetingInfoChangedSubject,
-        onInvite: widget.onInviteMembers,
-        isHost: _isHost,
+        // onInvite: widget.onInviteMembers,
+        localUerID: _participant.identity,
         onOperation: widget.onParticipantOperation,
       ),
     );
@@ -445,8 +442,7 @@ class _ControlsViewState extends State<ControlsView> {
                           return;
                         }
                         MeetingAlertDialog.show(forMobile: true, context, 'Are you sure?', onConfirm: () async {
-                          await widget.onParticipantOperation
-                              ?.call(type: OperationParticipantType.setHost, userID: value);
+                          await widget.onParticipantOperation?.call(type: OperationParticipantType.setHost, userID: value);
                           if (mounted) {
                             widget.onOperation?.call(context, OperationType.leave);
                           }

@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
-import 'package:openmeeting/core/data_sp.dart';
 
 import 'app/data/models/define.dart';
 import 'app/data/models/meeting_screen_info.dart';
